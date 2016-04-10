@@ -30,6 +30,16 @@
 
     <dependencies>
         <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
@@ -121,7 +131,7 @@
                                     <limit implementation="org.jacoco.report.check.Limit">
                                         <counter>INSTRUCTION</counter>
                                         <value>COVEREDRATIO</value>
-                                        <minimum>0.64</minimum>
+                                        <minimum>0.85</minimum>
                                     </limit>
                                 </limits>
                             </rule>
