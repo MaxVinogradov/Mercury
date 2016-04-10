@@ -91,17 +91,14 @@
                         <verbose>true</verbose>
                     </configuration>
                 </plugin>
-                <!-- Collect coverage information -->
-                <!--
                 <plugin>
                     <groupId>org.eluder.coveralls</groupId>
                     <artifactId>coveralls-maven-plugin</artifactId>
                     <version>${coveralls.version}</version>
                     <configuration>
-                        <repoToken>HRXdH9zy58YzqEvkzNWixIsqsaHBSBqdf</repoToken>
+                        <repoToken>pWl1yUi3JP44oDHsIIfC5Eype2ssNEltS</repoToken>
                     </configuration>
                 </plugin>
-                -->
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
