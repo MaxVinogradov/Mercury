@@ -1,3 +1,9 @@
+.idea
+*.log
+*.iml
+*.ipr
+*.iws
+
 target/
 pom.xml.tag
 pom.xml.releaseBackup
