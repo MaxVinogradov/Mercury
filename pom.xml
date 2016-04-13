@@ -133,6 +133,7 @@
                     </executions>
                     <configuration>
                         <excludes>
+                            <exclude>**/nc/sumy/edu/nc_edu_web_app/cgi/*.*</exclude>
                         </excludes>
                         <rules>
                             <rule implementation="org.jacoco.maven.RuleConfiguration">
