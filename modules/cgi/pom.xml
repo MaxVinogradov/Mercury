@@ -5,15 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <dependencies>
         <dependency>
-            <groupId>nc.edu.web-app</groupId>
+            <groupId>nc.edu.social_publisher</groupId>
             <artifactId>common</artifactId>
             <version>0.1</version>
         </dependency>
     </dependencies>
 
     <parent>
-        <groupId>nc.edu.web-app</groupId>
-        <artifactId>web-app</artifactId>
+        <groupId>nc.edu.social_publisher</groupId>
+        <artifactId>social_publisher</artifactId>
         <version>0.1</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
