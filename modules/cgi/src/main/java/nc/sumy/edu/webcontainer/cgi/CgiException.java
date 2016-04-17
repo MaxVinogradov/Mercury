@@ -6,7 +6,7 @@ package nc.sumy.edu.webcontainer.cgi;
 
 public class CgiException extends RuntimeException {
 
-    public static final String CLASS_NOT_FOUND = "Class \"%s\" not found";
+    public static final String CLASS_NOT_FOUND = "Class with id \"%s\" not found";
     public static final String INVALID_CLASS = "Invalid class: class \"%s\" should implement CgiAction";
 
     public CgiException(String message) {
