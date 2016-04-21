@@ -13,6 +13,7 @@
     <modules>
         <module>modules/cgi</module>
         <module>modules/common</module>
+        <module>modules/database</module>
     </modules>
 
     <properties>
@@ -32,6 +33,8 @@
         <coveralls.version>4.1.0</coveralls.version>
         <jacoco.version>0.7.6.201602180812</jacoco.version>
         <pmd.version>3.6</pmd.version>
+        <!-- Database -->
+        <h2.version>1.4.191</h2.version>
         <!-- Other -->
         <surefire.plugin.version>2.14.1</surefire.plugin.version>
     </properties>
@@ -73,6 +76,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
         </dependency>
     </dependencies>
 
@@ -133,7 +141,6 @@
                     </executions>
                     <configuration>
                         <excludes>
-                            <exclude>**/nc/sumy/edu/nc_edu_web_app/cgi/*.*</exclude>
                         </excludes>
                         <rules>
                             <rule implementation="org.jacoco.maven.RuleConfiguration">
