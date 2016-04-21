@@ -14,7 +14,7 @@ public class DataSourceConnection implements DataBaseConnection {
     private static final String PROVIDER_URL =
             "t3://localhost:7001";
 
-    private static DataSource dataSource;
+    private final DataSource dataSource;
 
     public DataSourceConnection(String dataSourceName) {
         dataSource = getDataSource(dataSourceName);
@@ -29,15 +29,15 @@ public class DataSourceConnection implements DataBaseConnection {
     }
 
     private static DataSource getDataSource(String dataSource) {
-        Hashtable ht = new Hashtable();
-        ht.put(Context.INITIAL_CONTEXT_FACTORY,
+        Hashtable environment = new Hashtable();
+        environment.put(Context.INITIAL_CONTEXT_FACTORY,
                 INITIAL_CONTEXT_FACTORY);
-        ht.put(Context.PROVIDER_URL, PROVIDER_URL);
+        environment.put(Context.PROVIDER_URL, PROVIDER_URL);
         Context ctx = null;
         try {
-            ctx = new InitialContext(ht);
+            ctx = new InitialContext(environment);
         } catch (NamingException e) {
-            throw new ContextException(ht, e);
+            throw new ContextException(environment, e);
         }
         try {
             return (DataSource) ctx.lookup(dataSource);
