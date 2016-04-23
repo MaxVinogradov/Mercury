@@ -8,15 +8,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
 
-public class DataSourceConnection implements DataBaseConnection {
-    private static final String INITIAL_CONTEXT_FACTORY =
+import static javax.naming.Context.INITIAL_CONTEXT_FACTORY;
+import static javax.naming.Context.PROVIDER_URL;
+
+
+public class DataBaseConnectionOracle implements DataBaseConnection {
+    private static final String WEBLOGIC_INITIAL_CONTEXT_FACTORY =
             "weblogic.jndi.WLInitialContextFactory";
-    private static final String PROVIDER_URL =
+    private static final String WEBLOGIC_PROVIDER_URL =
             "t3://localhost:7001";
 
     private final DataSource dataSource;
 
-    public DataSourceConnection(String dataSourceName) {
+    public DataBaseConnectionOracle(String dataSourceName) {
         dataSource = getDataSource(dataSourceName);
     }
 
@@ -28,11 +32,11 @@ public class DataSourceConnection implements DataBaseConnection {
         }
     }
 
-    private static DataSource getDataSource(String dataSource) {
+    private DataSource getDataSource(String dataSource) {
         Hashtable environment = new Hashtable();
-        environment.put(Context.INITIAL_CONTEXT_FACTORY,
-                INITIAL_CONTEXT_FACTORY);
-        environment.put(Context.PROVIDER_URL, PROVIDER_URL);
+        environment.put(INITIAL_CONTEXT_FACTORY,
+                WEBLOGIC_INITIAL_CONTEXT_FACTORY);
+        environment.put(PROVIDER_URL, WEBLOGIC_PROVIDER_URL);
         Context ctx = null;
         try {
             ctx = new InitialContext(environment);
