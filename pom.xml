@@ -36,7 +36,7 @@
         <!-- Database -->
         <h2.version>1.4.191</h2.version>
         <liquibase-maven-plugin.version>3.5.0</liquibase-maven-plugin.version>
-        <ojdbc14.version>10.2.0.4.0</ojdbc14.version>
+        <ojdbc.version>14</ojdbc.version>
         <!-- Other -->
         <surefire.plugin.version>2.14.1</surefire.plugin.version>
     </properties>
@@ -64,9 +64,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
-            <version>${ojdbc14.version}</version>
+            <groupId>ojdbc</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>${ojdbc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
