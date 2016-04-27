@@ -36,7 +36,7 @@
         <!-- Database -->
         <h2.version>1.4.191</h2.version>
         <liquibase-maven-plugin.version>3.5.0</liquibase-maven-plugin.version>
-        <ojdbc.version>14</ojdbc.version>
+        <ojdbc14.version>10.2.0.4.0</ojdbc14.version>
         <!-- Other -->
         <surefire.plugin.version>2.14.1</surefire.plugin.version>
     </properties>
@@ -64,9 +64,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>ojdbc</groupId>
-            <artifactId>ojdbc</artifactId>
-            <version>${ojdbc.version}</version>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>${ojdbc14.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -108,6 +108,23 @@
                         <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
+                </plugin>
+                <!-- Liquibase plugin -->
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase-maven-plugin.version}</version>
+                    <configuration>
+                        <propertyFile>modules/database/resources/liquibase.properties</propertyFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>update</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <!-- Activate PMD for java code checking -->
                 <plugin>
