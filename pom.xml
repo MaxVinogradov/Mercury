@@ -26,8 +26,7 @@
         <classindex.version>3.4</classindex.version>
         <commons-lang3.version>3.0</commons-lang3.version>
         <junit.version>4.12</junit.version>
-        <logback-core.version>1.1.7</logback-core.version>
-        <logback-classic.version>1.1.7</logback-classic.version>
+        <logback.version>1.1.7</logback.version>
         <slf4j.version>1.7.16</slf4j.version>
         <!-- Java code/tests analysis-->
         <coveralls.version>4.1.0</coveralls.version>
@@ -45,12 +44,17 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>${logback-core.version}</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -88,6 +92,16 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-maven-plugin</artifactId>
             <version>${liquibase-maven-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
