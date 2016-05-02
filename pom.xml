@@ -197,6 +197,7 @@
                     </executions>
                     <configuration>
                         <excludes>
+                            <exclude>**/database/**/*.class</exclude>
                         </excludes>
                         <rules>
                             <rule implementation="org.jacoco.maven.RuleConfiguration">

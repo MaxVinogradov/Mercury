@@ -1,6 +1,6 @@
 package nc.sumy.edu.webapp.database;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +9,10 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
-public class H2ConnectionTest {
+public class DataBaseConnectionH2Test {
 
     @Test
     public void getConnection() throws SQLException {

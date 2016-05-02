@@ -2,7 +2,7 @@ package nc.sumy.edu.webcontainer.common;
 
 import nc.sumy.edu.webcontainer.common.stub.TestWithPrivateConstructor;
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,9 @@ import java.net.Socket;
 import java.net.URISyntaxException;
 import java.net.URL;
 
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertSame;
+import static org.testng.Assert.fail;
 
 public class ClassUtilTest {
     public static final String TEST = "Integer a sagittis lacus. " +
@@ -69,17 +71,17 @@ public class ClassUtilTest {
         fail("System class path does not contain TestWithPrivateConstructor");
     }
 
-    @Test(expected = FileNotFoundException.class)
+    @Test(expectedExceptions = FileNotFoundException.class)
     public void getInputStreamByNameTestNull() {
         ClassUtil.getInputStreamByName(ClassUtilTest.class, "Absent.txt");
     }
 
-    @Test(expected = InstanceNotCreatedException.class)
+    @Test(expectedExceptions = InstanceNotCreatedException.class)
     public void newInstanceException() {
         ClassUtil.newInstance(TestWithPrivateConstructor.class);
     }
 
-    @Test(expected = FileNotReadException.class)
+    @Test(expectedExceptions = FileNotReadException.class)
     public void fileToStringException() {
         ClassUtil.fileToString(new File("Absent"));
     }
@@ -92,16 +94,16 @@ public class ClassUtilTest {
         clientOutput.write("Test request\n\n".getBytes());
         Socket socketOnServerSide = serverSocket.accept();
         String actual = ClassUtil.readInputStreamToString(socketOnServerSide.getInputStream());
-        assertEquals("Read string must be 'Test request'","Test request\n", actual.replace("\r", "") );
+        assertEquals(actual.replace("\r", ""), "Test request\n", "Read string must be 'Test request'");
         socketOnClientSide.close();
         serverSocket.close();
     }
 
-    @Test(expected = IOException.class)
+    @Test(expectedExceptions = IOException.class)
     public void readingFromClosedSocketTest() throws IOException {
-        try(ServerSocket serverSocket = new ServerSocket(7002);
-            Socket socketOnClientSide = new Socket("localhost", 7002);
-            Socket socketOnServerSide = serverSocket.accept(); ) {
+        try (ServerSocket serverSocket = new ServerSocket(7002);
+             Socket socketOnClientSide = new Socket("localhost", 7002);
+             Socket socketOnServerSide = serverSocket.accept();) {
             socketOnServerSide.close();
             ClassUtil.readInputStreamToString(socketOnServerSide.getInputStream());
         }

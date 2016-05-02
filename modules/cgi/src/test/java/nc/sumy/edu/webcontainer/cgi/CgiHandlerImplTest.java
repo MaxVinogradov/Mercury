@@ -1,19 +1,21 @@
 package nc.sumy.edu.webcontainer.cgi;
 
 import nc.sumy.edu.webcontainer.common.InstanceNotCreatedException;
-import org.junit.Test;
-import org.junit.Before;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+//import org.junit.Test;
+//import org.junit.Before;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.testng.Assert.assertEquals;
 
 public class CgiHandlerImplTest {
     private CgiHandlerImpl cgiHandlerImpl = null;
     private final static String CLASS_ID_TEST = "Test";
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         cgiHandlerImpl = new CgiHandlerImpl();
     }
@@ -36,22 +38,22 @@ public class CgiHandlerImplTest {
         assertEquals(testClass.getClass(), cgiHandlerImpl.find("Test"));
     }
 
-    @Test(expected = CgiClassNotFoundException.class)
+    @Test(expectedExceptions = CgiClassNotFoundException.class)
     public void findException() {
         cgiHandlerImpl.find("Absent");
     }
 
-    @Test(expected = CgiInvalidClassException.class)
+    @Test(expectedExceptions = CgiInvalidClassException.class)
     public void runException1() {
         cgiHandlerImpl.process("TestWithoutRun", new HashMap<>());
     }
 
-    @Test(expected = InstanceNotCreatedException.class)
+    @Test(expectedExceptions = InstanceNotCreatedException.class)
     public void runException2() {
         cgiHandlerImpl.process("TestWithPrivateConstructor", new HashMap<>());
     }
 
-    @Test(expected = InstanceNotCreatedException.class)
+    @Test(expectedExceptions = InstanceNotCreatedException.class)
     public void runException3() {
         cgiHandlerImpl.process("AbstractTest", new HashMap<>());
     }
