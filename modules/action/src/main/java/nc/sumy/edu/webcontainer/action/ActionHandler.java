@@ -1,12 +1,12 @@
-package nc.sumy.edu.webcontainer.cgi;
+package nc.sumy.edu.webcontainer.action;
 
 import java.util.Map;
 
 /**
-* Interface that provides method for working with cgi programm.
+* Interface that provides method for working with action programm.
 */
 
-public interface CgiHandler {
+public interface ActionHandler {
 
 /**
 * Process string from class using parameters.

@@ -1,13 +1,13 @@
-package nc.sumy.edu.webcontainer.cgi;
+package nc.sumy.edu.webcontainer.action;
 
 import java.util.Map;
 
 /**
 * Defines an interface that provide method for running program on server side.
-* The server create an instance of CgiAction and invoke run method.
+* The server create an instance of Actions and invoke run method.
 */
 
-public interface CgiAction {	
+public interface Actions {
 /**
  * This method generate response body.
  */

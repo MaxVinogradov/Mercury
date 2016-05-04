@@ -1,12 +1,12 @@
-package nc.sumy.edu.webcontainer.cgi.stub;
+package nc.sumy.edu.webcontainer.action.stub;
 
-import nc.sumy.edu.webcontainer.cgi.Cgi;
-import nc.sumy.edu.webcontainer.cgi.CgiAction;
+import nc.sumy.edu.webcontainer.action.Act;
+import nc.sumy.edu.webcontainer.action.Actions;
 
 import java.util.Map;
 
-@Cgi(id = "TestWithPrivateConstructor")
-public class TestWithPrivateConstructor implements CgiAction {
+@Act(id = "TestWithPrivateConstructor")
+public class TestWithPrivateConstructor implements Actions {
 
     private TestWithPrivateConstructor() {
     }

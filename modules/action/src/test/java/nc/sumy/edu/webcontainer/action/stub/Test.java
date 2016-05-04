@@ -1,12 +1,12 @@
-package nc.sumy.edu.webcontainer.cgi.stub;
+package nc.sumy.edu.webcontainer.action.stub;
 
-import nc.sumy.edu.webcontainer.cgi.Cgi;
-import nc.sumy.edu.webcontainer.cgi.CgiAction;
+import nc.sumy.edu.webcontainer.action.Act;
+import nc.sumy.edu.webcontainer.action.Actions;
 
 import java.util.Map;
 
-@Cgi(id = "Test")
-public class Test implements CgiAction {
+@Act(id = "Test")
+public class Test implements Actions {
     public String run(Map<String, String> parameters) {
         String result;
 
@@ -31,5 +31,4 @@ public class Test implements CgiAction {
 
         return result;
     }
-
 }

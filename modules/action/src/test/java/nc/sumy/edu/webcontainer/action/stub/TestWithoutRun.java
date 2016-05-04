@@ -1,8 +1,8 @@
-package nc.sumy.edu.webcontainer.cgi.stub;
+package nc.sumy.edu.webcontainer.action.stub;
 
-import nc.sumy.edu.webcontainer.cgi.Cgi;
+import nc.sumy.edu.webcontainer.action.Act;
 
-@Cgi(id = "TestWithoutRun")
+@Act(id = "TestWithoutRun")
 public class TestWithoutRun {
     public void someMethod() {
         //System.out.println("Class for test");

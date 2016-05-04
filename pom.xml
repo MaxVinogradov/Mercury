@@ -11,7 +11,7 @@
 
 
     <modules>
-        <module>modules/cgi</module>
+        <module>modules/action</module>
         <module>modules/common</module>
         <module>modules/database</module>
     </modules>
