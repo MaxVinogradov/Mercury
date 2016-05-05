@@ -14,6 +14,7 @@
         <module>modules/action</module>
         <module>modules/common</module>
         <module>modules/database</module>
+        <module>modules/Integration</module>
     </modules>
 
     <properties>
