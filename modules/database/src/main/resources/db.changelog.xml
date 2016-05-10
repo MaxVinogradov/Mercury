@@ -43,7 +43,8 @@
         
         <addUniqueConstraint tableName="accounts"
                              columnNames="service_name, login"
-                             constraintName="service_login_uk" />
+                             constraintName="service_login_uk"
+        />
     </changeSet>
 
     <changeSet id="3" author="vinogradov">
@@ -84,6 +85,31 @@
         </createIndex>
     </changeSet>
 
+    <changeSet id="5" author="vinogradov">
+        <createTable tableName="portals">
+            <column name="user_id" type="int(10)">
+                <constraints nullable="false" referencedTableName="user"/>
+            </column>
+            <column name="account_id" type="int(10)">
+                <constraints nullable="false" references="accounts"/>
+            </column>
+        </createTable>
 
+        <createIndex tableName="portals" indexName="portals_uk">
+            <column name="user_id" type="int(10)"/>
+            <column name="account_id" type="int(10)"/>
+        </createIndex>
+
+        <addUniqueConstraint tableName="portals"
+                             columnNames="user_id, account_id"
+                             constraintName="portals_uk"
+        />
+    </changeSet>
+
+    <changeSet id="6" author="vinogradov">
+        <createSequence sequenceName="users_seq"/>
+        <createSequence sequenceName="accounts_seq"/>
+        <createSequence sequenceName="posts_seq"/>
+    </changeSet>
 
 </databaseChangeLog>
