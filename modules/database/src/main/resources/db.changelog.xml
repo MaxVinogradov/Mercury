@@ -14,12 +14,37 @@
         </createTable>
 
         <insert tableName="services">
-            <column name="service_name" value="'vk.com'"/>
-            <column name="service_name" value="'facebook.com'"/>
-            <column name="service_name" value="'twitter.com'"/>
+            <column name="service_name" value="vk.com'"/>
+            <column name="service_name" value="facebook.com"/>
+            <column name="service_name" value="twitter.com"/>
         </insert>
     </changeSet>
-    
+
+    <changeSet id="2" author="vinogradov">
+        <createTable tableName="accounts">
+            <column name="account_id" type="int(10)">
+                <constraints primaryKey="true" primaryKeyName="accounts_i"/>
+            </column>
+            <column name="service_name" type="varchar(50)">
+                <constraints nullable="false" referencedTableName="services"/>
+            </column>
+            <column name="login" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_token" type="varchar(100)"/>
+        </createTable>
+
+        <createIndex tableName="accounts" indexName="accounts_i">
+            <column name="account_id" type="varchar(50)"/>
+        </createIndex>
+        
+        <addUniqueConstraint tableName="accounts"
+                             columnNames="service_name, login"
+                             constraintName="service_login_uk" />
+    </changeSet>
 
 
 </databaseChangeLog>
