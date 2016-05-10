@@ -38,13 +38,30 @@
         </createTable>
 
         <createIndex tableName="accounts" indexName="accounts_i">
-            <column name="account_id" type="varchar(50)"/>
+            <column name="account_id" type="int(10)"/>
         </createIndex>
         
         <addUniqueConstraint tableName="accounts"
                              columnNames="service_name, login"
                              constraintName="service_login_uk" />
     </changeSet>
+
+    <changeSet id="3" author="vinogradov">
+        <createTable tableName="users">
+            <column name="user_id" type="int(10)"/>
+            <column name="login" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="users" indexName="users_i">
+            <column name="user_id" type="int(10)"/>
+        </createIndex>
+    </changeSet>
+
 
 
 </databaseChangeLog>
