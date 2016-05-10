@@ -48,7 +48,9 @@
 
     <changeSet id="3" author="vinogradov">
         <createTable tableName="users">
-            <column name="user_id" type="int(10)"/>
+            <column name="user_id" type="int(10)">
+                <constraints primaryKeyName="users_i"/>
+            </column>
             <column name="login" type="varchar(50)">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -59,6 +61,26 @@
 
         <createIndex tableName="users" indexName="users_i">
             <column name="user_id" type="int(10)"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="4" author="vinogradov">
+        <createTable tableName="posts">
+            <column name="post_id" type="int(10)">
+                <constraints primaryKeyName="post_i"/>
+            </column>
+            <column name="user_id" type="int(10)">
+                <constraints nullable="false" referencedTableName="user"/>
+            </column>
+            <column name="publish_date" type="date)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(200)"/>
+            <column name="body" type="varchar(4000)"/>
+        </createTable>
+
+        <createIndex tableName="posts" indexName="posts_i">
+            <column name="post_id" type="int(10)"/>
         </createIndex>
     </changeSet>
 
