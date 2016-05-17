@@ -14,10 +14,7 @@ public interface SocialNetworkIntegration {
 
     default String getAccessToken() {
         String token = getTokenFromDatabase();
-        if(token == null || !this.checkToken(token)) {
-            token = this.authorization();
-        }
-        return token;
+        return token == null || !this.checkToken(token) ? this.authorization() : token;
     }
 
     boolean post(String token, String message);
