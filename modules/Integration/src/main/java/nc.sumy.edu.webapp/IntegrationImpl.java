@@ -13,7 +13,7 @@ public class IntegrationImpl implements Integration {
 
     public IntegrationImpl(Set<SocialNetworkInfo> networkInfoSet) {
         connected = new TreeMap<SocialNetworks,SocialNetworkIntegration>();
-        this.connect();
+        this.connect(networkInfoSet);
     }
 
 
@@ -30,7 +30,7 @@ public class IntegrationImpl implements Integration {
     @java.lang.Override
     public void connect(Set<SocialNetworkInfo> networkInfoSet) {
         for (SocialNetworkInfo networkInfo: networkInfoSet) {
-            SocialNetworkIntegration networkIntegration = null;
+            SocialNetworkIntegration networkIntegration;
             switch(networkInfo.getNetworkType()) {
                 case VK:
                     networkIntegration = new VkIntegration(networkInfo.getNetworkId());
@@ -41,6 +41,8 @@ public class IntegrationImpl implements Integration {
                 case TWITTER:
                     networkIntegration = new TwitterIntegration(networkInfo.getNetworkId());
                     break;
+                default:
+                    networkIntegration = null;
             }
             if(networkIntegration != null && networkIntegration.connect()) {
                 connected.put(networkInfo.getNetworkType(), networkIntegration);
