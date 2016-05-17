@@ -7,30 +7,13 @@ import java.util.Set;
 public class IntegrationImpl implements Integration {
     private Map<SocialNetworks,SocialNetworkIntegration> connected;
 
+    public IntegrationImpl() {
+        super();
+    }
+
     public IntegrationImpl(Set<SocialNetworkInfo> networkInfoSet) {
         connected = new TreeMap<SocialNetworks,SocialNetworkIntegration>();
         this.connect();
-    }
-
-    public void connectToVk(String id) {
-        SocialNetworkIntegration vk = new VkIntegration(id);
-        if(vk.connect()) {
-            connected.put(SocialNetworks.VK, vk);
-        }
-    }
-
-    public void connectToFb(String id) {
-        SocialNetworkIntegration fb = new FacebookIntegration(id);
-        if(fb.connect()) {
-            connected.put(SocialNetworks.FACEBOOK, fb);
-        }
-    }
-
-    public void connectToTwitter(String id) {
-        SocialNetworkIntegration twitter = new TwitterIntegration(id);
-        if(twitter.connect()) {
-            connected.put(SocialNetworks.TWITTER, twitter);
-        }
     }
 
 
