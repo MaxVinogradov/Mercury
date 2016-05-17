@@ -1,5 +1,5 @@
 package nc.sumy.edu.webapp;
 
-public enum SocialNetwork {
+public enum SocialNetworks {
     VK, FACEBOOK, TWITTER;
 }
