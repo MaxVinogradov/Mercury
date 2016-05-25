@@ -1,0 +1,73 @@
+@media (min-width: 768px) and (max-width: 922px) {
+    .navbar-nav>li>a {
+        font-size: 10pt;
+    }
+    .nav-item {
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+}
+@media (max-width: 768px) {
+    .social-img {
+        width: 20%;
+        margin: auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .social-img {
+        width: 100%;
+        margin: auto;
+    }
+}
+@media (min-width: 992px) {
+    .social-img {
+        width: 40%;
+        margin: auto;
+    }
+}
+@media (min-width: 768px) {
+    .navbar>.container .navbar-brand,
+    .navbar>.container-fluid .navbar-brand {
+        padding-top: 19px;
+        padding-bottom: 15px;
+    }
+    .navbar-right li>a {
+        padding-left: 3px;
+        padding-right: 4px;
+    }
+    .navbar-nav>li>a {
+        font-size: 12pt;
+    }
+    .navbar-nav > li > a,
+    .navbar-brand {
+        padding-top: 4px;
+        padding-bottom: 0;
+        height: 32px;
+        color: #EEEEEE !important;
+    }
+    .navbar {
+        min-height: 32px !important;
+    }
+    .navbar .nav,
+    .navbar .nav > li {
+        float: none;
+        display: inline-block;
+        *display: inline;
+        /* ie7 fix */
+        
+        *zoom: 1;
+        /* hasLayout ie7 trigger */
+        
+        vertical-align: top;
+    }
+    .navbar-inner {
+        text-align: center;
+    }
+}
+@media (max-width: 768px) {
+    .navbar-nav>li>a {
+        font-size: 15pt;
+    }
+}
