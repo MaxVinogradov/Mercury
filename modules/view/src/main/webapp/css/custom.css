@@ -124,7 +124,8 @@ h2:hover:after {
     letter-spacing: 1px;
     display: inline-block;
     -webkit-box-shadow: 0 3px 0 0 rgba(26, 35, 126, 1);
-    -moz-box-shadow: 0 3px 0 0 rgba(26, 35, 126, 1) box-shadow: 0 3px 0 0 rgba(26, 35, 126, 1);
+    -moz-box-shadow: 0 3px 0 0 rgba(26, 35, 126, 1);
+    box-shadow: 0 3px 0 0 rgba(26, 35, 126, 1);
     margin: 60px 0 0;
     font-weight: bold;
 }
