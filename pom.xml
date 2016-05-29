@@ -15,6 +15,7 @@
         <module>modules/common</module>
         <module>modules/database</module>
         <module>modules/integration</module>
+        <module>modules/view</module>
     </modules>
 
     <properties>
