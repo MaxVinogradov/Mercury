@@ -16,6 +16,7 @@
         <module>modules/database</module>
         <module>modules/integration</module>
         <module>modules/view</module>
+        <!--<module>modules/demo</module>-->
     </modules>
 
     <properties>
@@ -121,6 +122,13 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.weblogic</groupId>
+            <artifactId>weblogic-server-pom</artifactId>
+            <version>12.2.1-0-0</version>
+            <type>pom</type>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -254,6 +262,119 @@
                             <param>nc.sumy.edu.webapp.database.*</param>
                         </targetTests>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <!-- This is the configuration for the
+                         weblogic-maven-plugin
+                    -->
+                    <groupId>com.oracle.weblogic</groupId>
+                    <artifactId>weblogic-maven-plugin</artifactId>
+                    <version>12.2.1-0-0</version>
+                    <configuration>
+                        <!--<middlewareHome>/fmwhome/wls12210</middlewareHome>-->
+                    </configuration>
+                    <executions>
+                        <!-- Execute the appc goal during the package phase -->
+                        <execution>
+                            <id>wls-appc</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>appc</goal>
+                            </goals>
+                            <configuration>
+                                <source>${project.build.directory}/${project.name}.${project.packaging}</source>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>wls-create-domain</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>create-domain</goal>
+                            </goals>
+                            <!--<configuration>-->
+                                <!--<middlewareHome>c:/dev/wls12210</middlewareHome>-->
+                                <!--<domainHome>${project.build.directory}/base_domain</domainHome>-->
+                                <!--<user>weblogic</user>-->
+                                <!--<password>password</password>-->
+                            <!--</configuration>-->
+                        </execution>
+                        <!-- Deploy the application to the WebLogic Server in the
+                             pre-integration-test phase
+                        -->
+                        <execution>
+                            <id>wls-deploy</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                            <!--<configuration>-->
+                                <!--&lt;!&ndash;The admin URL where the app is deployed.-->
+                  <!--Here use the plugin's default value t3://localhost:7001&ndash;&gt;-->
+                                <!--<adminurl>t3://127.0.0.1:7001</adminurl>-->
+                                <!--<user>weblogic</user>-->
+                                <!--<password>12345678</password>-->
+                                <!--&lt;!&ndash;The location of the file or directory to be deployed&ndash;&gt;-->
+                                <!--<source>${project.build.directory}/${project.build.finalName}.${project.packaging}-->
+                                <!--</source>-->
+                                <!--&lt;!&ndash;The target servers where the application is deployed.-->
+                  <!--Here use the plugin's default value AdminServer&ndash;&gt;-->
+                                <!--<targets>AdminServer</targets>-->
+                                <!--<verbose>true</verbose>-->
+                                <!--<name>${project.build.finalName}</name>-->
+                            <!--</configuration>-->
+                        </execution>
+                        <execution>
+                            <id>wls-redeploy</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>redeploy</goal>
+                            </goals>
+                            <!--<configuration>-->
+                                <!--<adminurl>t3://127.0.0.1:7001</adminurl>-->
+                                <!--<user>weblogic</user>-->
+                                <!--<password>password</password>-->
+                                <!--<source>${project.build.directory}/${project.build.finalName}.${project.packaging}</source>-->
+                                <!--<name>${project.build.finalName}</name>-->
+                            <!--</configuration>-->
+                        </execution>
+                        <!-- Stop the application in the pre-integration-test phase -->
+                        <!--<execution>-->
+                        <!--<id>wls-stop-app</id>-->
+                        <!--<phase>pre-integration-test</phase>-->
+                        <!--<goals>-->
+                        <!--<goal>stop-app</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                        <!--<adminurl>t3://127.0.0.1:7001</adminurl>-->
+                        <!--<user>weblogic</user>-->
+                        <!--<password>password</password>-->
+                        <!--<name>${project.build.finalName}</name>-->
+                        <!--</configuration>-->
+                        <!--</execution>-->
+                        <execution>
+                            <id>wls-wlst-start-server</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>start-server</goal>
+                            </goals>
+                            <!--<configuration>-->
+                                <!--<domainHome>${project.build.directory}/base_domain</domainHome>-->
+                            <!--</configuration>-->
+                        </execution>
+                        <execution>
+                            <id>wls-wlst-stop-server</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>stop-server</goal>
+                            </goals>
+                            <!--<configuration>-->
+                                <!--<domainHome>${project.build.directory}/base_domain</domainHome>-->
+                                <!--<user>weblogic</user>-->
+                                <!--<password>password</password>-->
+                                <!--<adminurl>t3://localhost:7001</adminurl>-->
+                            <!--</configuration>-->
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
