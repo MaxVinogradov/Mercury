@@ -10,6 +10,7 @@
     <version>0.1</version>
 
     <modules>
+        <module>modules/liqubase</module>
         <module>modules/action</module>
         <module>modules/common</module>
         <module>modules/database</module>
