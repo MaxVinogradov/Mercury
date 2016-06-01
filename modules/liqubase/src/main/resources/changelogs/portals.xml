@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="5" author="vinogradov">
+        <createTable tableName="portals">
+            <column name="user_id" type="int(10)"/>
+            <column name="account_id" type="int(10)"/>
+        </createTable>
+
+        <createIndex tableName="portals" indexName="portals_uk">
+            <column name="user_id" type="int(10)">
+                <constraints nullable="false" referencedTableName="user"/>
+            </column>
+            <column name="account_id" type="int(10)">
+                <constraints nullable="false" references="accounts"/>
+            </column>
+        </createIndex>
+
+        <addUniqueConstraint tableName="portals"
+                             columnNames="user_id, account_id"
+                             constraintName="portals_uk"
+        />
+    </changeSet>
+
+</databaseChangeLog>
