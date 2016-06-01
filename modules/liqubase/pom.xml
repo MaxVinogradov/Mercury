@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>nc.edu.social_publisher</groupId>
+        <artifactId>social_publisher</artifactId>
+        <version>0.1</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>liqubase</artifactId>
+    <version>0.1</version>
+
+    <properties>
+        <liquibase-maven-plugin.version>3.5.0</liquibase-maven-plugin.version>
+        <liquibase.goal>update</liquibase.goal>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>appdb</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <database.url>jdbc:h2:mem:test</database.url>
+                <database.user>sa</database.user>
+                <database.password></database.password>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase-maven-plugin.version}</version>
+                <configuration>
+                    <changeLogFile>src/main/resources/db.changelog.xml</changeLogFile>
+                    <driver>org.h2.Driver</driver>
+                    <url>${database.url}</url>
+                    <username>${database.user}</username>
+                    <password>${database.password}</password>
+                    <dropFirst>true</dropFirst>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>appdb</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <url>${database.url}</url>
+                            <username>${database.user}</username>
+                            <password>${database.password}
+                            </password>
+                        </configuration>
+                        <goals>
+                            <goal>${liquibase.goal}</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
