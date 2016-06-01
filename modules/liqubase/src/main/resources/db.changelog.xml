@@ -6,12 +6,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="changelogs/services.xml"     relativeToChangelogFile="true"/>
-    <include file="changelogs/accounts.xml"     relativeToChangelogFile="true"/>
-    <include file="changelogs/users.xml"        relativeToChangelogFile="true"/>
-    <include file="changelogs/posts.xml"        relativeToChangelogFile="true"/>
-    <include file="changelogs/portals.xml"      relativeToChangelogFile="true"/>
-    <include file="changelogs/sequences.xml"    relativeToChangelogFile="true"/>
-    <!-- <include file="changelogs/triggers.xml"     relativeToChangelogFile="true"/> -->
+    <include file="changelogs/services.xml"         relativeToChangelogFile="true"/>
+    <include file="changelogs/accounts.xml"         relativeToChangelogFile="true"/>
+    <include file="changelogs/users.xml"            relativeToChangelogFile="true"/>
+    <include file="changelogs/posts.xml"            relativeToChangelogFile="true"/>
+    <include file="changelogs/portals.xml"          relativeToChangelogFile="true"/>
+    <include file="changelogs/sequences.xml"        relativeToChangelogFile="true"/>
+    <include file="changelogs/triggers.xml"         relativeToChangelogFile="true"/>
+    <include file="changelogs/insertInitData.xml"   relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

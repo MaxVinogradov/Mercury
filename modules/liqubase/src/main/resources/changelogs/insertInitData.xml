@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="8" author="VinogradovAndZulov">
+        <insert tableName="users">
+            <column name="login" value="John_Smith"/>
+            <column name="password" value="123456"/>
+            <column name="mail" value="john.smith080595@gmail.com"/>
+            <column name="birthday" value="1995-05-05"/>
+        </insert>
+
+        <insert tableName="accounts">
+            <column name="service_name" value="vk.com"/>
+            <column name="login" value="+380930484670"/>
+            <column name="password" value="123456"/>
+            <column name="last_token" value="NULL"/>
+        </insert>
+
+        <insert tableName="accounts">
+            <column name="service_name" value="facebook.com"/>
+            <column name="login" value="+380930484670"/>
+            <column name="password" value="123456ku"/>
+            <column name="last_token" value="NULL"/>
+        </insert>
+
+        <insert tableName="accounts">
+            <column name="service_name" value="twitter.com"/>
+            <column name="login" value="+380930484670"/>
+            <column name="password" value="123456ku"/>
+            <column name="last_token" value="NULL"/>
+        </insert>
+
+        <insert tableName="accounts">
+            <column name="service_name" value="email"/>
+            <column name="login" value="john.smith080595@gmail.com"/>
+            <column name="password" value="123456ku"/>
+            <column name="last_token" value="NULL"/>
+        </insert>
+
+        <insert tableName="portals">
+            <column name="user_id" value="1"/>
+            <column name="account_id" value="1"/>
+        </insert>
+
+        <insert tableName="portals">
+            <column name="user_id" value="1"/>
+            <column name="account_id" value="2"/>
+        </insert>
+
+        <insert tableName="portals">
+            <column name="user_id" value="1"/>
+            <column name="account_id" value="3"/>
+        </insert>
+
+        <insert tableName="portals">
+            <column name="user_id" value="1"/>
+            <column name="account_id" value="4"/>
+        </insert>
+
+        <insert tableName="posts">
+            <column name="user_id" value="1"/>
+            <column name="publish_date" value="2012-05-05"/>
+            <column name="title" value="Test"/>
+            <column name="body" value="Lorem ipsum dolor sit amet."/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
