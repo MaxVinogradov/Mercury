@@ -7,36 +7,27 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="7" author="vinogradov">
-        <createProcedure>
-            CREATE OR REPLACE TRIGGER trg_user_id
-            BEFORE INSERT ON users
-            FOR EACH ROW
-            BEGIN
-            SELECT users_seq.nextval
-            INTO :NEW.user_id
-            FROM DUAL;
-            END;
-        </createProcedure>
-        <createProcedure>
-            CREATE OR REPLACE TRIGGER trg_account_id
-            BEFORE INSERT ON accounts
-            FOR EACH ROW
-            BEGIN
-            SELECT accounts_seq.nextval
-            INTO :NEW.account_id
-            FROM DUAL;
-            END;
-        </createProcedure>
-        <createProcedure>
-            CREATE OR REPLACE TRIGGER trg_post_id
-            BEFORE INSERT ON posts
-            FOR EACH ROW
-            BEGIN
-            SELECT posts_seq.nextval
-            INTO :NEW.post_id
-            FROM DUAL;
-            END;
-        </createProcedure>
+        <addAutoIncrement catalogName="trg_user_id"
+                          columnDataType="int"
+                          columnName="user_id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="users"/>
+        <addAutoIncrement catalogName="trg_account_id"
+                          columnDataType="int"
+                          columnName="account_id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="accounts"/>
+        <addAutoIncrement catalogName="trg_post_id"
+                          columnDataType="int"
+                          columnName="post_id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="posts"/>
     </changeSet>
 
 </databaseChangeLog>
