@@ -13,7 +13,6 @@ public class Post {
     private String      body;
     //TODO: write a conversion from Timestamp to Calendar if it will needed.
 
-
     public Post() {}
 
     public Post(long postId, long userId, Calendar publishDate, String title, String body) {

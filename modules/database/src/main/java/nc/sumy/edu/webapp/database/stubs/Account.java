@@ -11,6 +11,18 @@ public class Account {
     private String  lastToken;
     private String  rawResponse;
 
+    public Account() {}
+
+    public Account(long accountId, String serviceName, String login,
+                   String password, String lastToken, String rawResponse) {
+        this.accountId = accountId;
+        this.serviceName = serviceName;
+        this.login = login;
+        this.password = password;
+        this.lastToken = lastToken;
+        this.rawResponse = rawResponse;
+    }
+
     public long getAccountId() {
         return accountId;
     }
