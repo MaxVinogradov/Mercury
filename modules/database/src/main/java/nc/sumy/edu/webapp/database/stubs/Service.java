@@ -6,6 +6,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class Service {
     private String serviceName;
 
+    public Service() {}
+
+    public Service(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
     public String getServiceName() {
         return serviceName;
     }

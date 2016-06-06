@@ -12,6 +12,16 @@ public class User {
     private String  mail;
     private Calendar publishDate;
 
+    public User() {}
+
+    public User(long userId, String login, String password, String mail, Calendar publishDate) {
+        this.userId = userId;
+        this.login = login;
+        this.password = password;
+        this.mail = mail;
+        this.publishDate = publishDate;
+    }
+
     public long getUserId() {
         return userId;
     }

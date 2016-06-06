@@ -7,6 +7,13 @@ public class Portal {
     private long userId;
     private long accountId;
 
+    public Portal() {}
+
+    public Portal(long userId, long accountId) {
+        this.userId = userId;
+        this.accountId = accountId;
+    }
+
     public long getUserId() {
         return userId;
     }
