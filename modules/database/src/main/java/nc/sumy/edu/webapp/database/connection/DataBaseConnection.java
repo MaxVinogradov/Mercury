@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database;
+package nc.sumy.edu.webapp.database.connection;
 
 import java.sql.Connection;
 

@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database;
+package nc.sumy.edu.webapp.database.connection;
 
 public class ConnectionException extends DataBaseException {
 
