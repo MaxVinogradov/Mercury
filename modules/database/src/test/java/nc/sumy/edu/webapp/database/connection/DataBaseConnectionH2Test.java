@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database;
+package nc.sumy.edu.webapp.database.connection;
 
 import nc.sumy.edu.webapp.database.connection.DataBaseConnection;
 import nc.sumy.edu.webapp.database.connection.DataBaseConnectionH2;
