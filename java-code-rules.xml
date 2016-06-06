@@ -7,9 +7,9 @@
         <rule ref="rulesets/java/optimizations.xml/AvoidInstantiatingObjectsInLoops">
             <priority>5</priority>
         </rule> -->
-    <rule ref="rulesets/java/design.xml/UncommentedEmptyConstructor">
+    <!--<rule ref="rulesets/java/design.xml/UncommentedEmptyConstructor">
         <priority>5</priority>
-    </rule>
+    </rule> -->
     <rule ref="rulesets/java/naming.xml/VariableNamingConventions">
         <priority>5</priority>
     </rule>
