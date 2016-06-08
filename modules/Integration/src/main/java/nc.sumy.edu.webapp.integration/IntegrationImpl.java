@@ -7,6 +7,7 @@ import java.util.Set;
 public class IntegrationImpl implements Integration {
     Set<SocialNetworkInfo> networkInfoSet;
 
+
     @Override
     public boolean publishPost(String message) {
         return false;
@@ -36,6 +37,6 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public void connect(Set<SocialNetworkInfo> networkInfoSet) {
-
+        this.networkInfoSet = networkInfoSet;
     }
 }
