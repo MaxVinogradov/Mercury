@@ -2,25 +2,15 @@ package nc.sumy.edu.webapp.integration;
 
 
 public class FacebookIntegration implements SocialNetworkIntegration{
-    private String id;
-
-    public FacebookIntegration(String id) {
-        this.id = id;
-    }
 
     @Override
-    public String authorization() {
+    public String getAuthorisationUrl() {
         return null;
     }
 
     @Override
-    public String getTokenFromDatabase() {
+    public SocialNetworkInfo getAccessTokenByCode() {
         return null;
-    }
-
-    @Override
-    public boolean checkToken(String token) {
-        return false;
     }
 
     @Override
