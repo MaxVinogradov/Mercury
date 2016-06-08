@@ -21,13 +21,13 @@ public class DBPullImpl implements DBPull{
     private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
-    private final String SELECT_USER =
+    private static final String SELECT_USER =
             "SELECT * FROM PUBLIC.USERS WHERE LOGIN = ?;";
-    private final String SELECT_PORTAL =
+    private static final String SELECT_PORTAL =
             "SELECT * FROM PUBLIC.PORTALS WHERE USER_ID = ?;";
-    private final String SELECT_ACCOUNT =
+    private static final String SELECT_ACCOUNT =
             "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
-    private final String SELECT_POSTS =
+    private static final String SELECT_POSTS =
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
 
     @Override
