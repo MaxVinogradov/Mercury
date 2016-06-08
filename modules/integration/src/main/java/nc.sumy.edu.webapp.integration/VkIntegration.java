@@ -9,15 +9,15 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
 public class VkIntegration implements SocialNetworkIntegration {
-    private static final String appId = "5454568";
-    private static final String appSecret = "DUv5bShooOTH7Vzsyqpe";
-    private static final OAuth20Service service = new ServiceBuilder()
-            .apiKey(appId)
-            .apiSecret(appSecret)
+    private static final String APP_ID = "5454568";
+    private static final String APP_SECRET = "DUv5bShooOTH7Vzsyqpe";
+    private final OAuth20Service service = new ServiceBuilder()
+            .apiKey(APP_ID)
+            .apiSecret(APP_SECRET)
             .scope("wall,offline,photos")
             .callback("http://localhost:7001/console")
             .build(VkontakteApi.instance());
-    private final String wallPostUrl = "https://api.vk.com/method/wall.post";
+    private static final String WALL_POST_URL = "https://api.vk.com/method/wall.post";
 
     @Override
     public String getAuthorisationUrl() {
@@ -37,7 +37,7 @@ public class VkIntegration implements SocialNetworkIntegration {
     @Override
     public boolean post(SocialNetworkInfo info, String message) {
         OAuth2AccessToken accessToken = new OAuth2AccessToken(info.getToken(), info.getRawResponse());
-        OAuthRequest request = new OAuthRequest(Verb.GET, wallPostUrl, service);
+        OAuthRequest request = new OAuthRequest(Verb.GET, WALL_POST_URL, service);
         service.signRequest(accessToken, request);
         Response response = request.send();
         return !response.getBody().contains("error");
@@ -45,8 +45,9 @@ public class VkIntegration implements SocialNetworkIntegration {
 
     @Override
     public boolean post(OAuth2AccessToken token, String message) {
-        OAuthRequest request = new OAuthRequest(Verb.GET, wallPostUrl, service);
+        OAuthRequest request = new OAuthRequest(Verb.GET, WALL_POST_URL, service);
         service.signRequest(token, request);
+        request.addParameter("message", message);
         Response response = request.send();
         return !response.getBody().contains("error");
     }
