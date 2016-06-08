@@ -1,23 +1,24 @@
 package nc.sumy.edu.webapp.database;
 
-
 import nc.sumy.edu.webapp.database.connection.DataBaseConnection;
 import nc.sumy.edu.webapp.database.connection.DataBaseConnectionH2;
 import nc.sumy.edu.webapp.database.stubs.Account;
 import nc.sumy.edu.webapp.database.stubs.Portal;
 import nc.sumy.edu.webapp.database.stubs.Post;
 import nc.sumy.edu.webapp.database.stubs.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.LinkedList;
 
 public class DBPullImpl implements DBPull{
+    private static final Logger LOGGER = LoggerFactory.getLogger(DBPullImpl.class);
+    private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
     private final String SELECT_USER =
@@ -44,7 +45,7 @@ public class DBPullImpl implements DBPull{
                         .setPublishDate(resultSet.getDate("BIRTHDAY"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(ERROR_MASSAGE, e);
         }
         return user;
     }
@@ -64,7 +65,7 @@ public class DBPullImpl implements DBPull{
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(ERROR_MASSAGE, e);
         }
         return collection;
     }
@@ -84,7 +85,7 @@ public class DBPullImpl implements DBPull{
                         .setRawResponse(resultSet.getString("RAW_RESPONSE"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(ERROR_MASSAGE, e);
         }
         return account;
     }
@@ -107,7 +108,7 @@ public class DBPullImpl implements DBPull{
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(ERROR_MASSAGE, e);
         }
         return collection;
     }
