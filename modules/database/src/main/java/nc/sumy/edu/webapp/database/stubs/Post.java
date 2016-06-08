@@ -11,7 +11,6 @@ public class Post {
     private Calendar    publishDate;
     private String      title;
     private String      body;
-    //TODO: write a conversion from Timestamp to Calendar if it will needed.
 
     public Post() {}
 
