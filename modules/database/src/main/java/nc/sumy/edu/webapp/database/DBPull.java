@@ -7,7 +7,7 @@ import nc.sumy.edu.webapp.database.stubs.User;
 
 import java.util.Collection;
 
-public interface DbPull {
+public interface DBPull {
 
     User loadUser(String login);
 

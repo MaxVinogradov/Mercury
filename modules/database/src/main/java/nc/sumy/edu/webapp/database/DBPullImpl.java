@@ -16,8 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class DbPullImpl implements DbPull {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DbPullImpl.class);
+public class DBPullImpl implements DBPull {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DBPullImpl.class);
     private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
