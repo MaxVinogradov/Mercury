@@ -12,5 +12,5 @@ public interface Integration {
 
     String getAuthorisationUrlForNetwork(SocialNetworks type);
 
-    void connect(Set<SocialNetworkInfo> networkInfoSet);
+    void setConnectedNetworks(Set<SocialNetworkInfo> networkInfoSet);
 }

@@ -80,7 +80,7 @@ public class IntegrationImpl implements Integration {
     }
 
     @Override
-    public void connect(Set<SocialNetworkInfo> networkInfoSet) {
+    public void setConnectedNetworks(Set<SocialNetworkInfo> networkInfoSet) {
         this.networkInfoSet = networkInfoSet;
     }
 }
