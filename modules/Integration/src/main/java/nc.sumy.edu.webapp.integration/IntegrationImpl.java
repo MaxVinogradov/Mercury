@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp;
+package nc.sumy.edu.webapp.integration;
 
 import java.util.Map;
 import java.util.TreeMap;

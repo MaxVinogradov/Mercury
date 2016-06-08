@@ -1,10 +1,10 @@
-package nc.sumy.edu.webapp;
+package nc.sumy.edu.webapp.integration;
 
 
-public class TwitterIntegration implements SocialNetworkIntegration{
+public class FacebookIntegration implements SocialNetworkIntegration{
     private String id;
 
-    public TwitterIntegration(String id) {
+    public FacebookIntegration(String id) {
         this.id = id;
     }
 

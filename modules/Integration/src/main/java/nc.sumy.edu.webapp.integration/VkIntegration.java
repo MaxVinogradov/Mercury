@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp;
+package nc.sumy.edu.webapp.integration;
 
 public class VkIntegration implements SocialNetworkIntegration {
     private String id;
