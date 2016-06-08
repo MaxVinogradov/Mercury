@@ -9,9 +9,9 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
 public class VkIntegration implements SocialNetworkIntegration {
-    private final String appId = "5454568";
-    private final String appSecret = "DUv5bShooOTH7Vzsyqpe";
-    private final OAuth20Service service = new ServiceBuilder()
+    private static final String appId = "5454568";
+    private static final String appSecret = "DUv5bShooOTH7Vzsyqpe";
+    private static final OAuth20Service service = new ServiceBuilder()
             .apiKey(appId)
             .apiSecret(appSecret)
             .scope("wall,offline,photos")

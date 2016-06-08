@@ -34,6 +34,7 @@ public class IntegrationImpl implements Integration {
                     break;
                 default:
                     current = false;
+                    break;
             }
             flag = flag && current;
         }
@@ -55,6 +56,7 @@ public class IntegrationImpl implements Integration {
                 break;
             default:
                 info = null;
+                break;
         }
         return info;
     }
@@ -75,6 +77,7 @@ public class IntegrationImpl implements Integration {
                 break;
             default:
                 authUrl = null;
+                break;
         }
         return authUrl;
     }
