@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -21,10 +22,12 @@ public class DBPullImpl implements DBPull{
             new DataBaseConnectionH2();
     private final String SELECT_USER =
             "SELECT * FROM PUBLIC.USERS WHERE LOGIN = ?;";
-    private static final String SELECT_PORTAL =
+    private final String SELECT_PORTAL =
             "SELECT * FROM PUBLIC.PORTALS WHERE USER_ID = ?;";
     private final String SELECT_ACCOUNT =
             "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
+    private final String SELECT_POSTS =
+            "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
 
     @Override
     public User loadUser(String login) {
@@ -34,13 +37,11 @@ public class DBPullImpl implements DBPull{
             statement.setString(1, login);
             try (ResultSet resultSet = statement.executeQuery()) {
                 resultSet.next();
-                user.setUserId(resultSet.getInt("USER_ID"));
-                user.setLogin(resultSet.getString("LOGIN"));
-                user.setPassword(resultSet.getString("PASSWORD"));
-                user.setMail(resultSet.getString("MAIL"));
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(resultSet.getDate("BIRTHDAY"));
-                user.setPublishDate(cal);
+                user.setUserId(resultSet.getInt("USER_ID"))
+                        .setLogin(resultSet.getString("LOGIN"))
+                        .setPassword(resultSet.getString("PASSWORD"))
+                        .setMail(resultSet.getString("MAIL"))
+                        .setPublishDate(resultSet.getDate("BIRTHDAY"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,15 +51,15 @@ public class DBPullImpl implements DBPull{
 
     @Override
     public Collection<Portal> loadPortals(int userId) {
-        Collection<Portal> collection = new LinkedList<>();
+        Collection<Portal> collection = new ArrayList<>();
         try (Connection connection = dataBaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_PORTAL)) {
+            PreparedStatement statement = connection.prepareStatement(SELECT_PORTAL)) {
             statement.setInt(1, userId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Portal portal = new Portal();
-                    portal.setUserId(resultSet.getInt("USER_ID"));
-                    portal.setUserId(resultSet.getInt("ACCOUNT_ID"));
+                    portal.setUserId(resultSet.getInt("USER_ID"))
+                            .setAccountId(resultSet.getInt("ACCOUNT_ID"));
                     collection.add(portal);
                 }
             }
@@ -75,12 +76,12 @@ public class DBPullImpl implements DBPull{
              PreparedStatement statement = connection.prepareStatement(SELECT_ACCOUNT)) {
             statement.setInt(1, accountId);
             try (ResultSet resultSet = statement.executeQuery()) {
-                account.setAccountId(resultSet.getInt("ACCOUNT_ID"));
-                account.setServiceName(resultSet.getString("SERVICE_NAME"));
-                account.setLogin(resultSet.getString("LOGIN"));
-                account.setPassword(resultSet.getString("PASSWORD"));
-                account.setLastToken(resultSet.getString("LAST_TOKEN"));
-                account.setRawResponse(resultSet.getString("RAW_RESPONSE"));
+                account.setAccountId(resultSet.getInt("ACCOUNT_ID"))
+                        .setServiceName(resultSet.getString("SERVICE_NAME"))
+                        .setLogin(resultSet.getString("LOGIN"))
+                        .setPassword(resultSet.getString("PASSWORD"))
+                        .setLastToken(resultSet.getString("LAST_TOKEN"))
+                        .setRawResponse(resultSet.getString("RAW_RESPONSE"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,7 +91,25 @@ public class DBPullImpl implements DBPull{
 
     @Override
     public Collection<Post> loadPosts(int userId) {
-        return null;
+        Collection<Post> collection = new ArrayList<>();
+        try (Connection connection = dataBaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_POSTS)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Post post = new Post();
+                    post.setUserId(resultSet.getInt("USER_ID"))
+                            .setPostId(resultSet.getInt("POST_ID"))
+                            .setPublishDate(resultSet.getDate("PUBLISH_DATE"))
+                            .setTitle(resultSet.getString("TITLE"))
+                            .setBody(resultSet.getString("BODY"));
+                    collection.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return collection;
     }
 
 }

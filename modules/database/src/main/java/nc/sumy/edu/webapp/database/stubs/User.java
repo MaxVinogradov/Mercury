@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.Calendar;
+import java.util.Date;
+
+import static java.util.Objects.isNull;
 
 public class User {
     private long userId;
@@ -62,8 +65,9 @@ public class User {
         return publishDate;
     }
 
-    public User setPublishDate(Calendar publishDate) {
-        this.publishDate = publishDate;
+    public User setPublishDate(Date publishDate) {
+        this.publishDate = Calendar.getInstance();
+        this.publishDate.setTime(publishDate);
         return this;
     }
 
@@ -71,7 +75,7 @@ public class User {
     public boolean equals(Object obj) {
         if (this == obj) return true;
 
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (isNull(obj) || getClass() != obj.getClass()) return false;
 
         User user = (User) obj;
 
