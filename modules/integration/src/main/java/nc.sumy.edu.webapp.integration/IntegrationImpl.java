@@ -2,8 +2,6 @@ package nc.sumy.edu.webapp.integration;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.Set;
 
 public class IntegrationImpl implements Integration {
@@ -23,7 +21,7 @@ public class IntegrationImpl implements Integration {
             }
             SocialNetworks type = info.getNetworkType();
             OAuth2AccessToken token = new OAuth2AccessToken(tokenString, rawResponse);
-            boolean current = false;
+            boolean current;
             switch(type) {
                 case VK:
                     current = new VkIntegration().post(token, message);
@@ -34,6 +32,8 @@ public class IntegrationImpl implements Integration {
                 case TWITTER:
                     current = new TwitterIntegration().post(token, message);
                     break;
+                default:
+                    current = false;
             }
             flag = flag && current;
         }
@@ -42,7 +42,7 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public SocialNetworkInfo processCode(SocialNetworks type, String code) {
-        SocialNetworkInfo info = null;
+        SocialNetworkInfo info;
         switch(type) {
             case VK:
                 info = new VkIntegration().getAccessTokenByCode(code);
@@ -53,6 +53,8 @@ public class IntegrationImpl implements Integration {
             case TWITTER:
                 info = new TwitterIntegration().getAccessTokenByCode(code);
                 break;
+            default:
+                info = null;
         }
         return info;
     }
@@ -60,7 +62,7 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public String getAuthorisationUrlForNetwork(SocialNetworks type) {
-        String authUrl = null;
+        String authUrl;
         switch(type) {
             case VK:
                 authUrl = new VkIntegration().getAuthorisationUrl();
@@ -71,6 +73,8 @@ public class IntegrationImpl implements Integration {
             case TWITTER:
                 authUrl = new TwitterIntegration().getAuthorisationUrl();
                 break;
+            default:
+                authUrl = null;
         }
         return authUrl;
     }
