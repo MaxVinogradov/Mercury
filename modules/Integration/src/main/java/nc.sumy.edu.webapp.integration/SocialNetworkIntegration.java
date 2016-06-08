@@ -1,11 +1,15 @@
 package nc.sumy.edu.webapp.integration;
 
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
+
 public interface SocialNetworkIntegration {
 
     String getAuthorisationUrl();
 
-    SocialNetworkInfo getAccessTokenByCode();
+    SocialNetworkInfo getAccessTokenByCode(String code);
 
-    boolean post(String token, String message);
+    boolean post(SocialNetworkInfo info, String message);
+
+    boolean post(OAuth2AccessToken token, String message);
 }
