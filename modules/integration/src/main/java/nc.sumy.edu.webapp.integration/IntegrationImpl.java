@@ -1,5 +1,6 @@
 package nc.sumy.edu.webapp.integration;
 
+import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import java.util.Set;
@@ -42,7 +43,7 @@ public class IntegrationImpl implements Integration {
     }
 
     @Override
-    public SocialNetworkInfo processCode(SocialNetworks type, String code) {
+    public SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code) {
         SocialNetworkInfo info;
         switch(type) {
             case VK:
@@ -53,6 +54,20 @@ public class IntegrationImpl implements Integration {
                 break;
             case TWITTER:
                 info = new TwitterIntegration().getAccessTokenByCode(code);
+                break;
+            default:
+                info = null;
+                break;
+        }
+        return info;
+    }
+
+    @Override
+    public SocialNetworkInfo processCodeForOAuth1(SocialNetworks type, String requestCode, String code) {
+        SocialNetworkInfo info;
+        switch(type) {
+            case TWITTER:
+                info = new TwitterIntegration().getAccessTokenByCode(requestCode, code);
                 break;
             default:
                 info = null;

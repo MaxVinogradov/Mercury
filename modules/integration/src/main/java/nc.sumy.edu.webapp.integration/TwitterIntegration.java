@@ -3,8 +3,15 @@ package nc.sumy.edu.webapp.integration;
 
 import com.github.scribejava.apis.TwitterApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
+import com.github.scribejava.core.model.OAuth1AccessToken;
+import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterIntegration implements SocialNetworkIntegration{
     private static final String APP_ID = "6DCIfit5FkI6bbj0I9OUDb6IO";
@@ -27,11 +34,43 @@ public class TwitterIntegration implements SocialNetworkIntegration{
 
     @Override
     public boolean post(SocialNetworkInfo info, String message) {
-        return false;
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(APP_ID)
+                .setOAuthConsumerSecret(APP_SECRET)
+                .setOAuthAccessToken(info.getToken())
+                .setOAuthAccessTokenSecret(info.getRawResponse());
+        Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        try {
+            twitter.updateStatus(message);
+        } catch (TwitterException e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean post(OAuth2AccessToken token, String message) {
-        return false;
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(APP_ID)
+                .setOAuthConsumerSecret(APP_SECRET)
+                .setOAuthAccessToken(token.getAccessToken())
+                .setOAuthAccessTokenSecret(token.getRawResponse());
+        Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        try {
+            twitter.updateStatus(message);
+        } catch (TwitterException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public SocialNetworkInfo getAccessTokenByCode(String requestCode, String code) {
+        OAuth1AccessToken token =  service.getAccessToken(new OAuth1RequestToken(requestCode, ""), code);
+        SocialNetworkInfo info = new SocialNetworkInfo();
+        info.setToken(token.getToken());
+        info.setRawResponse(token.getTokenSecret());
+        return info;
     }
 }

@@ -8,7 +8,9 @@ public interface Integration {
 
     boolean publishPost(String message);
 
-    SocialNetworkInfo processCode(SocialNetworks type, String code);
+    SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code);
+
+    SocialNetworkInfo processCodeForOAuth1(SocialNetworks type, String requestCode, String code);
 
     String getAuthorisationUrlForNetwork(SocialNetworks type);
 
