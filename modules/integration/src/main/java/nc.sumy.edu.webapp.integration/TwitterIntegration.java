@@ -2,12 +2,9 @@ package nc.sumy.edu.webapp.integration;
 
 
 import com.github.scribejava.apis.TwitterApi;
-import com.github.scribejava.apis.VkontakteApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
-import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
-import com.github.scribejava.core.oauth.OAuth20Service;
 
 public class TwitterIntegration implements SocialNetworkIntegration{
     private static final String APP_ID = "6DCIfit5FkI6bbj0I9OUDb6IO";
