@@ -1,9 +1,10 @@
 package nc.sumy.edu.webapp.integration;
 
-import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import java.util.Set;
+
+import static nc.sumy.edu.webapp.integration.SocialNetworks.TWITTER;
 
 public class IntegrationImpl implements Integration {
     private Set<SocialNetworkInfo> networkInfoSet;
@@ -64,14 +65,9 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public SocialNetworkInfo processCodeForOAuth1(SocialNetworks type, String requestCode, String code) {
-        SocialNetworkInfo info;
-        switch(type) {
-            case TWITTER:
-                info = new TwitterIntegration().getAccessTokenByCode(requestCode, code);
-                break;
-            default:
-                info = null;
-                break;
+        SocialNetworkInfo info = null;
+        if(type == TWITTER) {
+            info = new TwitterIntegration().getAccessTokenByCode(requestCode, code);
         }
         return info;
     }

@@ -10,7 +10,6 @@ import com.github.scribejava.core.oauth.OAuth10aService;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
-import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class TwitterIntegration implements SocialNetworkIntegration{
@@ -34,13 +33,13 @@ public class TwitterIntegration implements SocialNetworkIntegration{
 
     @Override
     public boolean post(SocialNetworkInfo info, String message) {
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
+        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        configurationBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(APP_ID)
                 .setOAuthConsumerSecret(APP_SECRET)
                 .setOAuthAccessToken(info.getToken())
                 .setOAuthAccessTokenSecret(info.getRawResponse());
-        Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
         try {
             twitter.updateStatus(message);
         } catch (TwitterException e) {
@@ -51,13 +50,13 @@ public class TwitterIntegration implements SocialNetworkIntegration{
 
     @Override
     public boolean post(OAuth2AccessToken token, String message) {
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
+        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        configurationBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(APP_ID)
                 .setOAuthConsumerSecret(APP_SECRET)
                 .setOAuthAccessToken(token.getAccessToken())
                 .setOAuthAccessTokenSecret(token.getRawResponse());
-        Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
         try {
             twitter.updateStatus(message);
         } catch (TwitterException e) {
