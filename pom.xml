@@ -43,7 +43,7 @@
         <!-- Other -->
         <surefire.plugin.version>2.14.1</surefire.plugin.version>
         <scribejava.version>2.5.2</scribejava.version>
-        <org.twitter4j.version>[4.0,)</org.twitter4j.version>
+        <org.twitter4j.version>4.0.2</org.twitter4j.version>
     </properties>
 
     <dependencies>
