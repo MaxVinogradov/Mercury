@@ -2,65 +2,43 @@ package nc.sumy.edu.webapp.integration;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static nc.sumy.edu.webapp.integration.SocialNetworks.TWITTER;
 
 public class IntegrationImpl implements Integration {
-    private Set<SocialNetworkInfo> networkInfoSet;
 
+    private Set<SocialNetworkInfo> networkInfoSet;
+    private Set<SocialNetworkIntegration> integrations = new HashSet<>();
+    private Map<SocialNetworks, SocialNetworkIntegration> integrationMapping = new HashMap<>();
 
     @Override
-    public boolean publishPost(String message) {
+    public ResultOfPostSubmit submitPost(String message) {
         if(networkInfoSet == null) return false;
-        boolean flag = true;
+        Set<PostSubmitResult> results = new HashSet<>();
         for (SocialNetworkInfo info : networkInfoSet) {
             String tokenString = info.getToken();
             String rawResponse = info.getRawResponse();
             if (rawResponse == null || tokenString == null) {
-                flag = false;
                 continue;
             }
             SocialNetworks type = info.getNetworkType();
             OAuth2AccessToken token = new OAuth2AccessToken(tokenString, rawResponse);
-            boolean current;
-            switch(type) {
-                case VK:
-                    current = new VkIntegration().post(token, message);
-                    break;
-                case FACEBOOK:
-                    current = new FacebookIntegration().post(token, message);
-                    break;
-                case TWITTER:
-                    current = new TwitterIntegration().post(token, message);
-                    break;
-                default:
-                    current = false;
-                    break;
+
+
+            for(SocialNetworkIntegration integration: integrations)
+                results.add( integration.post(token, message) );
             }
-            flag = flag && current;
         }
-        return flag;
+        return ;
     }
 
     @Override
     public SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code) {
-        SocialNetworkInfo info;
-        switch(type) {
-            case VK:
-                info = new VkIntegration().getAccessTokenByCode(code);
-                break;
-            case FACEBOOK:
-                info = new FacebookIntegration().getAccessTokenByCode(code);
-                break;
-            case TWITTER:
-                info = new TwitterIntegration().getAccessTokenByCode(code);
-                break;
-            default:
-                info = null;
-                break;
-        }
-        return info;
+        return integrationMapping.get(type).getAccessTokenByCode(code);
     }
 
     @Override

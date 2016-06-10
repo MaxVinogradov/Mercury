@@ -2,10 +2,10 @@ package nc.sumy.edu.webapp.database;
 
 import nc.sumy.edu.webapp.database.connection.DataBaseConnection;
 import nc.sumy.edu.webapp.database.connection.DataBaseConnectionH2;
-import nc.sumy.edu.webapp.database.stubs.Account;
-import nc.sumy.edu.webapp.database.stubs.Portal;
-import nc.sumy.edu.webapp.database.stubs.Post;
-import nc.sumy.edu.webapp.database.stubs.User;
+import nc.sumy.edu.webapp.database.domain.Account;
+import nc.sumy.edu.webapp.database.domain.Portal;
+import nc.sumy.edu.webapp.database.domain.Post;
+import nc.sumy.edu.webapp.database.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,8 +14,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DbPushImpl implements DbPush{
-    private static final Logger LOGGER = LoggerFactory.getLogger(DbPushImpl.class);
+public class DbPushImpl implements StoringService {
+    private static final Logger LOG = LoggerFactory.getLogger(DbPushImpl.class);
     private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
@@ -30,7 +30,7 @@ public class DbPushImpl implements DbPush{
             "INSERT INTO PUBLIC.PORTALS VALUES (?, ?);";
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         try (Connection connection = dataBaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_USER)) {
             statement.setString(1, user.getLogin());
@@ -39,8 +39,9 @@ public class DbPushImpl implements DbPush{
             statement.setDate(4, new Date(user.getPublishDate().getTime().getTime()));
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ERROR_MASSAGE, e);
+            LOG.error("Unable to add a new user: " + user.getLogin(), e);
         }
+        return user;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class DbPushImpl implements DbPush{
             statement.setString(4, post.getBody());
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ERROR_MASSAGE, e);
+            LOG.error(ERROR_MASSAGE, e);
         }
     }
 
@@ -68,7 +69,7 @@ public class DbPushImpl implements DbPush{
             statement.setString(5, account.getRawResponse());
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ERROR_MASSAGE, e);
+            LOG.error(ERROR_MASSAGE, e);
         }
     }
 
@@ -80,7 +81,7 @@ public class DbPushImpl implements DbPush{
             statement.setLong(2, portal.getAccountId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            LOGGER.error(ERROR_MASSAGE, e);
+            LOG.error(ERROR_MASSAGE, e);
         }
     }
 }

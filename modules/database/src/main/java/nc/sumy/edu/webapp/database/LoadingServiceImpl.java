@@ -2,10 +2,10 @@ package nc.sumy.edu.webapp.database;
 
 import nc.sumy.edu.webapp.database.connection.DataBaseConnection;
 import nc.sumy.edu.webapp.database.connection.DataBaseConnectionH2;
-import nc.sumy.edu.webapp.database.stubs.Account;
-import nc.sumy.edu.webapp.database.stubs.Portal;
-import nc.sumy.edu.webapp.database.stubs.Post;
-import nc.sumy.edu.webapp.database.stubs.User;
+import nc.sumy.edu.webapp.database.domain.Account;
+import nc.sumy.edu.webapp.database.domain.Portal;
+import nc.sumy.edu.webapp.database.domain.Post;
+import nc.sumy.edu.webapp.database.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +15,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
-public class DBPullImpl implements DBPull {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DBPullImpl.class);
+import static java.util.Collections.emptyList;
+
+public class LoadingServiceImpl implements LoadingService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoadingServiceImpl.class);
     private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
@@ -52,22 +55,19 @@ public class DBPullImpl implements DBPull {
 
     @Override
     public Collection<Portal> loadPortals(int userId) {
-        Collection<Portal> collection = new ArrayList<>();
-        try (Connection connection = dataBaseConnection.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SELECT_PORTAL)) {
-            statement.setInt(1, userId);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    Portal portal = new Portal();
-                    portal.setUserId(resultSet.getInt("USER_ID"))
-                            .setAccountId(resultSet.getInt("ACCOUNT_ID"));
-                    collection.add(portal);
-                }
+        try (Connection conn = dataBaseConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SELECT_PORTAL)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                Collection<Portal> collection = new ArrayList<>();
+                while (rs.next())
+                    collection.add(new Portal(rs.getInt("USER_ID"), rs.getInt("ACCOUNT_ID")));
+                return collection;
             }
         } catch (SQLException e) {
             LOGGER.error(ERROR_MASSAGE, e);
+            return emptyList();
         }
-        return collection;
     }
 
     @Override

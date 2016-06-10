@@ -5,8 +5,7 @@ import java.util.Set;
 public interface Integration {
 
 
-
-    boolean publishPost(String message);
+    boolean submitPost(String message);
 
     SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code);
 

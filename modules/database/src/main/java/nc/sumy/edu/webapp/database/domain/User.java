@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database.stubs;
+package nc.sumy.edu.webapp.database.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
