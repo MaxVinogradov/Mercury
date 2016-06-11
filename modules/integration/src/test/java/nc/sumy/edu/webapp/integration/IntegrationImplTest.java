@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 public class IntegrationImplTest {
     private static final IntegrationImpl integration = new IntegrationImpl();
+
     @Test
     public void testSubmitPostInvalidSetParameter(){
         Set resultEmpty = integration.submitPost(new HashSet<SocialNetworkInfo>(), "post message");

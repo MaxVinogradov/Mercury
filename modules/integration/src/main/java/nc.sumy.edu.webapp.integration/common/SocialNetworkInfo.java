@@ -65,7 +65,7 @@ public class SocialNetworkInfo {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
+        return new HashCodeBuilder(15, 39)
                 .append(networkId)
                 .append(networkType)
                 .append(token)
