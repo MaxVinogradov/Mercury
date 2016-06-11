@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import static org.junit.Assert.assertEquals;
 
@@ -39,5 +38,37 @@ public class IntegrationImplTest {
                 result.equals(actualEmptyString), true);
         assertEquals("Publishing null string must return set of results all false",
                 result, actualNull);
+    }
+
+    @Test
+    public void testSubmitPostValidParameters(){
+        SocialNetworkInfo infoNullToken = new SocialNetworkInfo("id1", SocialNetworks.VK, null, "token additional field");
+        SocialNetworkInfo infoNullAddFieldToken = new SocialNetworkInfo("id1", SocialNetworks.VK, "token",
+                null);
+        SocialNetworkInfo infoEmptyAddFieldToken = new SocialNetworkInfo("id2", SocialNetworks.VK, "token", "");
+        SocialNetworkInfo infoEmptyToken = new SocialNetworkInfo("id2", SocialNetworks.VK, "", "token additional field");
+
+        Set<SocialNetworkInfo> infoNull = new HashSet<>();
+        infoNull.add(infoNullToken);
+        infoNull.add(infoNullAddFieldToken);
+
+        Set<SocialNetworkInfo> infoEmpty = new HashSet<>();
+        infoEmpty.add(infoEmptyAddFieldToken);
+        infoEmpty.add(infoEmptyToken);
+
+        Set<ResultOfPostSubmit> resultNull = new HashSet<>();
+        resultNull.add(new ResultOfPostSubmit(infoNullToken, false));
+        resultNull.add(new ResultOfPostSubmit(infoNullAddFieldToken, false));
+
+        Set<ResultOfPostSubmit> resultEmpty = new HashSet<>();
+        resultEmpty.add(new ResultOfPostSubmit(infoEmptyAddFieldToken, false));
+        resultEmpty.add(new ResultOfPostSubmit(infoEmptyToken, false));
+
+        Set<ResultOfPostSubmit> actualNull = integration.submitPost(infoNull, "message");
+        Set<ResultOfPostSubmit> actualEmpty = integration.submitPost(infoEmpty, "message");
+        assertEquals("Publishing message to networks with null token/add.token field must return set of results all false",
+                resultNull, actualNull);
+        assertEquals("Publishing message to networks with empty token/add.token field must return set of results all false",
+                resultEmpty, actualEmpty);
     }
 }

@@ -40,7 +40,8 @@ public class IntegrationImpl implements Integration {
                 String rawResponse = info.getAdditionalTokenField();
                 SocialNetworks type = info.getNetworkType();
                 SocialNetworkIntegration sni = integrationMapping.get(type);
-                if (rawResponse == null || tokenString == null || sni == null)
+                if (rawResponse == null || rawResponse.length() == 0 || tokenString == null
+                        || tokenString.length() == 0|| sni == null)
                     results.add(new ResultOfPostSubmit(info, false));
                 else
                     results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
@@ -77,4 +78,7 @@ public class IntegrationImpl implements Integration {
         return sni.getAuthorisationUrl();
     }
 
+    public void setIntegrationMapping(Map<SocialNetworks, SocialNetworkIntegration> integrationMapping) {
+        this.integrationMapping = integrationMapping;
+    }
 }
