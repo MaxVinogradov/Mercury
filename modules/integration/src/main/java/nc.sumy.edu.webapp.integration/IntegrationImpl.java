@@ -11,10 +11,8 @@ import nc.sumy.edu.webapp.integration.oauth2.FacebookIntegration;
 import nc.sumy.edu.webapp.integration.oauth2.OAuth2Integration;
 import nc.sumy.edu.webapp.integration.oauth2.VkIntegration;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static nc.sumy.edu.webapp.integration.common.SocialNetworks.FACEBOOK;
 import static nc.sumy.edu.webapp.integration.common.SocialNetworks.TWITTER;
@@ -31,17 +29,22 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public Set<ResultOfPostSubmit> submitPost(Set<SocialNetworkInfo> networkInfoSet, String message) {
-        if(networkInfoSet == null) return null;
+        if(networkInfoSet == null || networkInfoSet.size() == 0) return Collections.emptySet();
         Set<ResultOfPostSubmit> results = new HashSet<>();
-        for (SocialNetworkInfo info : networkInfoSet) {
-            String tokenString = info.getToken();
-            String rawResponse = info.getRawResponse();
-            SocialNetworks type = info.getNetworkType();
-            SocialNetworkIntegration sni = integrationMapping.get(type);
-            if (rawResponse == null || tokenString == null || sni == null)
-                results.add(new ResultOfPostSubmit(info, false));
-            else
-                results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
+        if(message == null || message.length() == 0)
+            results.addAll(networkInfoSet.stream()
+                    .map(info -> new ResultOfPostSubmit(info, false)).collect(Collectors.toList()));
+        else {
+            for (SocialNetworkInfo info : networkInfoSet) {
+                String tokenString = info.getToken();
+                String rawResponse = info.getAdditionalTokenField();
+                SocialNetworks type = info.getNetworkType();
+                SocialNetworkIntegration sni = integrationMapping.get(type);
+                if (rawResponse == null || tokenString == null || sni == null)
+                    results.add(new ResultOfPostSubmit(info, false));
+                else
+                    results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
+            }
         }
         return results;
     }

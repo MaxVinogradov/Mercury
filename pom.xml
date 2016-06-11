@@ -41,10 +41,11 @@
         <h2.version>1.4.191</h2.version>
         <liquibase-maven-plugin.version>3.5.0</liquibase-maven-plugin.version>
         <ojdbc6.version>11.2.0.3</ojdbc6.version>
-        <!-- Other -->
-        <surefire.plugin.version>2.14.1</surefire.plugin.version>
+        <!-- Integration -->
         <scribejava.version>2.5.2</scribejava.version>
         <org.twitter4j.version>4.0.2</org.twitter4j.version>
+        <!-- Other -->
+        <surefire.plugin.version>2.14.1</surefire.plugin.version>
     </properties>
 
     <dependencies>
