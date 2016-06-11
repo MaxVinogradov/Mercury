@@ -1,4 +1,6 @@
-package nc.sumy.edu.webapp.integration;
+package nc.sumy.edu.webapp.integration.exceptions;
+
+import nc.sumy.edu.webapp.integration.common.SocialNetworks;
 
 public class IntegrationNotFoundException extends IntegrationException {
     public IntegrationNotFoundException(SocialNetworks type) {

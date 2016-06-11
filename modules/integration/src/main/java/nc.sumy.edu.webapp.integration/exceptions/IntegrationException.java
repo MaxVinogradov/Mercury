@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.integration;
+package nc.sumy.edu.webapp.integration.exceptions;
 
 public class IntegrationException extends RuntimeException {
     public IntegrationException(String message) {

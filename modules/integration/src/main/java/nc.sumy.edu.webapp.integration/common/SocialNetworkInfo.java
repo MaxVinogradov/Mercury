@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.integration;
+package nc.sumy.edu.webapp.integration.common;
 
 public class SocialNetworkInfo {
     private String networkId;

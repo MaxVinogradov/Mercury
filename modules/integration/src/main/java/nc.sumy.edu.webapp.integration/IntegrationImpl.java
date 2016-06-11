@@ -1,13 +1,24 @@
 package nc.sumy.edu.webapp.integration;
 
+import nc.sumy.edu.webapp.integration.common.ResultOfPostSubmit;
+import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
+import nc.sumy.edu.webapp.integration.common.SocialNetworks;
+import nc.sumy.edu.webapp.integration.exceptions.IntegrationNotFoundException;
+import nc.sumy.edu.webapp.integration.exceptions.IntegrationTypeMismatchException;
+import nc.sumy.edu.webapp.integration.oauth1.OAuth1Integration;
+import nc.sumy.edu.webapp.integration.oauth1.TwitterIntegration;
+import nc.sumy.edu.webapp.integration.oauth2.FacebookIntegration;
+import nc.sumy.edu.webapp.integration.oauth2.OAuth2Integration;
+import nc.sumy.edu.webapp.integration.oauth2.VkIntegration;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static nc.sumy.edu.webapp.integration.SocialNetworks.FACEBOOK;
-import static nc.sumy.edu.webapp.integration.SocialNetworks.TWITTER;
-import static nc.sumy.edu.webapp.integration.SocialNetworks.VK;
+import static nc.sumy.edu.webapp.integration.common.SocialNetworks.FACEBOOK;
+import static nc.sumy.edu.webapp.integration.common.SocialNetworks.TWITTER;
+import static nc.sumy.edu.webapp.integration.common.SocialNetworks.VK;
 
 public class IntegrationImpl implements Integration {
 
@@ -27,11 +38,10 @@ public class IntegrationImpl implements Integration {
             String rawResponse = info.getRawResponse();
             SocialNetworks type = info.getNetworkType();
             SocialNetworkIntegration sni = integrationMapping.get(type);
-            if (rawResponse == null || tokenString == null || sni == null) {
+            if (rawResponse == null || tokenString == null || sni == null)
                 results.add(new ResultOfPostSubmit(info, false));
-                continue;
-            }
-            results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
+            else
+                results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
         }
         return results;
     }

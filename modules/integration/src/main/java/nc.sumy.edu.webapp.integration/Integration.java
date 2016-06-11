@@ -1,5 +1,9 @@
 package nc.sumy.edu.webapp.integration;
 
+import nc.sumy.edu.webapp.integration.common.ResultOfPostSubmit;
+import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
+import nc.sumy.edu.webapp.integration.common.SocialNetworks;
+
 import java.util.Set;
 
 public interface Integration {

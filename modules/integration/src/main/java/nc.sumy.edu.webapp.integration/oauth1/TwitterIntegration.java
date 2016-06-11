@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.integration;
+package nc.sumy.edu.webapp.integration.oauth1;
 
 
 import com.github.scribejava.apis.TwitterApi;
@@ -6,6 +6,7 @@ import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
+import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
