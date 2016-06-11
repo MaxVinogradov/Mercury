@@ -1,7 +1,5 @@
 package nc.sumy.edu.webapp.integration;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -13,7 +11,6 @@ import static nc.sumy.edu.webapp.integration.SocialNetworks.VK;
 
 public class IntegrationImpl implements Integration {
 
-    private Set<SocialNetworkInfo> networkInfoSet;
     private Map<SocialNetworks, SocialNetworkIntegration> integrationMapping =
             new HashMap<SocialNetworks, SocialNetworkIntegration>() {{
                 put(VK, new VkIntegration());
@@ -22,24 +19,21 @@ public class IntegrationImpl implements Integration {
             }};
 
     @Override
-    public ResultOfPostSubmit submitPost(String message) {
-        if(networkInfoSet == null) return false;
-        Set<PostSubmitResult> results = new HashSet<>();
+    public Set<ResultOfPostSubmit> submitPost(Set<SocialNetworkInfo> networkInfoSet, String message) {
+        if(networkInfoSet == null) return null;
+        Set<ResultOfPostSubmit> results = new HashSet<>();
         for (SocialNetworkInfo info : networkInfoSet) {
             String tokenString = info.getToken();
             String rawResponse = info.getRawResponse();
-            if (rawResponse == null || tokenString == null) {
+            SocialNetworks type = info.getNetworkType();
+            SocialNetworkIntegration sni = integrationMapping.get(type);
+            if (rawResponse == null || tokenString == null || sni == null) {
+                results.add(new ResultOfPostSubmit(info, false));
                 continue;
             }
-            SocialNetworks type = info.getNetworkType();
-            OAuth2AccessToken token = new OAuth2AccessToken(tokenString, rawResponse);
-
-
-            for(SocialNetworkIntegration integration: integrations)
-                results.add( integration.post(token, message) );
-            }
+            results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
         }
-        return ;
+        return results;
     }
 
     @Override
@@ -65,11 +59,9 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public String getAuthorisationUrlForNetwork(SocialNetworks type) {
-        return integrationMapping.get(type).getAuthorisationUrl();
+        SocialNetworkIntegration sni = integrationMapping.get(type);
+        if(sni == null) throw new IntegrationNotFoundException(type);
+        return sni.getAuthorisationUrl();
     }
 
-    @Override
-    public void setConnectedNetworks(Set<SocialNetworkInfo> networkInfoSet) {
-        this.networkInfoSet = networkInfoSet;
-    }
 }

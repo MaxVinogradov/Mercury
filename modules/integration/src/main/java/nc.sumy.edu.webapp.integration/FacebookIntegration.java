@@ -37,17 +37,11 @@ public class FacebookIntegration implements OAuth2Integration{
 
     @Override
     public boolean post(SocialNetworkInfo info, String message) {
-        return false;
-    }
-
-    @Override
-    public boolean post(OAuth2AccessToken token, String message) {
+        OAuth2AccessToken accessToken = new OAuth2AccessToken(info.getToken(), info.getRawResponse());
         OAuthRequest request = new OAuthRequest(Verb.POST, WALL_POST_URL, service);
-        service.signRequest(token, request);
+        service.signRequest(accessToken, request);
         request.addParameter("message", message);
         Response response = request.send();
         return !response.getBody().contains("error");
     }
-
-
 }

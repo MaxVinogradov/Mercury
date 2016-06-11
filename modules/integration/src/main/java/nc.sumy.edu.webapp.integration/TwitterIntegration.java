@@ -5,7 +5,6 @@ import com.github.scribejava.apis.TwitterApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
-import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -35,23 +34,6 @@ public class TwitterIntegration implements OAuth1Integration{
                 .setOAuthConsumerSecret(APP_SECRET)
                 .setOAuthAccessToken(info.getToken())
                 .setOAuthAccessTokenSecret(info.getRawResponse());
-        Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
-        try {
-            twitter.updateStatus(message);
-        } catch (TwitterException e) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean post(OAuth2AccessToken token, String message) {
-        ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        configurationBuilder.setDebugEnabled(true)
-                .setOAuthConsumerKey(APP_ID)
-                .setOAuthConsumerSecret(APP_SECRET)
-                .setOAuthAccessToken(token.getAccessToken())
-                .setOAuthAccessTokenSecret(token.getRawResponse());
         Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
         try {
             twitter.updateStatus(message);

@@ -42,13 +42,4 @@ public class VkIntegration implements OAuth2Integration {
         Response response = request.send();
         return !response.getBody().contains("error");
     }
-
-    @Override
-    public boolean post(OAuth2AccessToken token, String message) {
-        OAuthRequest request = new OAuthRequest(Verb.GET, WALL_POST_URL, service);
-        service.signRequest(token, request);
-        request.addParameter("message", message);
-        Response response = request.send();
-        return !response.getBody().contains("error");
-    }
 }
