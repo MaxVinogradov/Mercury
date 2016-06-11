@@ -45,7 +45,7 @@
                     <url>${database.url}</url>
                     <username>${database.user}</username>
                     <password>${database.password}</password>
-                    <!--<dropFirst>true</dropFirst>-->
+                    <dropFirst>true</dropFirst>
                 </configuration>
                 <executions>
                     <execution>
@@ -54,8 +54,7 @@
                         <configuration>
                             <url>${database.url}</url>
                             <username>${database.user}</username>
-                            <password>${database.password}
-                            </password>
+                            <password>${database.password}</password>
                         </configuration>
                         <goals>
                             <goal>${liquibase.goal}</goal>
