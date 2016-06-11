@@ -6,8 +6,6 @@ import nc.sumy.edu.webapp.database.domain.Account;
 import nc.sumy.edu.webapp.database.domain.Portal;
 import nc.sumy.edu.webapp.database.domain.Post;
 import nc.sumy.edu.webapp.database.domain.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -15,72 +13,73 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class StoringServiceImpl implements StoringService {
-    private static final Logger LOG = LoggerFactory.getLogger(StoringServiceImpl.class);
-    private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
     private static final String INSERT_USER =
-            "INSERT INTO PUBLIC.USERS VALUES (?, ?, ?, ?);";
+            "INSERT INTO PUBLIC.USERS  (LOGIN, PASSWORD, MAIL, BIRTHDAY) VALUES (?, ?, ?, ?);";
     private static final String INSERT_POST =
-            "INSERT INTO PUBLIC.POSTS VALUES (?, ?, ?, ?);";
+            "INSERT INTO PUBLIC.POSTS (USER_ID, PUBLISH_DATE, TITLE, BODY) VALUES (?, ?, ?, ?);";
     private static final String INSERT_ACCOUNT =
-            "INSERT INTO PUBLIC.ACCOUNTS VALUES (?, ?, ?, ?, ?);";
+            "INSERT INTO PUBLIC.ACCOUNTS (SERVICE_NAME, LOGIN, PASSWORD, LAST_TOKEN, RAW_RESPONSE) VALUES (?, ?, ?, ?, ?);";
     private static final String INSERT_PORTAL =
             "INSERT INTO PUBLIC.PORTALS VALUES (?, ?);";
 
     @Override
     public User addUser(User user) {
-        try (Connection connection = dataBaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_USER)) {
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPassword());
-            statement.setString(3, user.getMail());
-            statement.setDate(4, new Date(user.getPublishDate().getTime().getTime()));
-            statement.executeUpdate();
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(INSERT_USER)) {
+            ps.setString(1, user.getLogin());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getMail());
+            ps.setDate  (4, new Date(user.getPublishDate().getTime().getTime()));
+            ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.error("Unable to add a new user: " + user.getLogin(), e);
+            throw new StoringServiceException("Unable to add a new user: " + user.getLogin(), e);
         }
         return user;
     }
 
     @Override
-    public void addPost(Post post) {
-        try (Connection connection = dataBaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_POST)) {
-            statement.setLong(1, post.getUserId());
-            statement.setDate(2, new Date(post.getPublishDate().getTime().getTime()));
-            statement.setString(3, post.getTitle());
-            statement.setString(4, post.getBody());
-            statement.executeUpdate();
+    public Post addPost(Post post) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(INSERT_POST)) {
+            ps.setLong  (1, post.getUserId());
+            ps.setDate  (2, new Date(post.getPublishDate().getTime().getTime()));
+            ps.setString(3, post.getTitle());
+            ps.setString(4, post.getBody());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.error(ERROR_MASSAGE, e);
+            throw new StoringServiceException("Unable to add a new post from user: " + post.getUserId(), e);
         }
+        return post;
     }
 
     @Override
-    public void addAccount(Account account) {
-        try (Connection connection = dataBaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_ACCOUNT)) {
-            statement.setString(1, account.getServiceName());
-            statement.setString(2, account.getLogin());
-            statement.setString(3, account.getPassword());
-            statement.setString(4, account.getLastToken());
-            statement.setString(5, account.getRawResponse());
-            statement.executeUpdate();
+    public Account addAccount(Account account) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(INSERT_ACCOUNT)) {
+            ps.setString(1, account.getServiceName());
+            ps.setString(2, account.getLogin());
+            ps.setString(3, account.getPassword());
+            ps.setString(4, account.getLastToken());
+            ps.setString(5, account.getRawResponse());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.error(ERROR_MASSAGE, e);
+            throw new StoringServiceException("Unable to add a new account: " + account.getLogin(), e);
         }
+        return account;
     }
 
     @Override
-    public void addPortal(Portal portal) {
-        try (Connection connection = dataBaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_PORTAL)) {
-            statement.setLong(1, portal.getUserId());
-            statement.setLong(2, portal.getAccountId());
-            statement.executeUpdate();
+    public Portal addPortal(Portal portal) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(INSERT_PORTAL)) {
+            ps.setLong(1, portal.getUserId());
+            ps.setLong(2, portal.getAccountId());
+            ps.executeUpdate();
         } catch (SQLException e) {
-            LOG.error(ERROR_MASSAGE, e);
+            throw new StoringServiceException("Unable to add a new portal of userId: " + portal.getUserId(), e);
         }
+        return portal;
     }
 }

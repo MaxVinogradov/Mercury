@@ -13,10 +13,10 @@ public interface StoringService {
     */
     User addUser(User user);
 
-    void addPost(Post post);
+    Post addPost(Post post);
 
-    void addAccount(Account account);
+    Account addAccount(Account account);
 
-    void addPortal(Portal portal);
+    Portal addPortal(Portal portal);
 
 }
