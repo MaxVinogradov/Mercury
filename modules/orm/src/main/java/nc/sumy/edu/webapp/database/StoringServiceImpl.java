@@ -19,7 +19,6 @@ public class StoringServiceImpl implements StoringService {
     private static final String ERROR_MASSAGE = "When using the database SQLException was happen.";
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
-    //Я игнорил первій столбец во всех табличках, не уверен в том как правильно с ним работать кроме как аккаунтов
     private static final String INSERT_USER =
             "INSERT INTO PUBLIC.USERS VALUES (?, ?, ?, ?);";
     private static final String INSERT_POST =
