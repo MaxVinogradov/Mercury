@@ -26,10 +26,6 @@ public class TwitterIntegration implements OAuth1Integration{
         return service.getAuthorizationUrl(service.getRequestToken());
     }
 
-    @Override
-    public SocialNetworkInfo getAccessTokenByCode(String code) {
-        return null;
-    }
 
     @Override
     public boolean post(SocialNetworkInfo info, String message) {

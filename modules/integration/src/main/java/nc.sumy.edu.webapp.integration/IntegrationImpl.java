@@ -45,17 +45,21 @@ public class IntegrationImpl implements Integration {
     @Override
     public SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code) {
         SocialNetworkIntegration sni = integrationMapping.get(type);
-        return (sni instanceof OAuth2Integration) ?
-                ((OAuth2Integration) sni).getAccessTokenByCode(code) :
-                null;
+        if (sni == null) throw new IntegrationNotFoundException(type);
+        if (sni instanceof OAuth2Integration)
+            return ((OAuth2Integration) sni).getAccessTokenByCode(code);
+        else
+            throw new IntegrationTypeMismatchException(type, "OAuth2");
     }
 
     @Override
     public SocialNetworkInfo processCodeForOAuth1(SocialNetworks type, String requestCode, String code) {
         SocialNetworkIntegration sni = integrationMapping.get(type);
-        return (sni instanceof OAuth1Integration) ?
-                ((OAuth1Integration) sni).getAccessTokenByCode(requestCode, code) :
-                null;
+        if (sni == null) throw new IntegrationNotFoundException(type);
+        if (sni instanceof OAuth1Integration)
+            return ((OAuth1Integration) sni).getAccessTokenByCode(requestCode, code);
+        else
+            throw new IntegrationTypeMismatchException(type, "OAuth1");
     }
 
 
