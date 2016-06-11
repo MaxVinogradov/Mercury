@@ -12,7 +12,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class TwitterIntegration implements SocialNetworkIntegration{
+public class TwitterIntegration implements OAuth1Integration{
     private static final String APP_ID = "6DCIfit5FkI6bbj0I9OUDb6IO";
     private static final String APP_SECRET = "0Wd0RnccP4GVllbjhK9nREnTfPmx7TSGyGdYoYHUsNIhMNjggt";
     private final OAuth10aService service = new ServiceBuilder()

@@ -9,7 +9,7 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
-public class FacebookIntegration implements SocialNetworkIntegration{
+public class FacebookIntegration implements OAuth2Integration{
     private static final String APP_ID = "220252605025084";
     private static final String APP_SECRET = "5df062aeebae2a5c332e534133679a02";
     private final OAuth20Service service = new ServiceBuilder()

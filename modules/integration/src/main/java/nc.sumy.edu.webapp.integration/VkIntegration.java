@@ -8,7 +8,7 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 
-public class VkIntegration implements SocialNetworkIntegration {
+public class VkIntegration implements OAuth2Integration {
     private static final String APP_ID = "5454568";
     private static final String APP_SECRET = "DUv5bShooOTH7Vzsyqpe";
     private final OAuth20Service service = new ServiceBuilder()

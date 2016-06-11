@@ -7,13 +7,19 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static nc.sumy.edu.webapp.integration.SocialNetworks.FACEBOOK;
 import static nc.sumy.edu.webapp.integration.SocialNetworks.TWITTER;
+import static nc.sumy.edu.webapp.integration.SocialNetworks.VK;
 
 public class IntegrationImpl implements Integration {
 
     private Set<SocialNetworkInfo> networkInfoSet;
-    private Set<SocialNetworkIntegration> integrations = new HashSet<>();
-    private Map<SocialNetworks, SocialNetworkIntegration> integrationMapping = new HashMap<>();
+    private Map<SocialNetworks, SocialNetworkIntegration> integrationMapping =
+            new HashMap<SocialNetworks, SocialNetworkIntegration>() {{
+                put(VK, new VkIntegration());
+                put(FACEBOOK, new FacebookIntegration());
+                put(TWITTER, new TwitterIntegration());
+            }};
 
     @Override
     public ResultOfPostSubmit submitPost(String message) {
@@ -38,37 +44,24 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code) {
-        return integrationMapping.get(type).getAccessTokenByCode(code);
+        SocialNetworkIntegration sni = integrationMapping.get(type);
+        return (sni instanceof OAuth2Integration) ?
+                ((OAuth2Integration) sni).getAccessTokenByCode(code) :
+                null;
     }
 
     @Override
     public SocialNetworkInfo processCodeForOAuth1(SocialNetworks type, String requestCode, String code) {
-        SocialNetworkInfo info = null;
-        if(type == TWITTER) {
-            info = new TwitterIntegration().getAccessTokenByCode(requestCode, code);
-        }
-        return info;
+        SocialNetworkIntegration sni = integrationMapping.get(type);
+        return (sni instanceof OAuth1Integration) ?
+                ((OAuth1Integration) sni).getAccessTokenByCode(requestCode, code) :
+                null;
     }
 
 
     @Override
     public String getAuthorisationUrlForNetwork(SocialNetworks type) {
-        String authUrl;
-        switch(type) {
-            case VK:
-                authUrl = new VkIntegration().getAuthorisationUrl();
-                break;
-            case FACEBOOK:
-                authUrl = new FacebookIntegration().getAuthorisationUrl();
-                break;
-            case TWITTER:
-                authUrl = new TwitterIntegration().getAuthorisationUrl();
-                break;
-            default:
-                authUrl = null;
-                break;
-        }
-        return authUrl;
+        return integrationMapping.get(type).getAuthorisationUrl();
     }
 
     @Override
