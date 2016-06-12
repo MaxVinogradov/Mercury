@@ -20,18 +20,34 @@ import static nc.sumy.edu.webapp.integration.common.SocialNetworks.VK;
 
 public class IntegrationImpl implements Integration {
 
-    private Map<SocialNetworks, SocialNetworkIntegration> integrationMapping =
-            new HashMap<SocialNetworks, SocialNetworkIntegration>() {{
-                put(VK, new VkIntegration());
-                put(FACEBOOK, new FacebookIntegration());
-                put(TWITTER, new TwitterIntegration());
-            }};
+    private Map<SocialNetworks, SocialNetworkIntegration> integrationMapping;
+    private static final Map<SocialNetworks, SocialNetworkIntegration> DEFAULT_MAPPING;
+
+    static {
+        DEFAULT_MAPPING = getDefaultMapping();
+    }
+
+    public IntegrationImpl(Map<SocialNetworks, SocialNetworkIntegration> integrationMapping) {
+        this.integrationMapping = integrationMapping;
+    }
+
+    public IntegrationImpl() {
+        this.integrationMapping = DEFAULT_MAPPING;
+    }
+
+    private static Map<SocialNetworks, SocialNetworkIntegration> getDefaultMapping() {
+        Map<SocialNetworks, SocialNetworkIntegration> map = new HashMap<>();
+        map.put(VK, new VkIntegration());
+        map.put(FACEBOOK, new FacebookIntegration());
+        map.put(TWITTER, new TwitterIntegration());
+        return map;
+    }
 
     @Override
     public Set<ResultOfPostSubmit> submitPost(Set<SocialNetworkInfo> networkInfoSet, String message) {
-        if(networkInfoSet == null || networkInfoSet.isEmpty()) return Collections.emptySet();
+        if(checkInfoSet(networkInfoSet)) return Collections.emptySet();
         Set<ResultOfPostSubmit> results = new HashSet<>();
-        if(message == null || message.length() == 0)
+        if(checkMessage(message))
             results.addAll(networkInfoSet.stream()
                     .map(info -> new ResultOfPostSubmit(info, false)).collect(Collectors.toList()));
         else {
@@ -40,8 +56,7 @@ public class IntegrationImpl implements Integration {
                 String rawResponse = info.getAdditionalTokenField();
                 SocialNetworks type = info.getNetworkType();
                 SocialNetworkIntegration sni = integrationMapping.get(type);
-                if (rawResponse == null || rawResponse.length() == 0 || tokenString == null
-                        || tokenString.length() == 0|| sni == null)
+                if (checkNetworkInfo(rawResponse, tokenString, sni))
                     results.add(new ResultOfPostSubmit(info, false));
                 else
                     results.add(new ResultOfPostSubmit(info, sni.post(info, message)));
@@ -49,6 +64,20 @@ public class IntegrationImpl implements Integration {
         }
         return results;
     }
+
+    private boolean checkNetworkInfo(String rawResponse, String tokenString, SocialNetworkIntegration sni) {
+        return rawResponse == null || rawResponse.length() == 0 || tokenString == null
+                || tokenString.length() == 0|| sni == null;
+    }
+
+    private boolean checkInfoSet(Set<SocialNetworkInfo> networkInfoSet) {
+        return networkInfoSet == null || networkInfoSet.isEmpty();
+    }
+
+    private boolean checkMessage(String message){
+        return message == null || message.length() == 0;
+    }
+
 
     @Override
     public SocialNetworkInfo processCodeForOAuth2(SocialNetworks type, String code) {
