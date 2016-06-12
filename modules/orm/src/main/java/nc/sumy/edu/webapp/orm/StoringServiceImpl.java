@@ -62,7 +62,7 @@ public class StoringServiceImpl implements StoringService {
             ps.setString(2, account.getLogin());
             ps.setString(3, account.getPassword());
             ps.setString(4, account.getLastToken());
-            ps.setString(5, account.getRawResponse());
+            ps.setString(5, account.getAdditionalTokenField());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new account: " + account.getLogin(), e);

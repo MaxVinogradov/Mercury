@@ -3,15 +3,15 @@ package nc.sumy.edu.webcontainer.common.integration;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class SocialNetworkInfo {
-    private String networkId;
-    private SocialNetworks networkType;
-    private String token;
+    private String accountId;
+    private SocialNetworks serviceName;
+    private String lastToken;
     private String additionalTokenField;
 
-    public SocialNetworkInfo(String networkId, SocialNetworks networkType, String token, String rawResponse) {
-        this.networkId = networkId;
-        this.networkType = networkType;
-        this.token = token;
+    public SocialNetworkInfo(String accountId, SocialNetworks serviceName, String lastToken, String rawResponse) {
+        this.accountId = accountId;
+        this.serviceName = serviceName;
+        this.lastToken = lastToken;
         this.additionalTokenField = rawResponse;
     }
 
@@ -19,28 +19,28 @@ public class SocialNetworkInfo {
         super();
     }
 
-    public String getNetworkId() {
-        return networkId;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setNetworkId(String networkId) {
-        this.networkId = networkId;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
-    public SocialNetworks getNetworkType() {
-        return networkType;
+    public SocialNetworks getServiceName() {
+        return serviceName;
     }
 
-    public void setNetworkType(SocialNetworks networkType) {
-        this.networkType = networkType;
+    public void setServiceName(SocialNetworks serviceName) {
+        this.serviceName = serviceName;
     }
 
-    public String getToken() {
-        return token;
+    public String getLastToken() {
+        return lastToken;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setLastToken(String lastToken) {
+        this.lastToken = lastToken;
     }
 
     public String getAdditionalTokenField() {
@@ -57,18 +57,18 @@ public class SocialNetworkInfo {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         SocialNetworkInfo that = (SocialNetworkInfo) obj;
-        return this.networkId.equals(that.getNetworkId()) &&
+        return this.accountId.equals(that.getAccountId()) &&
                 this.additionalTokenField.equals(that.getAdditionalTokenField()) &&
-                this.token.equals(that.getToken()) &&
-                this.networkType.equals(that.getNetworkType());
+                this.lastToken.equals(that.getLastToken()) &&
+                this.serviceName.equals(that.getServiceName());
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(15, 39)
-                .append(networkId)
-                .append(networkType)
-                .append(token)
+                .append(accountId)
+                .append(serviceName)
+                .append(lastToken)
                 .append(additionalTokenField)
                 .toHashCode();
     }

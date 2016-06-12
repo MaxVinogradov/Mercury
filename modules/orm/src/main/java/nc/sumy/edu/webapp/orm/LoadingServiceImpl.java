@@ -75,7 +75,7 @@ public class LoadingServiceImpl implements LoadingService {
                         .setLogin(rs.getString      ("LOGIN"))
                         .setPassword(rs.getString   ("PASSWORD"))
                         .setLastToken(rs.getString  ("LAST_TOKEN"))
-                        .setRawResponse(rs.getString("RAW_RESPONSE"));
+                        .setAdditionalTokenField(rs.getString("RAW_RESPONSE"));
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a account with accountId: " + accountId, e);

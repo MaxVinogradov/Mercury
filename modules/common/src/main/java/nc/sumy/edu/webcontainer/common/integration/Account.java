@@ -9,20 +9,27 @@ public class Account {
     private long    accountId;
     private SocialNetworks serviceName;
     private String  login;
-    private String  password;
+    private String  password; //delete from structure: from database, from orm.
     private String  lastToken;
-    private String  rawResponse;
+    private String additionalTokenField;
 
     public Account() {}
 
+    public Account(long accountId, SocialNetworks serviceName, String lastToken, String additionalTokenField) {
+        this.accountId = accountId;
+        this.serviceName = serviceName;
+        this.lastToken = lastToken;
+        this.additionalTokenField = additionalTokenField;
+    }
+
     public Account(long accountId, SocialNetworks serviceName, String login,
-                   String password, String lastToken, String rawResponse) {
+                   String password, String lastToken, String additionalTokenField) {
         this.accountId = accountId;
         this.serviceName = serviceName;
         this.login = login;
         this.password = password;
         this.lastToken = lastToken;
-        this.rawResponse = rawResponse;
+        this.additionalTokenField = additionalTokenField;
     }
 
     public long getAccountId() {
@@ -70,12 +77,12 @@ public class Account {
         return this;
     }
 
-    public String getRawResponse() {
-        return rawResponse;
+    public String getAdditionalTokenField() {
+        return additionalTokenField;
     }
 
-    public Account setRawResponse(String rawResponse) {
-        this.rawResponse = rawResponse;
+    public Account setAdditionalTokenField(String additionalTokenField) {
+        this.additionalTokenField = additionalTokenField;
         return this;
     }
 
@@ -93,7 +100,7 @@ public class Account {
                 .append(login, account.login)
                 .append(password, account.password)
                 .append(lastToken, account.lastToken)
-                .append(rawResponse, account.rawResponse)
+                .append(additionalTokenField, account.additionalTokenField)
                 .isEquals();
     }
 
@@ -105,7 +112,7 @@ public class Account {
                 .append(login)
                 .append(password)
                 .append(lastToken)
-                .append(rawResponse)
+                .append(additionalTokenField)
                 .toHashCode();
     }
 }
