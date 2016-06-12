@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database.connection;
+package nc.sumy.edu.webapp.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DataBaseConnectionH2 implements DataBaseConnection {
 
-    private static final String URL = "jdbc:h2:mem:test";
+    private static final String URL = "jdbc:h2:~/test";
     private static final String USER = "sa";
     private static final String PASS = "";
 

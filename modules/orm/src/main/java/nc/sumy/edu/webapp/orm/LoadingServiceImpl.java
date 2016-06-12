@@ -1,11 +1,11 @@
-package nc.sumy.edu.webapp.database;
+package nc.sumy.edu.webapp.orm;
 
-import nc.sumy.edu.webapp.database.connection.DataBaseConnection;
-import nc.sumy.edu.webapp.database.connection.DataBaseConnectionH2;
-import nc.sumy.edu.webapp.database.domain.Account;
-import nc.sumy.edu.webapp.database.domain.Portal;
-import nc.sumy.edu.webapp.database.domain.Post;
-import nc.sumy.edu.webapp.database.domain.User;
+import nc.sumy.edu.webapp.database.DataBaseConnection;
+import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
+import nc.sumy.edu.webapp.orm.domain.Account;
+import nc.sumy.edu.webapp.orm.domain.Portal;
+import nc.sumy.edu.webapp.orm.domain.Post;
+import nc.sumy.edu.webapp.orm.domain.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

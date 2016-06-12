@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database.connection;
+package nc.sumy.edu.webapp.database;
 
 import java.util.Map;
 

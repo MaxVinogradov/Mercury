@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.database;
+package nc.sumy.edu.webapp.orm;
 
 public class StoringServiceException extends RuntimeException{
 

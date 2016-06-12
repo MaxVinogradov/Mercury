@@ -250,10 +250,10 @@
                     <version>${pitest-maven.version}</version>
                     <configuration>
                         <targetClasses>
-                            <param>nc.sumy.edu.webapp.database.*</param>
+                            <param>nc.sumy.edu.webapp.orm.*</param>
                         </targetClasses>
                         <targetTests>
-                            <param>nc.sumy.edu.webapp.database.*</param>
+                            <param>nc.sumy.edu.webapp.orm.*</param>
                         </targetTests>
                     </configuration>
                 </plugin>
