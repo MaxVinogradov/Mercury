@@ -5,9 +5,7 @@ import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
 import nc.sumy.edu.webapp.integration.common.SocialNetworks;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.testng.Assert.assertEquals;
 
@@ -36,6 +34,19 @@ public class IntegrationImplTest {
         Set<ResultOfPostSubmit> actualNull = INTEGRATION.submitPost(infos, null);
         assertEquals(actualEmptyString, result, "Publishing empty string must return empty set of results all false");
         assertEquals(actualNull, result, "Publishing null string must return set of results all false");
+    }
+
+    @Test
+    public void testSubmitWithInvalidNetworkType() {
+        SocialNetworkInfo info = new SocialNetworkInfo("id", SocialNetworks.VK, "token", "token additional field");
+        Set<SocialNetworkInfo> infos = new HashSet<>();
+        infos.add(info);
+        Map<SocialNetworks, SocialNetworkIntegration> integrationMapping = new HashMap<>();
+        Set<ResultOfPostSubmit> actual = new IntegrationImpl(integrationMapping).submitPost(infos, "message");
+        Set<ResultOfPostSubmit> result = new HashSet<>();
+        result.add(new ResultOfPostSubmit(info, false));
+        assertEquals(actual, result, "Publishing to network that isn't in integration mapping" +
+                " must return set of results all false");
     }
 
     @Test
