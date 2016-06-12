@@ -2,7 +2,7 @@ package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
-import nc.sumy.edu.webcontainer.common.integration.Account;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webapp.orm.domain.Portal;
 import nc.sumy.edu.webapp.orm.domain.Post;
 import nc.sumy.edu.webapp.orm.domain.User;
@@ -55,19 +55,19 @@ public class StoringServiceImpl implements StoringService {
     }
 
     @Override
-    public Account addAccount(Account account) {
+    public SocialNetworkInfo addAccount(SocialNetworkInfo socialNetworkInfo) {
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(INSERT_ACCOUNT)) {
-            ps.setString(1, account.getServiceName().getDatabaseName());
-            ps.setString(2, account.getLogin());
-            ps.setString(3, account.getPassword());
-            ps.setString(4, account.getLastToken());
-            ps.setString(5, account.getAdditionalTokenField());
+            ps.setString(1, socialNetworkInfo.getServiceName().getDatabaseName());
+            ps.setString(2, socialNetworkInfo.getLogin());
+            ps.setString(3, socialNetworkInfo.getPassword());
+            ps.setString(4, socialNetworkInfo.getLastToken());
+            ps.setString(5, socialNetworkInfo.getAdditionalTokenField());
             ps.executeUpdate();
         } catch (SQLException e) {
-            throw new StoringServiceException("Unable to add a new account: " + account.getLogin(), e);
+            throw new StoringServiceException("Unable to add a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
         }
-        return account;
+        return socialNetworkInfo;
     }
 
     @Override

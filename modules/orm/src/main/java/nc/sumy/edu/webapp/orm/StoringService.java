@@ -1,6 +1,6 @@
 package nc.sumy.edu.webapp.orm;
 
-import nc.sumy.edu.webcontainer.common.integration.Account;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webapp.orm.domain.Portal;
 import nc.sumy.edu.webapp.orm.domain.Post;
 import nc.sumy.edu.webapp.orm.domain.User;
@@ -15,7 +15,7 @@ public interface StoringService {
 
     Post addPost(Post post);
 
-    Account addAccount(Account account);
+    SocialNetworkInfo addAccount(SocialNetworkInfo socialNetworkInfo);
 
     Portal addPortal(Portal portal);
 

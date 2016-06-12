@@ -2,7 +2,7 @@ package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
-import nc.sumy.edu.webcontainer.common.integration.Account;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webapp.orm.domain.Portal;
 import nc.sumy.edu.webapp.orm.domain.Post;
 import nc.sumy.edu.webapp.orm.domain.User;
@@ -64,13 +64,13 @@ public class LoadingServiceImpl implements LoadingService {
     }
 
     @Override
-    public Account loadAccount(int accountId) {
-        Account account = new Account();
+    public SocialNetworkInfo loadAccount(int accountId) {
+        SocialNetworkInfo socialNetworkInfo = new SocialNetworkInfo();
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(SELECT_ACCOUNT)) {
             ps.setInt(1, accountId);
             try (ResultSet rs = ps.executeQuery()) {
-                account.setAccountId(rs.getInt      ("ACCOUNT_ID"))
+                socialNetworkInfo.setAccountId(rs.getInt      ("ACCOUNT_ID"))
                         .setServiceName(SocialNetworks.getNetworkType(rs.getString("SERVICE_NAME")))
                         .setLogin(rs.getString      ("LOGIN"))
                         .setPassword(rs.getString   ("PASSWORD"))
@@ -78,9 +78,9 @@ public class LoadingServiceImpl implements LoadingService {
                         .setAdditionalTokenField(rs.getString("RAW_RESPONSE"));
             }
         } catch (SQLException e) {
-            throw new LoadingServiceException("Unable to load a account with accountId: " + accountId, e);
+            throw new LoadingServiceException("Unable to load a socialNetworkInfo with accountId: " + accountId, e);
         }
-        return account;
+        return socialNetworkInfo;
     }
 
     @Override
