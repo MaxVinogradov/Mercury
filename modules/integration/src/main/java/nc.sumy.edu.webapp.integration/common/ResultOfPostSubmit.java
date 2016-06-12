@@ -3,8 +3,8 @@ package nc.sumy.edu.webapp.integration.common;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class ResultOfPostSubmit {
-    private SocialNetworkInfo info;
-    private boolean postSucceed;
+    private final SocialNetworkInfo info;
+    private final boolean postSucceed;
 
     public ResultOfPostSubmit(SocialNetworkInfo info, boolean postSucceed) {
         this.info = info;
@@ -20,12 +20,12 @@ public class ResultOfPostSubmit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ResultOfPostSubmit that = (ResultOfPostSubmit) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ResultOfPostSubmit that = (ResultOfPostSubmit) obj;
         if (postSucceed != that.postSucceed) return false;
-        return info != null ? info.equals(that.info) : that.info == null;
+        return info == null ? that.info == null : info.equals(that.info);
     }
 
     @Override

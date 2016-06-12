@@ -29,7 +29,7 @@ public class IntegrationImpl implements Integration {
 
     @Override
     public Set<ResultOfPostSubmit> submitPost(Set<SocialNetworkInfo> networkInfoSet, String message) {
-        if(networkInfoSet == null || networkInfoSet.size() == 0) return Collections.emptySet();
+        if(networkInfoSet == null || networkInfoSet.isEmpty()) return Collections.emptySet();
         Set<ResultOfPostSubmit> results = new HashSet<>();
         if(message == null || message.length() == 0)
             results.addAll(networkInfoSet.stream()
