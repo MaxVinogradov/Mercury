@@ -38,7 +38,7 @@ public class IntegrationImplTest {
 
     @Test
     public void testSubmitWithInvalidNetworkType() {
-        SocialNetworkInfo info = new SocialNetworkInfo("id", SocialNetworks.VK, "token", "token additional field");
+        SocialNetworkInfo info = new SocialNetworkInfo("id", SocialNetworks.VK, "ten", " additional field");
         Set<SocialNetworkInfo> infos = new HashSet<>();
         infos.add(info);
         Map<SocialNetworks, SocialNetworkIntegration> integrationMapping = new HashMap<>();
