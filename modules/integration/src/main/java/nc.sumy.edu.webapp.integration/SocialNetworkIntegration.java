@@ -1,6 +1,6 @@
 package nc.sumy.edu.webapp.integration;
 
-import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 
 public interface SocialNetworkIntegration {
 

@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.integration.common;
+package nc.sumy.edu.webcontainer.common.integration;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 

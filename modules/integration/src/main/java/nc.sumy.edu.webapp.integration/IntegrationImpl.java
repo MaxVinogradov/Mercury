@@ -1,8 +1,8 @@
 package nc.sumy.edu.webapp.integration;
 
-import nc.sumy.edu.webapp.integration.common.ResultOfPostSubmit;
-import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
-import nc.sumy.edu.webapp.integration.common.SocialNetworks;
+import nc.sumy.edu.webcontainer.common.integration.ResultOfPostSubmit;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 import nc.sumy.edu.webapp.integration.exceptions.IntegrationNotFoundException;
 import nc.sumy.edu.webapp.integration.exceptions.IntegrationTypeMismatchException;
 import nc.sumy.edu.webapp.integration.oauth1.OAuth1Integration;
@@ -14,9 +14,9 @@ import nc.sumy.edu.webapp.integration.oauth2.VkIntegration;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static nc.sumy.edu.webapp.integration.common.SocialNetworks.FACEBOOK;
-import static nc.sumy.edu.webapp.integration.common.SocialNetworks.TWITTER;
-import static nc.sumy.edu.webapp.integration.common.SocialNetworks.VK;
+import static nc.sumy.edu.webcontainer.common.integration.SocialNetworks.FACEBOOK;
+import static nc.sumy.edu.webcontainer.common.integration.SocialNetworks.TWITTER;
+import static nc.sumy.edu.webcontainer.common.integration.SocialNetworks.VK;
 
 public class IntegrationImpl implements Integration {
 

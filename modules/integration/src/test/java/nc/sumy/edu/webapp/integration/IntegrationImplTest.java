@@ -1,8 +1,8 @@
 package nc.sumy.edu.webapp.integration;
 
-import nc.sumy.edu.webapp.integration.common.ResultOfPostSubmit;
-import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
-import nc.sumy.edu.webapp.integration.common.SocialNetworks;
+import nc.sumy.edu.webcontainer.common.integration.ResultOfPostSubmit;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 import org.testng.annotations.Test;
 
 import java.util.*;

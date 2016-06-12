@@ -9,6 +9,11 @@
             <artifactId>database</artifactId>
             <version>0.1</version>
         </dependency>
+        <dependency>
+            <artifactId>common</artifactId>
+            <groupId>nc.edu.social_publisher</groupId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
 
     <parent>

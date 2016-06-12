@@ -12,5 +12,12 @@
 
     <artifactId>integration</artifactId>
 
+    <dependencies>
+        <dependency>
+            <artifactId>common</artifactId>
+            <groupId>nc.edu.social_publisher</groupId>
+            <version>0.1</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -7,8 +7,8 @@ import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
-import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
-import nc.sumy.edu.webapp.integration.common.SocialNetworks;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 
 public class VkIntegration implements OAuth2Integration {
     private static final String APP_ID = "5454568";

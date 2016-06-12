@@ -1,6 +1,6 @@
 package nc.sumy.edu.webapp.integration.exceptions;
 
-import nc.sumy.edu.webapp.integration.common.SocialNetworks;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 
 public class IntegrationTypeMismatchException extends IntegrationException{
     public IntegrationTypeMismatchException(SocialNetworks type, String desirable) {

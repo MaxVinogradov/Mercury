@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.orm.domain;
+package nc.sumy.edu.webcontainer.common.integration;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

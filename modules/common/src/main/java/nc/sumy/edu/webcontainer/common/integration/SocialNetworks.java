@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.integration.common;
+package nc.sumy.edu.webcontainer.common.integration;
 
 public enum SocialNetworks {
     VK, FACEBOOK, TWITTER
