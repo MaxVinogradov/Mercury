@@ -3,13 +3,13 @@ package nc.sumy.edu.webapp.integration;
 import nc.sumy.edu.webapp.integration.common.ResultOfPostSubmit;
 import nc.sumy.edu.webapp.integration.common.SocialNetworkInfo;
 import nc.sumy.edu.webapp.integration.common.SocialNetworks;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 
 public class IntegrationImplTest {
@@ -19,10 +19,10 @@ public class IntegrationImplTest {
     public void testSubmitPostInvalidSetParameter(){
         Set resultEmpty = INTEGRATION.submitPost(new HashSet<SocialNetworkInfo>(), "post message");
         Set resultNull = INTEGRATION.submitPost(null, "post message");
-        assertEquals("Publishing to empty set of integrations must return empty set of results",
-                Collections.emptySet(), resultEmpty);
-        assertEquals("Publishing to null set returns must return empty set of results",
-                Collections.emptySet(), resultNull);
+        assertEquals(resultEmpty, Collections.emptySet(),
+                "Publishing to empty set of integrations must return empty set of results");
+        assertEquals(resultNull, Collections.emptySet(),
+                "Publishing to null set returns must return empty set of results");
     }
 
     @Test
@@ -34,10 +34,8 @@ public class IntegrationImplTest {
         result.add(new ResultOfPostSubmit(info, false));
         Set<ResultOfPostSubmit> actualEmptyString = INTEGRATION.submitPost(infos, "");
         Set<ResultOfPostSubmit> actualNull = INTEGRATION.submitPost(infos, null);
-        assertEquals("Publishing empty string must return empty set of results all false",
-                result.equals(actualEmptyString), true);
-        assertEquals("Publishing null string must return set of results all false",
-                result, actualNull);
+        assertEquals(actualEmptyString, result, "Publishing empty string must return empty set of results all false");
+        assertEquals(actualNull, result, "Publishing null string must return set of results all false");
     }
 
     @Test
@@ -66,9 +64,9 @@ public class IntegrationImplTest {
 
         Set<ResultOfPostSubmit> actualNull = INTEGRATION.submitPost(infoNull, "message");
         Set<ResultOfPostSubmit> actualEmpty = INTEGRATION.submitPost(infoEmpty, "message");
-        assertEquals("Publishing message to networks with null token/add.token field must return set of results all false",
-                resultNull, actualNull);
-        assertEquals("Publishing message to networks with empty token/add.token field must return set of results all false",
-                resultEmpty, actualEmpty);
+        assertEquals(actualNull,
+                resultNull, "Publishing message to networks with null token/add.token field must return set of results all false");
+        assertEquals(actualEmpty,
+                resultEmpty, "Publishing message to networks with empty token/add.token field must return set of results all false");
     }
 }
