@@ -25,4 +25,18 @@ public class DataBaseConnectionH2Test {
                     DateFormat.getDateInstance().format(result.getDate(1)));
         }
     }
+    @Test
+    public void getConnectionAccountsTable() throws SQLException {
+        DataBaseConnection dataBaseConnection = new DataBaseConnectionH2();
+        try (Connection connection = dataBaseConnection.getConnection();
+             PreparedStatement statement = connection
+                     .prepareStatement("SELECT * FROM PUBLIC.ACCOUNTS;");
+             ResultSet result = statement.executeQuery()) {
+            assertTrue(result.next());
+            assertEquals(1, result.getInt(1));
+            assertEquals("vk.com", result.getString(2));
+            assertEquals("+380930484670", result.getString(3));
+            assertEquals("123456", result.getString(4));
+        }
+    }
 }
