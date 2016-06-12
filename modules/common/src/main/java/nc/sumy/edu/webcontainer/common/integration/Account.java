@@ -7,7 +7,7 @@ import static java.util.Objects.isNull;
 
 public class Account {
     private long    accountId;
-    private String  serviceName;
+    private SocialNetworks serviceName;
     private String  login;
     private String  password;
     private String  lastToken;
@@ -15,7 +15,7 @@ public class Account {
 
     public Account() {}
 
-    public Account(long accountId, String serviceName, String login,
+    public Account(long accountId, SocialNetworks serviceName, String login,
                    String password, String lastToken, String rawResponse) {
         this.accountId = accountId;
         this.serviceName = serviceName;
@@ -34,11 +34,11 @@ public class Account {
         return this;
     }
 
-    public String getServiceName() {
+    public SocialNetworks getServiceName() {
         return serviceName;
     }
 
-    public Account setServiceName(String serviceName) {
+    public Account setServiceName(SocialNetworks serviceName) {
         this.serviceName = serviceName;
         return this;
     }

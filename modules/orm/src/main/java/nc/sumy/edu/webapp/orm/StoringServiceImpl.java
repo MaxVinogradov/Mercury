@@ -58,7 +58,7 @@ public class StoringServiceImpl implements StoringService {
     public Account addAccount(Account account) {
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(INSERT_ACCOUNT)) {
-            ps.setString(1, account.getServiceName());
+            ps.setString(1, account.getServiceName().getDatabaseName());
             ps.setString(2, account.getLogin());
             ps.setString(3, account.getPassword());
             ps.setString(4, account.getLastToken());

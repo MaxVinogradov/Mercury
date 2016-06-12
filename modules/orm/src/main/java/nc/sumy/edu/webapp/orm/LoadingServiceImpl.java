@@ -6,6 +6,8 @@ import nc.sumy.edu.webcontainer.common.integration.Account;
 import nc.sumy.edu.webapp.orm.domain.Portal;
 import nc.sumy.edu.webapp.orm.domain.Post;
 import nc.sumy.edu.webapp.orm.domain.User;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -69,7 +71,7 @@ public class LoadingServiceImpl implements LoadingService {
             ps.setInt(1, accountId);
             try (ResultSet rs = ps.executeQuery()) {
                 account.setAccountId(rs.getInt      ("ACCOUNT_ID"))
-                        .setServiceName(rs.getString("SERVICE_NAME"))
+                        .setServiceName(SocialNetworks.getNetworkType(rs.getString("SERVICE_NAME")))
                         .setLogin(rs.getString      ("LOGIN"))
                         .setPassword(rs.getString   ("PASSWORD"))
                         .setLastToken(rs.getString  ("LAST_TOKEN"))
