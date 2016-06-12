@@ -52,9 +52,9 @@ public class IntegrationImpl implements Integration {
                     .map(info -> new ResultOfPostSubmit(info, false)).collect(Collectors.toList()));
         else {
             for (SocialNetworkInfo info : networkInfoSet) {
-                String tokenString = info.getToken();
+                String tokenString = info.getLastToken();
                 String rawResponse = info.getAdditionalTokenField();
-                SocialNetworks type = info.getNetworkType();
+                SocialNetworks type = info.getServiceName();
                 SocialNetworkIntegration sni = integrationMapping.get(type);
                 if (checkNetworkInfo(rawResponse, tokenString, sni))
                     results.add(new ResultOfPostSubmit(info, false));

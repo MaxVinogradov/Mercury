@@ -33,7 +33,7 @@ public class TwitterIntegration implements OAuth1Integration{
         configurationBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(APP_ID)
                 .setOAuthConsumerSecret(APP_SECRET)
-                .setOAuthAccessToken(info.getToken())
+                .setOAuthAccessToken(info.getLastToken())
                 .setOAuthAccessTokenSecret(info.getAdditionalTokenField());
         Twitter twitter = new TwitterFactory(configurationBuilder.build()).getInstance();
         try {
@@ -47,7 +47,7 @@ public class TwitterIntegration implements OAuth1Integration{
     public SocialNetworkInfo getAccessTokenByCode(String requestCode, String code) {
         OAuth1AccessToken token =  service.getAccessToken(new OAuth1RequestToken(requestCode, ""), code);
         SocialNetworkInfo info = new SocialNetworkInfo();
-        info.setToken(token.getToken());
+        info.setLastToken(token.getToken());
         info.setAdditionalTokenField(token.getTokenSecret());
         return info;
     }

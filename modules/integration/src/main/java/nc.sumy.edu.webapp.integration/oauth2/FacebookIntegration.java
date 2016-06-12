@@ -31,15 +31,15 @@ public class FacebookIntegration implements OAuth2Integration{
     public SocialNetworkInfo getAccessTokenByCode(String code) {
         OAuth2AccessToken accessToken = service.getAccessToken(code);
         SocialNetworkInfo info = new SocialNetworkInfo();
-        info.setNetworkType(SocialNetworks.FACEBOOK);
-        info.setToken(accessToken.getAccessToken());
+        info.setServiceName(SocialNetworks.FACEBOOK);
+        info.setLastToken(accessToken.getAccessToken());
         info.setAdditionalTokenField(accessToken.getRawResponse());
         return info;
     }
 
     @Override
     public boolean post(SocialNetworkInfo info, String message) {
-        OAuth2AccessToken accessToken = new OAuth2AccessToken(info.getToken(), info.getAdditionalTokenField());
+        OAuth2AccessToken accessToken = new OAuth2AccessToken(info.getLastToken(), info.getAdditionalTokenField());
         OAuthRequest request = new OAuthRequest(Verb.POST, WALL_POST_URL, service);
         service.signRequest(accessToken, request);
         request.addParameter("message", message);
