@@ -19,4 +19,12 @@ public interface StoringService {
 
     Portal addPortal(Portal portal);
 
+    User updateUser(User user);
+
+    Post updatePost(Post post);
+
+    SocialNetworkInfo updateAccount(SocialNetworkInfo socialNetworkInfo);
+
+    Portal updatePortal(Portal portal);
+
 }

@@ -23,63 +23,146 @@ public class StoringServiceImpl implements StoringService {
             "INSERT INTO PUBLIC.ACCOUNTS (SERVICE_NAME, LOGIN, PASSWORD, LAST_TOKEN, RAW_RESPONSE) VALUES (?, ?, ?, ?, ?);";
     private static final String INSERT_PORTAL =
             "INSERT INTO PUBLIC.PORTALS VALUES (?, ?);";
+    private static final String UPDATE_USER =
+            "UPDATE PUBLIC.USERS " +
+                    "SET LOGIN=?, PASSWORD=?, " +
+                    "MAIL=?, BIRTHDAY=? " +
+                    "WHERE USER_ID=?;";
+    private static final String UPDATE_POST =
+            "UPDATE PUBLIC.POSTS " +
+                    "SET USER_ID=?, PUBLISH_DATE=?, " +
+                    "TITLE=?, BODY=? " +
+                    "WHERE POST_ID=?;";
+    private static final String UPDATE_ACCOUNT =
+            "UPDATE PUBLIC.ACCOUNTS " +
+                    "SET USER_ID=?, PUBLISH_DATE=?, " +
+                    "TITLE=?, BODY=? " +
+                    "WHERE POST_ID=?;";
+    //TODO: add column PORTAL_ID to PORTALS table and fix query
+    private static final String UPDATE_PORTAL =
+            "UPDATE PUBLIC.PORTALS " +
+                    "SET ACCOUNT_ID=? " +
+                    "WHERE USER_ID=?;";
 
     @Override
     public User addUser(User user) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(INSERT_USER)) {
-            ps.setString(1, user.getLogin());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getMail());
-            ps.setDate  (4, new Date(user.getPublishDate().getTime().getTime()));
-            ps.executeUpdate();
+             PreparedStatement statement = conn.prepareStatement(INSERT_USER)) {
+            setParamUser(statement, user).executeUpdate();
+            return user;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new user: " + user.getLogin(), e);
         }
-        return user;
+    }
+
+    @Override
+    public User updateUser(User user) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(UPDATE_USER)) {
+            setParamUser(statement, user).setLong(5, user.getUserId());
+            statement.executeUpdate();
+            return user;
+        } catch (SQLException e) {
+            throw new StoringServiceException("Unable to update a new user: " + user.getLogin(), e);
+        }
+    }
+
+    private PreparedStatement setParamUser(PreparedStatement statement, User user) throws SQLException {
+        statement.setString(1, user.getLogin());
+        statement.setString(2, user.getPassword());
+        statement.setString(3, user.getMail());
+        statement.setDate(4, new Date(user.getPublishDate().getTime().getTime()));
+        return statement;
     }
 
     @Override
     public Post addPost(Post post) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(INSERT_POST)) {
-            ps.setLong  (1, post.getUserId());
-            ps.setDate  (2, new Date(post.getPublishDate().getTime().getTime()));
-            ps.setString(3, post.getTitle());
-            ps.setString(4, post.getBody());
-            ps.executeUpdate();
+             PreparedStatement statement = conn.prepareStatement(INSERT_POST)) {
+            setParamPost(statement, post).executeUpdate();
+            return post;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new post from user: " + post.getUserId(), e);
         }
-        return post;
+    }
+
+    @Override
+    public Post updatePost(Post post) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(UPDATE_POST)) {
+            setParamPost(statement, post).setLong(5, post.getPostId());
+            statement.executeUpdate();
+            return post;
+        } catch (SQLException e) {
+            throw new StoringServiceException("Unable to add a update post from user: " + post.getUserId(), e);
+        }
+    }
+
+    private PreparedStatement setParamPost(PreparedStatement statement, Post post) throws SQLException {
+        statement.setLong(1, post.getUserId());
+        statement.setDate(2, new Date(post.getPublishDate().getTime().getTime()));
+        statement.setString(3, post.getTitle());
+        statement.setString(4, post.getBody());
+        return statement;
     }
 
     @Override
     public SocialNetworkInfo addAccount(SocialNetworkInfo socialNetworkInfo) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(INSERT_ACCOUNT)) {
-            ps.setString(1, socialNetworkInfo.getServiceName().getDatabaseName());
-            ps.setString(2, socialNetworkInfo.getLogin());
-            ps.setString(3, socialNetworkInfo.getPassword());
-            ps.setString(4, socialNetworkInfo.getLastToken());
-            ps.setString(5, socialNetworkInfo.getAdditionalTokenField());
-            ps.executeUpdate();
+             PreparedStatement statement = conn.prepareStatement(INSERT_ACCOUNT)) {
+            setParamAccount(statement, socialNetworkInfo).executeUpdate();
+            return socialNetworkInfo;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
         }
-        return socialNetworkInfo;
+    }
+
+    @Override
+    public SocialNetworkInfo updateAccount(SocialNetworkInfo socialNetworkInfo) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(UPDATE_ACCOUNT)) {
+            setParamAccount(statement, socialNetworkInfo).setLong(5, socialNetworkInfo.getAccountId());
+            statement.executeUpdate();
+            return socialNetworkInfo;
+        } catch (SQLException e) {
+            throw new StoringServiceException("Unable to update a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
+        }
+    }
+
+    private PreparedStatement setParamAccount(PreparedStatement statement, SocialNetworkInfo account) throws SQLException {
+        statement.setString(1, account.getServiceName().getDatabaseName());
+        statement.setString(2, account.getLogin());
+        statement.setString(3, account.getPassword());
+        statement.setString(4, account.getLastToken());
+        statement.setString(5, account.getAdditionalTokenField());
+        return statement;
     }
 
     @Override
     public Portal addPortal(Portal portal) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(INSERT_PORTAL)) {
-            ps.setLong(1, portal.getUserId());
-            ps.setLong(2, portal.getAccountId());
-            ps.executeUpdate();
+             PreparedStatement statement = conn.prepareStatement(INSERT_PORTAL)) {
+            setParamPortal(statement, portal).executeUpdate();
+            return portal;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new portal of userId: " + portal.getUserId(), e);
         }
-        return portal;
+    }
+
+    @Override
+    public Portal updatePortal(Portal portal) {
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement statement = conn.prepareStatement(UPDATE_PORTAL)) {
+            setParamPortal(statement, portal).executeUpdate();
+            return portal;
+        } catch (SQLException e) {
+            throw new StoringServiceException("Unable to update a new portal of userId: " + portal.getUserId(), e);
+        }
+    }
+
+    private PreparedStatement setParamPortal(PreparedStatement statement, Portal portal) throws SQLException {
+        statement.setLong(1, portal.getUserId());
+        statement.setLong(2, portal.getAccountId());
+        return statement;
     }
 }
