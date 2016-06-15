@@ -48,8 +48,8 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public User addUser(User user) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(INSERT_USER)) {
-            setParamUser(statement, user).executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(INSERT_USER)) {
+            setParamUser(ps, user).executeUpdate();
             return loadingService.loadUser(user.getLogin());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new user: " + user.getLogin(), e);
@@ -59,9 +59,9 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public User updateUser(User user) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(UPDATE_USER)) {
-            setParamUser(statement, user).setLong(5, user.getUserId());
-            statement.executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_USER)) {
+            setParamUser(ps, user).setLong(5, user.getUserId());
+            ps.executeUpdate();
             return loadingService.loadUser(user.getLogin());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to update a new user: " + user.getLogin(), e);
@@ -79,8 +79,8 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public Post addPost(Post post) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(INSERT_POST)) {
-            setParamPost(statement, post).executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(INSERT_POST)) {
+            setParamPost(ps, post).executeUpdate();
             return post;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new post from user: " + post.getUserId(), e);
@@ -90,9 +90,9 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public Post updatePost(Post post) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(UPDATE_POST)) {
-            setParamPost(statement, post).setLong(5, post.getPostId());
-            statement.executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_POST)) {
+            setParamPost(ps, post).setLong(5, post.getPostId());
+            ps.executeUpdate();
             return post;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a update post from user: " + post.getUserId(), e);
@@ -110,8 +110,8 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public SocialNetworkInfo addAccount(SocialNetworkInfo socialNetworkInfo) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(INSERT_ACCOUNT)) {
-            setParamAccount(statement, socialNetworkInfo).executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(INSERT_ACCOUNT)) {
+            setParamAccount(ps, socialNetworkInfo).executeUpdate();
             return loadingService.loadAccount(socialNetworkInfo.getAccountId());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
@@ -121,9 +121,9 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public SocialNetworkInfo updateAccount(SocialNetworkInfo socialNetworkInfo) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(UPDATE_ACCOUNT)) {
-            setParamAccount(statement, socialNetworkInfo).setLong(5, socialNetworkInfo.getAccountId());
-            statement.executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_ACCOUNT)) {
+            setParamAccount(ps, socialNetworkInfo).setLong(5, socialNetworkInfo.getAccountId());
+            ps.executeUpdate();
             return loadingService.loadAccount(socialNetworkInfo.getAccountId());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to update a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
@@ -142,8 +142,8 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public Portal addPortal(Portal portal) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(INSERT_PORTAL)) {
-            setParamPortal(statement, portal).executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(INSERT_PORTAL)) {
+            setParamPortal(ps, portal).executeUpdate();
             return portal;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new portal of userId: " + portal.getUserId(), e);
@@ -153,8 +153,8 @@ public class StoringServiceImpl implements StoringService {
     @Override
     public Portal updatePortal(Portal portal) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(UPDATE_PORTAL)) {
-            setParamPortal(statement, portal).executeUpdate();
+             PreparedStatement ps = conn.prepareStatement(UPDATE_PORTAL)) {
+            setParamPortal(ps, portal).executeUpdate();
             return portal;
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to update a new portal of userId: " + portal.getUserId(), e);

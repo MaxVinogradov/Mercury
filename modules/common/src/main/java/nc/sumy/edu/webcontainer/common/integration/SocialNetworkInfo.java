@@ -6,12 +6,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import static java.util.Objects.isNull;
 
 public class SocialNetworkInfo {
-    private int    accountId;
+    private int     accountId;
     private SocialNetworks serviceName;
     private String  login;
     private String  password; //delete from structure: from database, from orm.
     private String  lastToken;
-    private String additionalTokenField;
+    private String  additionalTokenField;
 
     public SocialNetworkInfo() {}
 
