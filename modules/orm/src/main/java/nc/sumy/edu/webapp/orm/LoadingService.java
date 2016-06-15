@@ -15,6 +15,8 @@ public interface LoadingService {
 
     SocialNetworkInfo loadAccount(int accountId);
 
+    Collection<SocialNetworkInfo> loadAccounts(int userId);
+
     Collection<Post> loadPosts(int userId);
 
 }

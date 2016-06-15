@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class LoadingServiceImpl implements LoadingService {
     private final DataBaseConnection dataBaseConnection =
@@ -26,6 +27,10 @@ public class LoadingServiceImpl implements LoadingService {
             "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
     private static final String SELECT_POSTS =
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
+    private static final String SELECT_ACCOUNTS_VIA_POSTS =
+            "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
+            "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
+            "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
 
     @Override
     public User loadUser(String login) {
@@ -70,17 +75,43 @@ public class LoadingServiceImpl implements LoadingService {
              PreparedStatement ps = conn.prepareStatement(SELECT_ACCOUNT)) {
             ps.setInt(1, accountId);
             try (ResultSet rs = ps.executeQuery()) {
-                socialNetworkInfo.setAccountId(rs.getInt      ("ACCOUNT_ID"))
-                        .setServiceName(SocialNetworks.getNetworkType(rs.getString("SERVICE_NAME")))
-                        .setLogin(rs.getString      ("LOGIN"))
-                        .setPassword(rs.getString   ("PASSWORD"))
-                        .setLastToken(rs.getString  ("LAST_TOKEN"))
-                        .setAdditionalTokenField(rs.getString("RAW_RESPONSE"));
+                socialNetworkInfo.setAccountId(rs.getInt                ("ACCOUNT_ID"));
+                socialNetworkInfo.setServiceName(SocialNetworks
+                        .getNetworkType(rs.getString                    ("SERVICE_NAME")));
+                socialNetworkInfo.setLogin(rs.getString                 ("LOGIN"));
+                socialNetworkInfo.setPassword(rs.getString              ("PASSWORD"));
+                socialNetworkInfo.setLastToken(rs.getString             ("LAST_TOKEN"));
+                socialNetworkInfo.setAdditionalTokenField(rs.getString  ("RAW_RESPONSE"));
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a socialNetworkInfo with accountId: " + accountId, e);
         }
         return socialNetworkInfo;
+    }
+
+    @Override
+    public Collection<SocialNetworkInfo> loadAccounts(int userId) {
+        Collection<SocialNetworkInfo> collection = new HashSet<>();
+        try (Connection conn = dataBaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SELECT_ACCOUNTS_VIA_POSTS)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    SocialNetworkInfo socialNetworkInfo = new SocialNetworkInfo();
+                    socialNetworkInfo.setAccountId(rs.getInt                ("ACCOUNT_ID"));
+                    socialNetworkInfo.setServiceName(SocialNetworks
+                            .getNetworkType(rs.getString                    ("SERVICE_NAME")));
+                    socialNetworkInfo.setLogin(rs.getString                 ("LOGIN"));
+                    socialNetworkInfo.setPassword(rs.getString              ("PASSWORD"));
+                    socialNetworkInfo.setLastToken(rs.getString             ("LAST_TOKEN"));
+                    socialNetworkInfo.setAdditionalTokenField(rs.getString  ("RAW_RESPONSE"));
+                    collection.add(socialNetworkInfo);
+                }
+            }
+        } catch (SQLException e) {
+            throw new LoadingServiceException("Unable to load a post of user: " + userId, e);
+        }
+        return collection;
     }
 
     @Override
