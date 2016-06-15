@@ -43,13 +43,14 @@ public class StoringServiceImpl implements StoringService {
             "UPDATE PUBLIC.PORTALS " +
                     "SET ACCOUNT_ID=? " +
                     "WHERE USER_ID=?;";
+    private final LoadingService loadingService = new LoadingServiceImpl();
 
     @Override
     public User addUser(User user) {
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(INSERT_USER)) {
             setParamUser(statement, user).executeUpdate();
-            return user;
+            return loadingService.loadUser(user.getLogin());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new user: " + user.getLogin(), e);
         }
@@ -61,7 +62,7 @@ public class StoringServiceImpl implements StoringService {
              PreparedStatement statement = conn.prepareStatement(UPDATE_USER)) {
             setParamUser(statement, user).setLong(5, user.getUserId());
             statement.executeUpdate();
-            return user;
+            return loadingService.loadUser(user.getLogin());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to update a new user: " + user.getLogin(), e);
         }
@@ -111,7 +112,7 @@ public class StoringServiceImpl implements StoringService {
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(INSERT_ACCOUNT)) {
             setParamAccount(statement, socialNetworkInfo).executeUpdate();
-            return socialNetworkInfo;
+            return loadingService.loadAccount(socialNetworkInfo.getAccountId());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
         }
@@ -123,7 +124,7 @@ public class StoringServiceImpl implements StoringService {
              PreparedStatement statement = conn.prepareStatement(UPDATE_ACCOUNT)) {
             setParamAccount(statement, socialNetworkInfo).setLong(5, socialNetworkInfo.getAccountId());
             statement.executeUpdate();
-            return socialNetworkInfo;
+            return loadingService.loadAccount(socialNetworkInfo.getAccountId());
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to update a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);
         }

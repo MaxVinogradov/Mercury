@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import static java.util.Objects.isNull;
 
 public class SocialNetworkInfo {
-    private long    accountId;
+    private int    accountId;
     private SocialNetworks serviceName;
     private String  login;
     private String  password; //delete from structure: from database, from orm.
@@ -15,14 +15,14 @@ public class SocialNetworkInfo {
 
     public SocialNetworkInfo() {}
 
-    public SocialNetworkInfo(long accountId, SocialNetworks serviceName, String lastToken, String additionalTokenField) {
+    public SocialNetworkInfo(int accountId, SocialNetworks serviceName, String lastToken, String additionalTokenField) {
         this.accountId = accountId;
         this.serviceName = serviceName;
         this.lastToken = lastToken;
         this.additionalTokenField = additionalTokenField;
     }
 
-    public SocialNetworkInfo(long accountId, SocialNetworks serviceName, String login,
+    public SocialNetworkInfo(int accountId, SocialNetworks serviceName, String login,
                              String password, String lastToken, String additionalTokenField) {
         this.accountId = accountId;
         this.serviceName = serviceName;
@@ -32,11 +32,11 @@ public class SocialNetworkInfo {
         this.additionalTokenField = additionalTokenField;
     }
 
-    public long getAccountId() {
+    public int getAccountId() {
         return accountId;
     }
 
-    public SocialNetworkInfo setAccountId(long accountId) {
+    public SocialNetworkInfo setAccountId(int accountId) {
         this.accountId = accountId;
         return this;
     }

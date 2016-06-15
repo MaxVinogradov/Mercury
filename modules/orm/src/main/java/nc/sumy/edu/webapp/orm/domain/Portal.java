@@ -6,21 +6,21 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import static java.util.Objects.isNull;
 
 public class Portal {
-    private long userId;
-    private long accountId;
+    private int userId;
+    private int accountId;
 
     public Portal() {}
 
-    public Portal(long userId, long accountId) {
+    public Portal(int userId, int accountId) {
         this.userId = userId;
         this.accountId = accountId;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public Portal setUserId(long userId) {
+    public Portal setUserId(int userId) {
         this.userId = userId;
         return this;
     }
@@ -29,7 +29,7 @@ public class Portal {
         return accountId;
     }
 
-    public Portal setAccountId(long accountId) {
+    public Portal setAccountId(int accountId) {
         this.accountId = accountId;
         return this;
     }

@@ -9,7 +9,7 @@ import java.util.Date;
 import static java.util.Objects.isNull;
 
 public class User {
-    private long userId;
+    private int userId;
     private String  login;
     private String  password;
     private String  mail;
@@ -17,7 +17,7 @@ public class User {
 
     public User() {}
 
-    public User(long userId, String login, String password, String mail, Calendar publishDate) {
+    public User(int userId, String login, String password, String mail, Calendar publishDate) {
         this.userId = userId;
         this.login = login;
         this.password = password;
@@ -29,7 +29,7 @@ public class User {
         return userId;
     }
 
-    public User setUserId(long userId) {
+    public User setUserId(int userId) {
         this.userId = userId;
         return this;
     }

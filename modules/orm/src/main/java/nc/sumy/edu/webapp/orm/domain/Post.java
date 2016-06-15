@@ -9,15 +9,15 @@ import java.util.Date;
 import static java.util.Objects.isNull;
 
 public class Post {
-    private long        postId;
-    private long        userId;
+    private int        postId;
+    private int        userId;
     private Calendar    publishDate;
     private String      title;
     private String      body;
 
     public Post() {}
 
-    public Post(long postId, long userId, Calendar publishDate, String title, String body) {
+    public Post(int postId, int userId, Calendar publishDate, String title, String body) {
         this.postId = postId;
         this.userId = userId;
         this.publishDate = publishDate;
@@ -29,7 +29,7 @@ public class Post {
         return postId;
     }
 
-    public Post setPostId(long postId) {
+    public Post setPostId(int postId) {
         this.postId = postId;
         return this;
     }
@@ -38,7 +38,7 @@ public class Post {
         return userId;
     }
 
-    public Post setUserId(long userId) {
+    public Post setUserId(int userId) {
         this.userId = userId;
         return this;
     }
