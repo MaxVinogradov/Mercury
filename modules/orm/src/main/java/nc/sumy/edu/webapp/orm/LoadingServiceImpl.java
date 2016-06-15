@@ -109,7 +109,7 @@ public class LoadingServiceImpl implements LoadingService {
                 }
             }
         } catch (SQLException e) {
-            throw new LoadingServiceException("Unable to load a post of user: " + userId, e);
+            throw new LoadingServiceException("Unable to load a accounts set of user: " + userId, e);
         }
         return collection;
     }
