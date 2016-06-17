@@ -37,10 +37,10 @@ public class RemovingServiceImpl  implements RemovingService{
     @Override
     public void removeUsersAccount(int account, int user) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(REMOVE_PORTAL)) {
-            ps.setInt(1, user);
-            ps.setInt(2, account);
-            ps.execute();
+             PreparedStatement statement = conn.prepareStatement(REMOVE_PORTAL)) {
+            statement.setInt(1, user);
+            statement.setInt(2, account);
+            statement.execute();
         } catch (SQLException e) {
             throw new RemovingServiceException(
                     "Unable to remove account " + account + " of user " + user, e);
@@ -49,9 +49,9 @@ public class RemovingServiceImpl  implements RemovingService{
 
     private void makeRemoving(int id, String query, String exceptionText) {
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-            ps.setInt(1, id);
-            ps.execute();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.execute();
         } catch (SQLException e) {
             throw new RemovingServiceException(exceptionText, e);
         }

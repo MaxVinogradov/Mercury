@@ -29,22 +29,22 @@ public class LoadingServiceImpl implements LoadingService {
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
     private static final String SELECT_ACCOUNTS_VIA_POSTS =
             "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
-            "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
-            "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
+                    "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
+                    "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
 
     @Override
     public User loadUser(String login) {
         User user = new User();
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SELECT_USER)) {
-            ps.setString(1, login);
-            try (ResultSet rs = ps.executeQuery()) {
-                rs.next();
-                user.setUserId(rs.getInt        ("USER_ID"))
-                    .setLogin(rs.getString      ("LOGIN"))
-                    .setPassword(rs.getString   ("PASSWORD"))
-                    .setMail(rs.getString       ("MAIL"))
-                    .setPublishDate(rs.getDate  ("BIRTHDAY"));
+             PreparedStatement statement = conn.prepareStatement(SELECT_USER)) {
+            statement.setString(1, login);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                resultSet.next();
+                user.setUserId(resultSet.getInt("USER_ID"))
+                        .setLogin(resultSet.getString("LOGIN"))
+                        .setPassword(resultSet.getString("PASSWORD"))
+                        .setMail(resultSet.getString("MAIL"))
+                        .setPublishDate(resultSet.getDate("BIRTHDAY"));
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a new user: " + login, e);
@@ -56,11 +56,12 @@ public class LoadingServiceImpl implements LoadingService {
     public Collection<Portal> loadPortals(int userId) {
         Collection<Portal> collection = new ArrayList<>();
         try (Connection conn = dataBaseConnection.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SELECT_PORTAL)) {
-            ps.setInt(1, userId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next())
-                    collection.add(new Portal(rs.getInt("USER_ID"), rs.getInt("ACCOUNT_ID")));
+             PreparedStatement statement = conn.prepareStatement(SELECT_PORTAL)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    collection.add(new Portal(resultSet.getInt("USER_ID"), resultSet.getInt("ACCOUNT_ID")));
+                }
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a portals of user: " + userId, e);
@@ -72,16 +73,16 @@ public class LoadingServiceImpl implements LoadingService {
     public SocialNetworkInfo loadAccount(int accountId) {
         SocialNetworkInfo socialNetworkInfo = new SocialNetworkInfo();
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SELECT_ACCOUNT)) {
-            ps.setInt(1, accountId);
-            try (ResultSet rs = ps.executeQuery()) {
-                socialNetworkInfo.setAccountId(rs.getInt                ("ACCOUNT_ID"));
+             PreparedStatement statement = conn.prepareStatement(SELECT_ACCOUNT)) {
+            statement.setInt(1, accountId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                socialNetworkInfo.setAccountId(resultSet.getInt("ACCOUNT_ID"));
                 socialNetworkInfo.setServiceName(SocialNetworks
-                        .getNetworkType(rs.getString                    ("SERVICE_NAME")));
-                socialNetworkInfo.setLogin(rs.getString                 ("LOGIN"));
-                socialNetworkInfo.setPassword(rs.getString              ("PASSWORD"));
-                socialNetworkInfo.setLastToken(rs.getString             ("LAST_TOKEN"));
-                socialNetworkInfo.setAdditionalTokenField(rs.getString  ("RAW_RESPONSE"));
+                        .getNetworkType(resultSet.getString("SERVICE_NAME")));
+                socialNetworkInfo.setLogin(resultSet.getString("LOGIN"));
+                socialNetworkInfo.setPassword(resultSet.getString("PASSWORD"));
+                socialNetworkInfo.setLastToken(resultSet.getString("LAST_TOKEN"));
+                socialNetworkInfo.setAdditionalTokenField(resultSet.getString("RAW_RESPONSE"));
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a socialNetworkInfo with accountId: " + accountId, e);
@@ -93,18 +94,18 @@ public class LoadingServiceImpl implements LoadingService {
     public Collection<SocialNetworkInfo> loadAccounts(int userId) {
         Collection<SocialNetworkInfo> collection = new HashSet<>();
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SELECT_ACCOUNTS_VIA_POSTS)) {
-            ps.setInt(1, userId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
+             PreparedStatement statement = conn.prepareStatement(SELECT_ACCOUNTS_VIA_POSTS)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
                     SocialNetworkInfo socialNetworkInfo = new SocialNetworkInfo();
-                    socialNetworkInfo.setAccountId(rs.getInt                ("ACCOUNT_ID"));
+                    socialNetworkInfo.setAccountId(resultSet.getInt("ACCOUNT_ID"));
                     socialNetworkInfo.setServiceName(SocialNetworks
-                            .getNetworkType(rs.getString                    ("SERVICE_NAME")));
-                    socialNetworkInfo.setLogin(rs.getString                 ("LOGIN"));
-                    socialNetworkInfo.setPassword(rs.getString              ("PASSWORD"));
-                    socialNetworkInfo.setLastToken(rs.getString             ("LAST_TOKEN"));
-                    socialNetworkInfo.setAdditionalTokenField(rs.getString  ("RAW_RESPONSE"));
+                            .getNetworkType(resultSet.getString("SERVICE_NAME")));
+                    socialNetworkInfo.setLogin(resultSet.getString("LOGIN"));
+                    socialNetworkInfo.setPassword(resultSet.getString("PASSWORD"));
+                    socialNetworkInfo.setLastToken(resultSet.getString("LAST_TOKEN"));
+                    socialNetworkInfo.setAdditionalTokenField(resultSet.getString("RAW_RESPONSE"));
                     collection.add(socialNetworkInfo);
                 }
             }
@@ -118,16 +119,16 @@ public class LoadingServiceImpl implements LoadingService {
     public Collection<Post> loadPosts(int userId) {
         Collection<Post> collection = new ArrayList<>();
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SELECT_POSTS)) {
-            ps.setInt(1, userId);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
+             PreparedStatement statement = conn.prepareStatement(SELECT_POSTS)) {
+            statement.setInt(1, userId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
                     Post post = new Post();
-                    post.setUserId(rs.getInt            ("USER_ID"))
-                            .setPostId(rs.getInt        ("POST_ID"))
-                            .setPublishDate(rs.getDate  ("PUBLISH_DATE"))
-                            .setTitle(rs.getString      ("TITLE"))
-                            .setBody(rs.getString       ("BODY"));
+                    post.setUserId(resultSet.getInt("USER_ID"))
+                            .setPostId(resultSet.getInt("POST_ID"))
+                            .setPublishDate(resultSet.getDate("PUBLISH_DATE"))
+                            .setTitle(resultSet.getString("TITLE"))
+                            .setBody(resultSet.getString("BODY"));
                     collection.add(post);
                 }
             }
