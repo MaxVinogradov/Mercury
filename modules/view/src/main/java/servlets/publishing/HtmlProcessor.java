@@ -25,4 +25,12 @@ public class HtmlProcessor {
         return SPAN_OP_GI + "class=\"glyphicon glyphicon-" + glyphiconType + "\">" + SPAN_CL;
     }
 
+    public String createPostList() {
+        return null;
+    }
+
+    public String createPost() {
+        return null;
+    }
+
 }
