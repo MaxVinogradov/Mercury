@@ -19,11 +19,11 @@ public class TwitterCodeProcessor extends HttpServlet {
     private static final CodeProcessor PROCESSOR = new CodeProcessor();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PROCESSOR.processOAuth1(request, response);
+        PROCESSOR.processOAuth1(request, response, SocialNetworks.TWITTER);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PROCESSOR.processOAuth1(request, response);
+        PROCESSOR.processOAuth1(request, response, SocialNetworks.TWITTER);
     }
 
 }
