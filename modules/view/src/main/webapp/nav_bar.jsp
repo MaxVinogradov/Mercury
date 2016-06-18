@@ -22,7 +22,7 @@
                         <li><a href="#">Change your profile</a></li>
                     </ul>
                 </li>
-                <li><a href="#">About<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                <li><a href="/view/">About<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                 <li><a href="#">Log out<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out"></span></a></li>
             </ul>
         </div>
