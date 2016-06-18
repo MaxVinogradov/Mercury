@@ -7,49 +7,58 @@ import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class CodeProcessor {
     private static final String REDIRECT_URL = "connect.jsp";
     private static final String FAIL_PARAMETER = "?success=false";
+    private static final String SUCCESS_PARAMETER = "?success=true";
 
 
-    public void processOAuth1(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) {
+    public void processOAuth1(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) throws IOException {
         String code = request.getParameter("code");
         String requestToken = request.getParameter("requestToken");
         String redirectUrl = REDIRECT_URL;
-        int user_id = (int) request.getSession().getAttribute("user_id");
-
-        if (code != null && requestToken != null) {
+        Object user_idObj = request.getSession().getAttribute("user_id");
+        if (code != null && requestToken != null && user_idObj != null) {
             try{
+                int user_id = (int) user_idObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(type,
                         requestToken, code);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(user_id, info);
+                redirectUrl += SUCCESS_PARAMETER;
             } catch(IntegrationException e) {
                 //log
                 redirectUrl += FAIL_PARAMETER;
             }
-
-        }
-        response.addHeader("Forward", redirectUrl);
+        } else
+            redirectUrl += FAIL_PARAMETER;
+        response.sendRedirect(redirectUrl);
     }
 
-    public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) {
+    public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) throws IOException, ServletException {
         String code = request.getParameter("code");
         String redirectUrl = REDIRECT_URL;
-        int user_id = (int) request.getSession().getAttribute("user_id");
-        if (code != null) {
+        Object user_idObj = request.getSession().getAttribute("user_id");
+        if (code != null && user_idObj != null) {
             try{
+                int user_id = (int) user_idObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(type, code);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(user_id, info);
+                redirectUrl += SUCCESS_PARAMETER;
             } catch(IntegrationException e) {
                 //log
                 redirectUrl += FAIL_PARAMETER;
             }
-        }
-        response.addHeader("Forward", redirectUrl);
+        } else
+            redirectUrl += FAIL_PARAMETER;
+        //response.getWriter().append(redirectUrl);
+        response.sendRedirect(redirectUrl);
     }
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "VkCodeProcessor", urlPatterns = "/VkCodeProcessor")
+@WebServlet("/VkCodeProcessor")
 public class VkCodeProcessor extends HttpServlet {
     private static final CodeProcessor PROCESSOR = new CodeProcessor();
 
