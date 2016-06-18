@@ -9,9 +9,7 @@ body,html{
       transition: margin 200ms ease-out;
   }
 
-  .main{
-    padding: 10px 10px 0 10px;
-  }
+
 
  @media (min-width: 765px) {
 
@@ -116,12 +114,16 @@ body,html{
   section{
     padding-left: 15px;
   }
-  
+
  .nav li a {
  	color: black;
- 	font-size: 1.2em;
  }
 
  .icon-bar {
  	background-color: black;
+ }
+
+ .only-content {
+     margin: 0 !important;
+     padding: 0 !important;
  }
