@@ -25,7 +25,7 @@ public class IntegrationImplTest {
 
     @Test
     public void testSubmitPostInvalidMessageParameter(){
-        SocialNetworkInfo info = new SocialNetworkInfo("id", SocialNetworks.VK, "token", "token additional field");
+        SocialNetworkInfo info = new SocialNetworkInfo(1, SocialNetworks.VK, "token", "token additional field");
         Set<SocialNetworkInfo> infos = new HashSet<>();
         infos.add(info);
         Set<ResultOfPostSubmit> result = new HashSet<>();
@@ -38,7 +38,7 @@ public class IntegrationImplTest {
 
     @Test
     public void testSubmitWithInvalidNetworkType() {
-        SocialNetworkInfo info = new SocialNetworkInfo("id", SocialNetworks.VK, "ten", " additional field");
+        SocialNetworkInfo info = new SocialNetworkInfo(2, SocialNetworks.VK, "ten", " additional field");
         Set<SocialNetworkInfo> infos = new HashSet<>();
         infos.add(info);
         Map<SocialNetworks, SocialNetworkIntegration> integrationMapping = new HashMap<>();
@@ -51,11 +51,11 @@ public class IntegrationImplTest {
 
     @Test
     public void testSubmitPostValidParameters(){
-        SocialNetworkInfo infoNullToken = new SocialNetworkInfo("id1", SocialNetworks.VK, null, "token additional field");
-        SocialNetworkInfo infoNullAddFieldToken = new SocialNetworkInfo("id1", SocialNetworks.VK, "token",
+        SocialNetworkInfo infoNullToken = new SocialNetworkInfo(3, SocialNetworks.VK, null, "token additional field");
+        SocialNetworkInfo infoNullAddFieldToken = new SocialNetworkInfo(4, SocialNetworks.VK, "token",
                 null);
-        SocialNetworkInfo infoEmptyAddFieldToken = new SocialNetworkInfo("id2", SocialNetworks.VK, "token", "");
-        SocialNetworkInfo infoEmptyToken = new SocialNetworkInfo("id2", SocialNetworks.VK, "", "token additional field");
+        SocialNetworkInfo infoEmptyAddFieldToken = new SocialNetworkInfo(5, SocialNetworks.VK, "token", "");
+        SocialNetworkInfo infoEmptyToken = new SocialNetworkInfo(7, SocialNetworks.VK, "", "token additional field");
 
         Set<SocialNetworkInfo> infoNull = new HashSet<>();
         infoNull.add(infoNullToken);

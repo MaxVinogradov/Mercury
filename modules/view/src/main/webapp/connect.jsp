@@ -68,7 +68,7 @@
                         </div>
                         <div class="row panel-body">
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                                <a href="connect_vk.html">
+                                <a href="connect_vk.jsp">
                                     <img src="images/vk.svg" alt="vk.com" class="waves-image img-responsive">
                                 </a>
                             </div>
