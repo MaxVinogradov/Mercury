@@ -19,12 +19,14 @@ public class CodeProcessor {
         String code = request.getParameter("code");
         String requestToken = request.getParameter("requestToken");
         String redirectUrl = REDIRECT_URL;
+        int user_id = (int) request.getSession().getAttribute("user_id");
+
         if (code != null && requestToken != null) {
             try{
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(type,
                         requestToken, code);
                 StoringService store = new StoringServiceImpl();
-                store.addAccount(info);
+                store.addAccount(user_id, info);
             } catch(IntegrationException e) {
                 //log
                 redirectUrl += FAIL_PARAMETER;
@@ -37,11 +39,12 @@ public class CodeProcessor {
     public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) {
         String code = request.getParameter("code");
         String redirectUrl = REDIRECT_URL;
+        int user_id = (int) request.getSession().getAttribute("user_id");
         if (code != null) {
             try{
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(type, code);
                 StoringService store = new StoringServiceImpl();
-                store.addAccount(info);
+                store.addAccount(user_id, info);
             } catch(IntegrationException e) {
                 //log
                 redirectUrl += FAIL_PARAMETER;
