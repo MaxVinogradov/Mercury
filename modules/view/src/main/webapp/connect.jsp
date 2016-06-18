@@ -87,11 +87,16 @@
                                 </a>
                             </div>
                         </div>
-                        <% if(!request.getParameter("success").equals("false")) { %>
+                        <% Object successFlag = request.getParameter("success");
+                            if(successFlag != null) { if(!successFlag.equals("false")) { %>
+
                             <h4 class="text-success text-center"><strong>Success!</strong> Connection to network was successful!</h4>
+
                         <% } else { %>
+
                             <h4 class="text-danger text-center"><strong>Ooops!</strong> Connection to network failed!</h4>
-                        <% }%>
+
+                        <% } }%>
                     </div>
                 </div>
             </div>

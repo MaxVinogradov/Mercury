@@ -78,7 +78,7 @@
                                 consequatur dicta doloremque eaque eos eum expedita illum molestias nam obcaecati,
                                 placeat quos recusandae sapiente tempora vero voluptas.2</p>
                             <div class="row">
-                                <a href="
+                                <a target="_blank" href="
                                     <%= new IntegrationImpl().getAuthorisationUrlForNetwork(SocialNetworks.VK) %>
                                 "><button class="btn btn-primary btn-lg">Log in Vk</button></a>
                             </div>
