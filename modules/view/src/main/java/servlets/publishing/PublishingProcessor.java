@@ -18,8 +18,8 @@ public class PublishingProcessor {
         int id = (int) request.getSession().getAttribute("user_id");
         Set<SocialNetworkInfo> networkInfos = (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccounts(id);
         String message = (String) request.getAttribute("message");
-        getTableData(new IntegrationImpl().submitPost(networkInfos, message));
         RequestDispatcher dispatcher = request.getRequestDispatcher("/create_post.jsp");
+        request.setAttribute("posting_results", getTableData(new IntegrationImpl().submitPost(networkInfos, message)));
         dispatcher.forward(request, response);
     }
 
@@ -28,7 +28,7 @@ public class PublishingProcessor {
         HtmlProcessor processor = new HtmlProcessor();
         for (ResultOfPostSubmit result : resultsInfos) {
             builder.append(processor.createTableRow(result.getInfo().getLogin(),
-                    (result.isPostSucceed() ? " was successful" : "failed")));
+                    (result.isPostSucceed() ? processor.createGlyphicon("ok") : processor.createGlyphicon("remove"))));
         }
         return builder.toString();
     }
