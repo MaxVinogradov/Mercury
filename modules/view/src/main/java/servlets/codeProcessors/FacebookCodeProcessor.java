@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(name = "FacebookCodeProcessor")
+@WebServlet("/FacebookCodeProcessor")
 public class FacebookCodeProcessor extends HttpServlet {
     private static final CodeProcessor PROCESSOR = new CodeProcessor();
 
