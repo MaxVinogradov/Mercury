@@ -15,13 +15,13 @@ public class CodeProcessor {
     private static final String FAIL_PARAMETER = "?success=false";
 
 
-    public void processOAuth1(HttpServletRequest request, HttpServletResponse response) {
+    public void processOAuth1(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) {
         String code = request.getParameter("code");
         String requestToken = request.getParameter("requestToken");
         String redirectUrl = REDIRECT_URL;
         if (code != null && requestToken != null) {
             try{
-                SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(SocialNetworks.TWITTER,
+                SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(type,
                         requestToken, code);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(info);
@@ -34,12 +34,12 @@ public class CodeProcessor {
         response.addHeader("Forward", redirectUrl);
     }
 
-    public void processOAuth2(HttpServletRequest request, HttpServletResponse response) {
+    public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) {
         String code = request.getParameter("code");
         String redirectUrl = REDIRECT_URL;
         if (code != null) {
             try{
-                SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(SocialNetworks.FACEBOOK, code);
+                SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(type, code);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(info);
             } catch(IntegrationException e) {
