@@ -2,6 +2,9 @@ package servlets.publishing;
 
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
+import nc.sumy.edu.webapp.orm.StoringService;
+import nc.sumy.edu.webapp.orm.StoringServiceImpl;
+import nc.sumy.edu.webapp.orm.domain.Post;
 import nc.sumy.edu.webcontainer.common.integration.ResultOfPostSubmit;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 
@@ -9,14 +12,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Set;
 
 public class PublishingProcessor extends Processor{
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = getUserIdFromSession(request);
-        Set<SocialNetworkInfo> networkInfos = (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccounts(userId);
+        Set<SocialNetworkInfo> networkInfos =
+                (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccounts(getUserIdFromSession(request));
         String message = (String) request.getAttribute("message"); //TODO!!!
+        Post post = new Post();
+        post.setUserId(getUserIdFromSession(request))
+                .setTitle("")
+                .setBody(message)
+                .setPublishDate(new Date());
+        StoringService storingService = new StoringServiceImpl();
+        storingService.addPost(post);
         doForward(request, response, "/create_post.jsp",
                 "posting_results", getTableData(new IntegrationImpl().submitPost(networkInfos, message)));
     }
@@ -30,4 +41,6 @@ public class PublishingProcessor extends Processor{
         }
         return builder.toString();
     }
+
+
 }
