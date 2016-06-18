@@ -1,6 +1,8 @@
 package servlets.codeProcessors;
 
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
+import nc.sumy.edu.webapp.integration.exceptions.IntegrationException;
+import nc.sumy.edu.webapp.integration.exceptions.IntegrationTypeMismatchException;
 import nc.sumy.edu.webapp.orm.StoringService;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
@@ -16,21 +18,15 @@ import java.io.IOException;
 
 @WebServlet(name = "FacebookCodeProcessor")
 public class FacebookCodeProcessor extends HttpServlet {
+    private static final CodeProcessor PROCESSOR = new CodeProcessor();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        PROCESSOR.processOAuth2(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        PROCESSOR.processOAuth2(request, response);
     }
 
-    private void process(HttpServletRequest request, HttpServletResponse response) {
-        String code = request.getParameter("code");
-        if (code != null) {
-            SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(SocialNetworks.FACEBOOK, code);
-            StoringService store = new StoringServiceImpl();
-            store.addAccount(info);
-        }
-        response.addHeader("Forward", "path to adding new networks page");
-    }
+
 }
