@@ -84,14 +84,12 @@
                             </div>
                             <div class="row" style="margin-top: 25px;">
                                 <div class="form-group">
-                                    <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                                    <form action="/VkCodeProcessor" name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
                                         <div class="input-group-lg" >
                                             <input type="text" placeholder="Enter access token" style="width: 80%;"/>
                                         </div>
-                                        <a href="\VkCodeProcessor">
-                                            <button type="cancel" class="btn btn-danger" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
-                                        </a>
-                                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-oks"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+                                        <button type="cancel" class="btn btn-danger" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
+                                        <button type="submit" class="btn btn-success" ac><i class="glyphicon glyphicon-oks"></i>&nbsp;&nbsp;&nbsp;Submit</button>
                                     </form>
                                 </div>
                             </div>
