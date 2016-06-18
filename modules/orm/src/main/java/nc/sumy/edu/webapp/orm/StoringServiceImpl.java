@@ -104,10 +104,11 @@ public class StoringServiceImpl implements StoringService {
     }
 
     @Override
-    public SocialNetworkInfo addAccount(SocialNetworkInfo socialNetworkInfo) {
+    public SocialNetworkInfo addAccount(int userId, SocialNetworkInfo socialNetworkInfo) {
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(INSERT_ACCOUNT)) {
             setParamAccount(statement, socialNetworkInfo).executeUpdate();
+            addPortal(new Portal(userId, getInsertedId(statement)));
             return socialNetworkInfo.setAccountId(getInsertedId(statement));
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);

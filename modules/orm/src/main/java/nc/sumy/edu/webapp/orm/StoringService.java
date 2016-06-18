@@ -15,7 +15,7 @@ public interface StoringService {
 
     Post addPost(Post post);
 
-    SocialNetworkInfo addAccount(SocialNetworkInfo socialNetworkInfo);
+    SocialNetworkInfo addAccount(int userId, SocialNetworkInfo socialNetworkInfo);
 
     Portal addPortal(Portal portal);
 
