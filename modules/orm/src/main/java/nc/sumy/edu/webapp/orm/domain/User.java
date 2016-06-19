@@ -13,16 +13,16 @@ public class User {
     private String  login;
     private String  password;
     private String  mail;
-    private Calendar publishDate;
+    private Calendar birthDate;
 
     public User() {}
 
-    public User(int userId, String login, String password, String mail, Calendar publishDate) {
+    public User(int userId, String login, String password, String mail, Calendar birthDate) {
         this.userId = userId;
         this.login = login;
         this.password = password;
         this.mail = mail;
-        this.publishDate = publishDate;
+        this.birthDate = birthDate;
     }
 
     public long getUserId() {
@@ -61,13 +61,13 @@ public class User {
         return this;
     }
 
-    public Calendar getPublishDate() {
-        return publishDate;
+    public Calendar getBirthDate() {
+        return birthDate;
     }
 
-    public User setPublishDate(Date publishDate) {
-        this.publishDate = Calendar.getInstance();
-        this.publishDate.setTime(publishDate);
+    public User setBirthDate(Date birthDate) {
+        this.birthDate = Calendar.getInstance();
+        this.birthDate.setTime(birthDate);
         return this;
     }
 
@@ -84,7 +84,7 @@ public class User {
                 .append(login, user.login)
                 .append(password, user.password)
                 .append(mail, user.mail)
-                .append(publishDate, user.publishDate)
+                .append(birthDate, user.birthDate)
                 .isEquals();
     }
 
@@ -95,7 +95,7 @@ public class User {
                 .append(login)
                 .append(password)
                 .append(mail)
-                .append(publishDate)
+                .append(birthDate)
                 .toHashCode();
     }
 }

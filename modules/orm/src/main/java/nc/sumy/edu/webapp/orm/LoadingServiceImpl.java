@@ -34,17 +34,18 @@ public class LoadingServiceImpl implements LoadingService {
 
     @Override
     public User loadUser(String login) {
-        User user = new User();
+        User user;
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(SELECT_USER)) {
             statement.setString(1, login);
             try (ResultSet resultSet = statement.executeQuery()) {
+                user = new User();
                 resultSet.next();
                 user.setUserId(resultSet.getInt("USER_ID"))
                         .setLogin(resultSet.getString("LOGIN"))
                         .setPassword(resultSet.getString("PASSWORD"))
                         .setMail(resultSet.getString("MAIL"))
-                        .setPublishDate(resultSet.getDate("BIRTHDAY"));
+                        .setBirthDate(resultSet.getDate("BIRTHDAY"));
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a new user: " + login, e);

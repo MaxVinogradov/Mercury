@@ -68,7 +68,7 @@ public class StoringServiceImpl implements StoringService {
         statement.setString(1, user.getLogin());
         statement.setString(2, user.getPassword());
         statement.setString(3, user.getMail());
-        statement.setDate(4, new Date(user.getPublishDate().getTime().getTime()));
+        statement.setDate(4, new Date(user.getBirthDate().getTime().getTime()));
         return statement;
     }
 
