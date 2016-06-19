@@ -14,7 +14,7 @@ import static java.util.Objects.isNull;
 import static nc.sumy.edu.webapp.enums.PageURLs.*;
 import static nc.sumy.edu.webapp.enums.Attributes.*;
 
-public class LoginProcessor extends AbstractProcessor {
+public class LogInProcessor extends AbstractProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = (String) request.getAttribute(LOGIN.toString());
