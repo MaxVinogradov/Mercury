@@ -1,5 +1,6 @@
 package nc.sumy.edu.webapp.codeProcessors;
 
+import com.github.scribejava.core.exceptions.OAuthException;
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.integration.exceptions.IntegrationException;
 import nc.sumy.edu.webapp.orm.StoringService;
@@ -20,10 +21,14 @@ public class CodeProcessor {
 
 
     public void processOAuth1(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) throws IOException {
-        String code = request.getParameter("code");
-        String requestToken = request.getParameter("requestToken");
+        String code = request.getParameter("oauth_verifier");
+        String requestToken = request.getParameter("oauth_token");
         String redirectUrl = REDIRECT_URL;
         Object user_idObj = request.getSession().getAttribute("user_id");
+        System.out.println(user_idObj);
+        System.out.println(redirectUrl);
+        System.out.println(code);
+        System.out.println(requestToken);
         if (code != null && requestToken != null && user_idObj != null) {
             try{
                 int user_id = (int) user_idObj;
@@ -45,6 +50,9 @@ public class CodeProcessor {
         String code = request.getParameter("code");
         String redirectUrl = REDIRECT_URL;
         Object user_idObj = request.getSession().getAttribute("user_id");
+        System.out.println(user_idObj);
+        System.out.println(redirectUrl);
+        System.out.println(code);
         if (code != null && user_idObj != null) {
             try{
                 int user_id = (int) user_idObj;
@@ -56,9 +64,10 @@ public class CodeProcessor {
                 //log
                 redirectUrl += FAIL_PARAMETER;
             }
-        } else
+        } else {
             redirectUrl += FAIL_PARAMETER;
+        }
         //response.getWriter().append(redirectUrl);
-        response.sendRedirect(redirectUrl);
+        //response.sendRedirect(redirectUrl);
     }
 }
