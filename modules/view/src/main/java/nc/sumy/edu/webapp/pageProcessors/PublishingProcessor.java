@@ -29,8 +29,10 @@ public class PublishingProcessor extends AbstractProcessor {
                 .setPublishDate(new Date());
         StoringService storingService = new StoringServiceImpl();
         storingService.addPost(post);
-        doForward(request, response, "/create_post.jsp",
-                "posting_results", getTableData(new IntegrationImpl().submitPost(networkInfos, message)));
+        doForward(request, response,
+                "/create_post.jsp",
+                "posting_results",
+                getTableData(new IntegrationImpl().submitPost(networkInfos, message)));
     }
 
     private String getTableData(Set<ResultOfPostSubmit> resultsInfos) {
