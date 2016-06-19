@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mercury</title>
     <!-- Style links -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/query.css" rel="stylesheet">
-    <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <link href="../css/query.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../images/icon.ico" type="image/x-icon">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -44,11 +44,11 @@
     <div class="initial parallax-window-introduction" data-parallax="scroll">
         <div class="container-fluid text-center">
             <div class="row-fluid">
-                <img src="images/logo-large.svg" alt="logo" class="logo">
+                <img src="../images/logo-large.svg" alt="logo" class="logo">
             </div>
             <div class="row-fluid">
-                    <a href="login.html" style="margin-right: 20px;"><button class="btn nav-item">Log in</button></a>
-                    <a href="signup.html" style="margin-left: 20px;"><button class="btn nav-item">Sign up</button></a>
+                    <a href="../login.jsp" style="margin-right: 20px;"><button class="btn nav-item">Log in</button></a>
+                    <a href="../signup.jsp" style="margin-left: 20px;"><button class="btn nav-item">Sign up</button></a>
             </div>
             <div class="row-fluid btn-intro-container">
                 <a href="#description"><button class="btn btn-lg learn-more-btn">Go to description</button></a>
@@ -81,7 +81,7 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="item item-height active">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <img src="images/vk.svg" alt="vk.com" class="img-responsive social-img">
+                            <img src="../images/vk.svg" alt="vk.com" class="img-responsive social-img">
                         </div>
                         <div class="col-md-5 col-sm-6 col-xs-12">
                             <h2>Vkontakte</h2>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="item item-height">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <img src="images/facebook.svg" alt="facebook.com" class="img-responsive social-img">
+                            <img src="../images/facebook.svg" alt="facebook.com" class="img-responsive social-img">
                         </div>
                         <div class="col-md-5 col-sm-6 col-xs-12">
                             <h2>Facebook</h2>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="item item-height">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <img src="images/twitter.svg" alt="twitter.com" class="img-responsive  social-img">
+                            <img src="../images/twitter.svg" alt="twitter.com" class="img-responsive  social-img">
                         </div>
                         <div class="col-md-5 col-sm-6 col-xs-12">
                             <h2>Twitter</h2>
@@ -174,20 +174,20 @@
         <div class="row">
             <h1 class="arrow margin-bottom-header">Our team</h1>
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <a href="https://vk.com/leftjoin"><img src="images/dubinka.jpg" alt="dubinka" class="img-responsive img-circle dev-img"></a>
+                <a href="https://vk.com/leftjoin"><img src="../images/dubinka.jpg" alt="dubinka" class="img-responsive img-circle dev-img"></a>
                 <!-- <p class="introtext">Yurii Dubinka</p> -->
                 <h2 class="introtext"><a href="https://vk.com/leftjoin">Yurii Dubinka</a></h2>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <a href="https://vk.com/id345571845"><img src="images/zulov.jpg" alt="zulov" class="img-responsive img-circle dev-img"></a>
+                <a href="https://vk.com/id345571845"><img src="../images/zulov.jpg" alt="zulov" class="img-responsive img-circle dev-img"></a>
                 <h2 class="introtext"><a href="https://vk.com/id345571845">Alexey Zhulyov</a></h2>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <a href="https://vk.com/vinogradov97max"><img src="images/vinogradov.jpg" alt="vinogradov" class="img-responsive img-circle dev-img"></a>
+                <a href="https://vk.com/vinogradov97max"><img src="../images/vinogradov.jpg" alt="vinogradov" class="img-responsive img-circle dev-img"></a>
                 <h2 class="introtext"><a href="https://vk.com/vinogradov97max">Maxim Vinogradov</a></h2>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
-                <a href="https://vk.com/olegluk"><img src="images/luk.jpg" alt="luk" class="img-responsive img-circle dev-img"></a>
+                <a href="https://vk.com/olegluk"><img src="../images/luk.jpg" alt="luk" class="img-responsive img-circle dev-img"></a>
                 <h2 class="introtext"><a href="https://vk.com/olegluk">Oleg Lukjyanykhin</a></h2>
             </div>
         </div>
@@ -200,7 +200,7 @@
             <h1 class="arrow margin-bottom-header">We on the GitHub</h1>
         </div>
         <div class="row col-md-offset-3 col-md-2 col-sm-offset-2 col-sm-3">
-            <a href="https://github.com/MaxVinogradov/nc_edu_web_app"><img class="img-responsive img-circle github-logo" src="images/github-social-logo.svg" alt="github"></a>
+            <a href="https://github.com/MaxVinogradov/nc_edu_web_app"><img class="img-responsive img-circle github-logo" src="../images/github-social-logo.svg" alt="github"></a>
         </div>
         <div class="row col-md-offset-1 col-md-4 col-sm-offset-2 col-sm-5">
             <p class="applying-description" style="margin-top: 0;"><a href="https://github.com/MaxVinogradov/nc_edu_web_app">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat perspiciatis beatae laudantium autem vero magni deleniti ut, odio fugit dolores nulla hic fugiat laborum inventore labore quis omnis molestias dolore. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></p>
@@ -215,10 +215,10 @@
 </footer>
 <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
 <!-- Scripts -->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/parallax.js/parallax.js"></script>
-<script type="text/javascript" src="lib/spincrement.js/jquery.spincrement.min.js"></script>
-<script type="text/javascript" src="js/index_custom.js"></script>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../lib/parallax.js/parallax.js"></script>
+<script type="text/javascript" src="../lib/spincrement.js/jquery.spincrement.min.js"></script>
+<script type="text/javascript" src="../js/index_custom.js"></script>
 </body>
 </html>

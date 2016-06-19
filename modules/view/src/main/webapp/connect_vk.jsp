@@ -1,11 +1,5 @@
 <%@ page import="nc.sumy.edu.webapp.integration.IntegrationImpl" %>
-<%@ page import="nc.sumy.edu.webcontainer.common.integration.SocialNetworks" %><%--
-  Created by IntelliJ IDEA.
-  User: Вадим
-  Date: 18.06.2016
-  Time: 13:16
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="nc.sumy.edu.webcontainer.common.integration.SocialNetworks" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
