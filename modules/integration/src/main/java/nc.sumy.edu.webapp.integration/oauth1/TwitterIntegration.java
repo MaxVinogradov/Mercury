@@ -18,7 +18,7 @@ public class TwitterIntegration implements OAuth1Integration{
     private final OAuth10aService service = new ServiceBuilder()
             .apiKey(APP_ID)
             .apiSecret(APP_SECRET)
-            .callback("http://www.example.com/oauth_callback/")
+            .callback("http://localhost:7001/view/TwitterCodeProcessor")
             .build(TwitterApi.instance());
 
     @Override

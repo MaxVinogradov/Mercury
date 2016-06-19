@@ -44,7 +44,7 @@
                                 </a>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                                <a href="
+                                <a target="_blank" href="
                                     <%= new IntegrationImpl().getAuthorisationUrlForNetwork(SocialNetworks.FACEBOOK) %>
                                 ">
                                     <img src="images/facebook.svg" alt="facebook.com" class="waves-image img-responsive">

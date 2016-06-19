@@ -18,13 +18,13 @@ public class FacebookIntegration implements OAuth2Integration{
             .apiKey(APP_ID)
             .apiSecret(APP_SECRET)
             .scope("publish_actions")
-            .callback("http://www.example.com/oauth_callback/")
+            .callback("http://localhost:7001/view/FacebookCodeProcessor")
             .build(FacebookApi.instance());
     private static final String WALL_POST_URL = "https://graph.facebook.com/v2.6/me/feed";
 
     @Override
     public String getAuthorisationUrl() {
-        return service.getAuthorizationUrl();
+        return service.getAuthorizationUrl() + "&auth_type=reauthenticate" ;
     }
 
     @Override

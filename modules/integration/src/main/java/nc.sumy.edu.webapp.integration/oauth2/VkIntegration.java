@@ -17,13 +17,13 @@ public class VkIntegration implements OAuth2Integration {
             .apiKey(APP_ID)
             .apiSecret(APP_SECRET)
             .scope("wall,offline,photos")
-            .callback("http://localhost:7001/console")
+            .callback("http://oauth.vk.com/blank.html")
             .build(VkontakteApi.instance());
     private static final String WALL_POST_URL = "https://api.vk.com/method/wall.post";
 
     @Override
     public String getAuthorisationUrl() {
-        return service.getAuthorizationUrl();
+        return service.getAuthorizationUrl() + "&revoke=1";
     }
 
     @Override
