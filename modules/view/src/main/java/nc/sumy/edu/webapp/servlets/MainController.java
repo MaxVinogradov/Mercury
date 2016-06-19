@@ -1,4 +1,4 @@
-package servlets;
+package nc.sumy.edu.webapp.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

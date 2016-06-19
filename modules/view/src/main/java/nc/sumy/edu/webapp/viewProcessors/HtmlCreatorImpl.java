@@ -1,22 +1,12 @@
-package servlets.publishing;
+package nc.sumy.edu.webapp.viewProcessors;
 
 import nc.sumy.edu.webapp.orm.domain.Post;
 
 import java.util.Collection;
 
-public class HtmlProcessor {
-    private static final String TD_OP = "<td>";
-    private static final String TD_CL = "</td>";
-    private static final String TR_OP = "<tr>";
-    private static final String TR_CL = "</tr>";
-    private static final String SPAN_OP_GI = "<span ";
-    private static final String SPAN_CL = "</span>";
-    private static final String DIV_OP = "<div class=\"container\">";
-    private static final String DIV_CL = "</div>";
-    private static final String P_OP = "<p>";
-    private static final String P_CL = "</p>";
-    private static final String H3_OP = "<h3 class=\"text-center\">";
-    private static final String H3_CL = "</h3>";
+import static nc.sumy.edu.webapp.viewProcessors.PreparedHtmlTags.*;
+
+public class HtmlCreatorImpl {
 
     public String createTableRow(String... data) {
         StringBuilder builder = new StringBuilder();

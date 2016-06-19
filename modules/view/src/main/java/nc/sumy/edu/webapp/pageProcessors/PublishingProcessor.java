@@ -1,10 +1,11 @@
-package servlets.publishing;
+package nc.sumy.edu.webapp.pageProcessors;
 
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.StoringService;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.Post;
+import nc.sumy.edu.webapp.viewProcessors.HtmlCreatorImpl;
 import nc.sumy.edu.webcontainer.common.integration.ResultOfPostSubmit;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Set;
 
-public class PublishingProcessor extends Processor{
+public class PublishingProcessor extends AbstractProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<SocialNetworkInfo> networkInfos =
@@ -34,7 +35,7 @@ public class PublishingProcessor extends Processor{
 
     private String getTableData(Set<ResultOfPostSubmit> resultsInfos) {
         StringBuilder builder = new StringBuilder();
-        HtmlProcessor processor = new HtmlProcessor();
+        HtmlCreatorImpl processor = new HtmlCreatorImpl();
         for (ResultOfPostSubmit result : resultsInfos) {
             builder.append(processor.createTableRow(result.getInfo().getLogin(),
                     (result.isPostSucceed() ? processor.createGlyphicon("ok") : processor.createGlyphicon("remove"))));

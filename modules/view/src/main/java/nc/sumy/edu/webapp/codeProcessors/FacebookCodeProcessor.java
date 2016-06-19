@@ -1,11 +1,5 @@
-package servlets.codeProcessors;
+package nc.sumy.edu.webapp.codeProcessors;
 
-import nc.sumy.edu.webapp.integration.IntegrationImpl;
-import nc.sumy.edu.webapp.integration.exceptions.IntegrationException;
-import nc.sumy.edu.webapp.integration.exceptions.IntegrationTypeMismatchException;
-import nc.sumy.edu.webapp.orm.StoringService;
-import nc.sumy.edu.webapp.orm.StoringServiceImpl;
-import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 
 import javax.servlet.ServletException;

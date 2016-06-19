@@ -1,4 +1,4 @@
-package servlets.codeProcessors;
+package nc.sumy.edu.webapp.codeProcessors;
 
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.integration.exceptions.IntegrationException;
