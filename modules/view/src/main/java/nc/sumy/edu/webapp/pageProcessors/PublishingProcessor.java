@@ -16,12 +16,15 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Set;
 
+import static nc.sumy.edu.webapp.enums.PageURLs.*;
+import static nc.sumy.edu.webapp.enums.Attributes.*;
+
 public class PublishingProcessor extends AbstractProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<SocialNetworkInfo> networkInfos =
                 (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccounts(getUserIdFromSession(request));
-        String message = (String) request.getAttribute("message"); //TODO!!!
+        String message = (String) request.getAttribute(MESSAGE.toString());
         Post post = new Post();
         post.setUserId(getUserIdFromSession(request))
                 .setTitle("")
@@ -30,8 +33,8 @@ public class PublishingProcessor extends AbstractProcessor {
         StoringService storingService = new StoringServiceImpl();
         storingService.addPost(post);
         doForward(request, response,
-                "/create_post.jsp",
-                "posting_results",
+                CREATE_POST_PAGE.toString(),
+                POSTING_RESULTS.toString(),
                 getTableData(new IntegrationImpl().submitPost(networkInfos, message)));
     }
 

@@ -5,6 +5,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 public abstract class AbstractProcessor {
 
@@ -13,10 +15,30 @@ public abstract class AbstractProcessor {
     }
 
     public void doForward(HttpServletRequest request, HttpServletResponse response,
-                          String page, String key, String value)
+                          String page)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-        request.setAttribute(key, value);
+        dispatcher.forward(request, response);
+    }
+
+    public void doForward(HttpServletRequest request, HttpServletResponse response,
+                          String page,
+                          String attributeKey,
+                          String attributeValue)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        request.setAttribute(attributeKey, attributeValue);
+        dispatcher.forward(request, response);
+    }
+
+    public void doForward(HttpServletRequest request, HttpServletResponse response,
+                          String page,
+                          Map<String, String> attributes)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+        for (Map.Entry<String, String> attribute: attributes.entrySet()) {
+            request.setAttribute(attribute.getKey(), attribute.getValue());
+        }
         dispatcher.forward(request, response);
     }
 
