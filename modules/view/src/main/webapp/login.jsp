@@ -29,7 +29,7 @@
                         <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="user" type="text" class="form-control" name="user" value="" placeholder="User">
+                                <input id="user" type="text" class="form-control" name="login" value="" placeholder="User">
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>

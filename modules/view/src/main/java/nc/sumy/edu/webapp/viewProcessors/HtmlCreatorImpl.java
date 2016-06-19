@@ -4,7 +4,7 @@ import nc.sumy.edu.webapp.orm.domain.Post;
 
 import java.util.Collection;
 
-import static nc.sumy.edu.webapp.viewProcessors.PreparedHtmlTags.*;
+import static nc.sumy.edu.webapp.enums.PreparedHtmlTags.*;
 
 public class HtmlCreatorImpl {
 

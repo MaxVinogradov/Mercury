@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.viewProcessors;
+package nc.sumy.edu.webapp.enums;
 
 public enum PreparedHtmlTags {
 
