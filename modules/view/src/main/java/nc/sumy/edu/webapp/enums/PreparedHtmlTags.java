@@ -20,6 +20,8 @@ public enum PreparedHtmlTags {
 
     P_OP("<p>"),
 
+    P_DANGER_OP("<p class=\"text-danger\" style=\"font-weight: bold;\">"),
+
     P_CL("</p>"),
 
     H3_OP("<h3 class=\"text-center\">"),

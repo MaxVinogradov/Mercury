@@ -6,7 +6,8 @@ public enum Attributes {
     USER_ID("user_id"),
     APPLICATION_POSTS("application_posts"),
     MESSAGE("message"),
-    POSTING_RESULTS("posting_results");
+    POSTING_RESULTS("posting_results"),
+    LOGIN_ERROR("login_error");
 
 
     private final String attribute;

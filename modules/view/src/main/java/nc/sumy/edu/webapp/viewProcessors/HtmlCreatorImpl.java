@@ -34,6 +34,10 @@ public class HtmlCreatorImpl {
         return builder.toString();
     }
 
+    public String createErrorMassage(String massage) {
+        return P_DANGER_OP + massage + P_CL;
+    }
+
     private String createPost(Post post) {
         return H3_OP + "Mercury" + H3_CL +
                 P_OP + post.getBody() + P_CL +
