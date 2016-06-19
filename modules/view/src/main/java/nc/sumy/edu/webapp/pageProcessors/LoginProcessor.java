@@ -22,17 +22,22 @@ public class LoginProcessor extends AbstractProcessor {
         User user = (new LoadingServiceImpl()).loadUser(login);
         if (isNull(user)) {
             doForward(request, response,
-                    LOG_IN_PAGE.toString(),
-                    LOGIN_ERROR.toString(),
-                    (new HtmlCreatorImpl()).createErrorMassage("Invalid login. Try again!"));
+                    LOG_IN_PAGE,
+                    LOGIN_ERROR,
+                    (new HtmlCreatorImpl()).createErrorMassage("Invalid login. Try again!")
+            );
         } else if (StringUtils.equals(user.getPassword(), password)){
             doForward(request, response,
-                    LOG_IN_PAGE.toString(),
-                    LOGIN_ERROR.toString(),
-                    (new HtmlCreatorImpl()).createErrorMassage("Uncorrected password. Try again!"));
+                    LOG_IN_PAGE,
+                    LOGIN_ERROR,
+                    (new HtmlCreatorImpl()).createErrorMassage("Uncorrected password. Try again!")
+            );
         } else {
-            request.getSession().setAttribute(USER_ID.toString(), user.getUserId());
-            doForward(request, response, CREATE_POST_PAGE.toString());
+            doForward(request, response,
+                    CREATE_POST_PAGE,
+                    USER_ID,
+                    user.getUserId()
+            );
         }
     }
 

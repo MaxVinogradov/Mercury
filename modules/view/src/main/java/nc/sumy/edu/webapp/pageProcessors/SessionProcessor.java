@@ -1,5 +1,5 @@
 package nc.sumy.edu.webapp.pageProcessors;
 
-public class SeccionProcessor {
+public class SessionProcessor {
     //    request.getSession(false);
 }

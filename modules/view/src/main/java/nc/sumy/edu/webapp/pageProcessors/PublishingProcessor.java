@@ -33,19 +33,20 @@ public class PublishingProcessor extends AbstractProcessor {
         StoringService storingService = new StoringServiceImpl();
         storingService.addPost(post);
         doForward(request, response,
-                CREATE_POST_PAGE.toString(),
-                POSTING_RESULTS.toString(),
-                getTableData(new IntegrationImpl().submitPost(networkInfos, message)));
+                CREATE_POST_PAGE,
+                POSTING_RESULTS,
+                getTableData(new IntegrationImpl().submitPost(networkInfos, message))
+        );
     }
 
-    private String getTableData(Set<ResultOfPostSubmit> resultsInfos) {
+    private StringBuilder getTableData(Set<ResultOfPostSubmit> resultsInfos) {
         StringBuilder builder = new StringBuilder();
         HtmlCreatorImpl processor = new HtmlCreatorImpl();
         for (ResultOfPostSubmit result : resultsInfos) {
             builder.append(processor.createTableRow(result.getInfo().getLogin(),
                     (result.isPostSucceed() ? processor.createGlyphicon("ok") : processor.createGlyphicon("remove"))));
         }
-        return builder.toString();
+        return builder;
     }
 
 
