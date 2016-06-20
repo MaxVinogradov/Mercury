@@ -26,7 +26,7 @@
                         <div class="panel-title text-center">Log in</div>
                     </div>
                     <div class="panel-body">
-                        <form name="form" method="POST" enctype="multipart/form-data" action="Controller?action=log_in" id="form" class="form-horizontal">
+                        <form name="form" method="POST" action="Controller?action=log_in" id="form" class="form-horizontal">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="user" type="text" class="form-control" name="login" value="" placeholder="User">
@@ -41,6 +41,7 @@
                                     <button type="cancel" class="btn btn-danger pull-right" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
                                 </div>
                             </div>
+                            <div class="row text-center" id="servlet_error" style="color: rgba(0,0,0,0);"><%=request.getAttribute("log_in_error")%></div>
                         </form>
                     </div>
                 </div>
