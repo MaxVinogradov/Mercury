@@ -20,8 +20,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span class="pull-right hidden-xs showopacity glyphicon glyphicon-cog menu-icon-size"></span></a>
                     <ul class="dropdown-menu forAnimate" role="menu">
                         <li><a href="${pageContext.request.contextPath}/connect.jsp">Add accounts</a></li>
-                        <li><a href="#">Remove accounts</a></li>
-                        <li><a href="#">Change your profile</a></li>
+                        <li><a href="#" class="disabled">Remove accounts</a></li>
+                        <li><a href="#" class="disabled">Change your profile</a></li>
                     </ul>
                 </li>
                 <li><a href="${pageContext.request.contextPath}" target="_blank">About<span class="pull-right hidden-xs showopacity glyphicon glyphicon-home menu-icon-size"></span></a></li>
