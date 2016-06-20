@@ -23,8 +23,8 @@ public class PublishingProcessor extends AbstractProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<SocialNetworkInfo> networkInfos =
-                (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccounts(getUserIdFromSession(request));
-        String message = (String) request.getAttribute(MESSAGE.toString());
+                (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccountsWithTwoMethods(getUserIdFromSession(request));
+        String message = (String) request.getParameter(MESSAGE.toString());
         Post post = new Post();
         post.setUserId(getUserIdFromSession(request))
                 .setTitle("")

@@ -81,7 +81,7 @@ public class CodeProcessor {
             info.setLastToken("");
         }
         if (info.getLogin() == null) {
-            info.setLogin("");
+            info.setLogin("second");
         }
         if (info.getPassword() == null) {
             info.setPassword("");

@@ -19,7 +19,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="last_token" type="varchar(300)"/>
-            <column name="raw_response" type="varchar(300)"/>
+            <column name="raw_response" type="varchar(350)"/>
         </createTable>
 
         <createIndex tableName="accounts" indexName="accounts_i">
