@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static nc.sumy.edu.webapp.enums.PageURLs.*;
 
 @WebServlet("/Controller")
 public class MainController extends HttpServlet {
@@ -23,12 +24,18 @@ public class MainController extends HttpServlet {
         if (nonNull(action) && isNotEmpty(action)) {
             switch(action) {
                 case ("sign_up") : {
-                    System.err.println("-------------------------!!1");
                     (new SignUpProcessor()).process(request, response);
                 }
                 break;
                 case ("log_in") : {
                     (new LogInProcessor()).process(request, response);
+                }
+                break;
+                case ("log_out") : {
+                    if (nonNull(request.getSession(false))) {
+                        request.getSession().invalidate();
+                        response.sendRedirect("/view" + INDEX_PAGE);
+                    }
                 }
                 break;
                 case ("publish") : {
