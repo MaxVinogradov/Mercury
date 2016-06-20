@@ -1,13 +1,19 @@
 package nc.sumy.edu.webapp.enums;
 
 public enum Attributes {
+
+    USER_ID("user_id"),
+
     LOGIN("login"),
     PASSWORD("password"),
-    USER_ID("user_id"),
+    MAIL("mail"),
+    BIRTH_DATE("birthDate"),
+
     APPLICATION_POSTS("application_posts"),
     MESSAGE("message"),
     POSTING_RESULTS("posting_results"),
-    LOGIN_ERROR("login_error");
+    LOGIN_ERROR("login_error"),
+    SIGN_UP_ERROR("sign_up_error");
 
 
     private final String attribute;

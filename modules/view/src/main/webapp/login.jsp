@@ -26,7 +26,7 @@
                         <div class="panel-title text-center">Log in</div>
                     </div>
                     <div class="panel-body">
-                        <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <form name="form" method="POST" enctype="multipart/form-data" action="Controller?action=login" id="form" class="form-horizontal">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="user" type="text" class="form-control" name="login" value="" placeholder="User">

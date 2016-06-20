@@ -25,7 +25,7 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
