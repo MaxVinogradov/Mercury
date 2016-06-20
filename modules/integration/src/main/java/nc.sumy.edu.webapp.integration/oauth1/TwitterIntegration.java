@@ -7,6 +7,7 @@ import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
+import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -47,6 +48,7 @@ public class TwitterIntegration implements OAuth1Integration{
     public SocialNetworkInfo getAccessTokenByCode(String requestCode, String code) {
         OAuth1AccessToken token =  service.getAccessToken(new OAuth1RequestToken(requestCode, ""), code);
         SocialNetworkInfo info = new SocialNetworkInfo();
+        info.setServiceName(SocialNetworks.TWITTER);
         info.setLastToken(token.getToken());
         info.setAdditionalTokenField(token.getTokenSecret());
         return info;
