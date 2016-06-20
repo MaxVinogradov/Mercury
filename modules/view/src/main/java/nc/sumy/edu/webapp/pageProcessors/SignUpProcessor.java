@@ -21,8 +21,8 @@ import static nc.sumy.edu.webapp.enums.PageURLs.*;
 public class SignUpProcessor extends AbstractProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = (String) request.getAttribute(LOGIN.toString());
-
+        String login = request.getParameter(LOGIN.toString());
+        System.err.println(login);
         if (nonNull((new LoadingServiceImpl()).loadUser(login))) {
             doForward(request, response,
                     SIGN_UP_PAGE,
@@ -31,12 +31,16 @@ public class SignUpProcessor extends AbstractProcessor {
             );
         } else {
             User user = new User();
-            DateFormat format = new SimpleDateFormat("MMMM d, yyyy", ENGLISH);
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy", ENGLISH);
             try {
                 user.setLogin(login)
-                        .setPassword((String) request.getAttribute(PASSWORD.toString()))
-                        .setMail((String) request.getAttribute(MAIL.toString()))
-                        .setBirthDate(format.parse(String.valueOf(request.getAttribute(BIRTH_DATE.toString()))));
+                        .setPassword((String) request.getParameter(PASSWORD.toString()))
+                        .setMail((String) request.getParameter(MAIL.toString()))
+                        .setBirthDate(format.parse(String.valueOf(request.getParameter(BIRTH_DATE.toString()))));
+                System.out.println(user.getLogin());
+                System.out.println(user.getPassword());
+                System.out.println(user.getMail());
+                System.out.println(user.getBirthDate());
                 doForward(request, response,
                         CREATE_POST_PAGE,
                         USER_ID,
@@ -51,6 +55,5 @@ public class SignUpProcessor extends AbstractProcessor {
             }
         }
     }
-
 
 }

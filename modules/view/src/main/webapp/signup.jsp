@@ -26,7 +26,7 @@
                         <div class="panel-title text-center">Sign up</div>
                     </div>
                     <div class="panel-body">
-                        <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <form id="form" action="Controller?action=sign_up" method="POST" class="form-horizontal">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                 <input id="user" type="text" class="form-control" name="login" value="" placeholder="User" required minlength="5">
