@@ -27,10 +27,20 @@ public class LoadingServiceImpl implements LoadingService {
             "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
     private static final String SELECT_POSTS =
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
+    /*
     private static final String SELECT_ACCOUNTS_VIA_POSTS =
             "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
                     "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
                     "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
+    */
+    private static final String SELECT_ACCOUNTS_VIA_POSTS =
+            "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
+                    "FROM   PUBLIC.ACCOUNTS ACC " +
+                    "       INNER JOIN " +
+                    "       PUBLIC.PORTALS PORT " +
+                    "       ON ACC.USER_ID = PORT.USER_ID" +
+                    "WHERE  ACC.USER_ID = ?;";
+
 
     @Override
     public User loadUser(String login) {
