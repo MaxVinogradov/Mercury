@@ -24,6 +24,8 @@ public class SignUpProcessor extends AbstractProcessor {
         String login = request.getParameter(LOGIN.toString());
         System.err.println(login);
         if (nonNull((new LoadingServiceImpl()).loadUser(login))) {
+            System.err.println("User has already exist");
+            System.err.println((new LoadingServiceImpl()).loadUser(login).getMail());
             doForward(request, response,
                     SIGN_UP_PAGE,
                     SIGN_UP_ERROR,
@@ -31,21 +33,16 @@ public class SignUpProcessor extends AbstractProcessor {
             );
         } else {
             User user = new User();
-            DateFormat format = new SimpleDateFormat("dd.MM.yyyy", ENGLISH);
+            DateFormat format = new SimpleDateFormat("dd-MM-yyyy", ENGLISH);
             try {
                 user.setLogin(login)
-                        .setPassword((String) request.getParameter(PASSWORD.toString()))
-                        .setMail((String) request.getParameter(MAIL.toString()))
-                        .setBirthDate(format.parse(String.valueOf(request.getParameter(BIRTH_DATE.toString()))));
-                System.out.println(user.getLogin());
-                System.out.println(user.getPassword());
-                System.out.println(user.getMail());
-                System.out.println(user.getBirthDate());
-                doForward(request, response,
-                        CREATE_POST_PAGE,
-                        USER_ID,
-                        (new StoringServiceImpl()).addUser(user).getUserId()
-                );
+                        .setPassword(request.getParameter(PASSWORD.toString()))
+                        .setMail(request.getParameter(MAIL.toString()))
+                        .setBirthDate(format.parse(request.getParameter(BIRTH_DATE.toString())));
+
+                request.getSession().setAttribute(USER_ID.toString(),
+                        (new StoringServiceImpl()).addUser(user).getUserId());
+                response.sendRedirect(CREATE_POST_PAGE.toString());
             } catch (ParseException e) {
                 doForward(request, response,
                         SIGN_UP_PAGE,

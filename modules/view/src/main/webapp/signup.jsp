@@ -54,6 +54,7 @@
                                 </div>
                             </div>
                             <p id="massage" class="text-center text-danger"></p>
+                            <div class="row text-center" id="servlet_error" style="color: rgba(0,0,0,0);"><%=request.getAttribute("sign_up_error")%></div>
                         </form>
                     </div>
                 </div>
