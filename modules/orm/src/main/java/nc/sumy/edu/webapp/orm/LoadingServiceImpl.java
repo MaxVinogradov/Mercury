@@ -87,18 +87,31 @@ public class LoadingServiceImpl implements LoadingService {
              PreparedStatement statement = conn.prepareStatement(SELECT_ACCOUNT)) {
             statement.setInt(1, accountId);
             try (ResultSet resultSet = statement.executeQuery()) {
-                socialNetworkInfo.setAccountId(resultSet.getInt("ACCOUNT_ID"));
-                socialNetworkInfo.setServiceName(SocialNetworks
-                        .getNetworkType(resultSet.getString("SERVICE_NAME")));
-                socialNetworkInfo.setLogin(resultSet.getString("LOGIN"));
-                socialNetworkInfo.setPassword(resultSet.getString("PASSWORD"));
-                socialNetworkInfo.setLastToken(resultSet.getString("LAST_TOKEN"));
-                socialNetworkInfo.setAdditionalTokenField(resultSet.getString("RAW_RESPONSE"));
+                //socialNetworkInfo.setAccountId(resultSet.getInt("ACCOUNT_ID"));
+                if(resultSet.next()) {
+                    String type = resultSet.getString("SERVICE_NAME");
+                    SocialNetworks typeN = SocialNetworks.getNetworkType(type);
+                    socialNetworkInfo.setServiceName(typeN);
+                    //socialNetworkInfo.setLogin(resultSet.getString("LOGIN"));
+                    //socialNetworkInfo.setPassword(resultSet.getString("PASSWORD"));
+                    socialNetworkInfo.setLastToken(resultSet.getString("LAST_TOKEN"));
+                    socialNetworkInfo.setAdditionalTokenField(resultSet.getString("RAW_RESPONSE"));
+                }
             }
         } catch (SQLException e) {
             throw new LoadingServiceException("Unable to load a socialNetworkInfo with accountId: " + accountId, e);
         }
         return socialNetworkInfo;
+    }
+
+    public Collection<SocialNetworkInfo> loadAccountsWithTwoMethods(int userId) {
+        Collection<Portal> portals = loadPortals(userId);
+        Collection<SocialNetworkInfo> infos = new HashSet<>();
+        for (Portal portal : portals) {
+            SocialNetworkInfo info = loadAccount((int) portal.getAccountId());
+            infos.add(info);
+        }
+        return infos;
     }
 
     @Override
