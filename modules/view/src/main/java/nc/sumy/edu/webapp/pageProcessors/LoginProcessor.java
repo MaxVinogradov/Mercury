@@ -1,7 +1,6 @@
 package nc.sumy.edu.webapp.pageProcessors;
 
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
-import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.User;
 import nc.sumy.edu.webapp.viewProcessors.HtmlCreatorImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +34,7 @@ public class LogInProcessor extends AbstractProcessor {
             );
         } else {
             request.getSession().setAttribute(USER_ID.toString(), user.getUserId());
-            response.sendRedirect("/view" + CREATE_POST_PAGE.toString());
+            response.sendRedirect("/view" + CREATE_POST_PAGE);
         }
     }
 

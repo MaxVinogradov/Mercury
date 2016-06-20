@@ -1,4 +1,4 @@
-<%@ page import="nc.sumy.edu.webapp.pageProcessors.PublishingProcessor" %>
+<%@ page import="nc.sumy.edu.webapp.pageProcessors.ApplicationPostProcessor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -26,7 +26,7 @@
             <div class="panel-body">
                 <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1
                             col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-                    <%=(new PublishingProcessor()).process(request, response)%>
+                    <%=(new ApplicationPostProcessor()).process(request, response)%>
                 </div>
             </div>
         </div>

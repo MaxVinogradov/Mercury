@@ -14,12 +14,8 @@ import static nc.sumy.edu.webapp.enums.Attributes.*;
 
 public class ApplicationPostProcessor extends AbstractProcessor {
 
-    public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doForward(request, response,
-                APP_POSTS_PAGE,
-                APPLICATION_POSTS,
-                (new HtmlCreatorImpl()).createPostList(new LoadingServiceImpl().loadPosts(getUserIdFromSession(request)))
-        );
+    public String process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        return (new HtmlCreatorImpl()).createPostList(new LoadingServiceImpl().loadPosts(getUserIdFromSession(request)));
     }
 
 }
