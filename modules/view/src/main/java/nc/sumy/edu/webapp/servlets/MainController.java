@@ -1,6 +1,7 @@
 package nc.sumy.edu.webapp.servlets;
 
 import nc.sumy.edu.webapp.pageProcessors.LogInProcessor;
+import nc.sumy.edu.webapp.pageProcessors.PublishingProcessor;
 import nc.sumy.edu.webapp.pageProcessors.SignUpProcessor;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,10 @@ public class MainController extends HttpServlet {
                 break;
                 case ("log_in") : {
                     (new LogInProcessor()).process(request, response);
+                }
+                break;
+                case ("publish") : {
+                    (new PublishingProcessor()).process(request, response);
                 }
                 break;
             }

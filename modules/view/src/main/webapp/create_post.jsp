@@ -25,8 +25,8 @@
             <div class="panel-body">
 
                 <div class="form-group">
-                    <form name="form" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
-                        <textarea class="shadow-affect" rows="7" id="post"></textarea>
+                    <form name="form" action="Controller?action=publish" id="form" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                        <textarea class="shadow-affect" rows="7" name="message" id="post"></textarea>
                         <div class="col-sm-12 controls text-center">
                             <button type="cancel" class="btn btn-danger" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
                             <button class="btn btn-primary" style="margin-right: 15px;"><i class="glyphicon glyphicon-share-alt"></i>&nbsp;&nbsp;&nbsp;Go to the wall</button>

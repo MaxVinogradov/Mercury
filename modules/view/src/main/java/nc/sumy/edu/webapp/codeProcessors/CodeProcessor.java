@@ -34,6 +34,7 @@ public class CodeProcessor {
                 int user_id = (int) user_idObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(type,
                         requestToken, code);
+                fixNullFields(info);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(user_id, info);
                 redirectUrl += SUCCESS_PARAMETER;
@@ -57,6 +58,7 @@ public class CodeProcessor {
             try{
                 int user_id = (int) user_idObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(type, code);
+                fixNullFields(info);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(user_id, info);
                 redirectUrl += SUCCESS_PARAMETER;
@@ -68,6 +70,21 @@ public class CodeProcessor {
             redirectUrl += FAIL_PARAMETER;
         }
         //response.getWriter().append(redirectUrl);
-        //response.sendRedirect(redirectUrl);
+        response.sendRedirect(redirectUrl);
+    }
+
+    private void fixNullFields(SocialNetworkInfo info) {
+        if (info.getAdditionalTokenField() == null) {
+            info.setAdditionalTokenField("");
+        }
+        if (info.getLastToken() == null) {
+            info.setLastToken("");
+        }
+        if (info.getLogin() == null) {
+            info.setLogin("");
+        }
+        if (info.getPassword() == null) {
+            info.setPassword("");
+        }
     }
 }
