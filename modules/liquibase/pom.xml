@@ -26,7 +26,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <database.url>jdbc:h2:~/test</database.url>
+                <database.url>jdbc:h2:./data/test</database.url>
                 <database.user>sa</database.user>
                 <database.password></database.password>
             </properties>

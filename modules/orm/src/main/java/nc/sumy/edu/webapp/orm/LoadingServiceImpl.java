@@ -28,18 +28,18 @@ public class LoadingServiceImpl implements LoadingService {
     private static final String SELECT_POSTS =
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
     /*
-    private static final String SELECT_ACCOUNTS_VIA_POSTS =
+    private static final String SELECT_ACCOUNTS_VIA_PORTS =
             "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
                     "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
                     "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
     */
-    private static final String SELECT_ACCOUNTS_VIA_POSTS =
-            "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
-                    "FROM   PUBLIC.ACCOUNTS ACC " +
-                    "       INNER JOIN " +
-                    "       PUBLIC.PORTALS PORT " +
-                    "       ON ACC.USER_ID = PORT.USER_ID" +
-                    "WHERE  ACC.USER_ID = ?;";
+    private static final String SELECT_ACCOUNTS_VIA_PORTS =
+            "SELECT ACC.* \n" +
+                    "FROM   \n" +
+                    "  PUBLIC.ACCOUNTS acc\n" +
+                    "  ,PUBLIC.PORTALS port \n" +
+                    "WHERE  port.USER_ID = ?\n" +
+                    "AND acc.ACCOUNT_ID = port.ACCOUNT_ID;";
 
 
     @Override
@@ -105,7 +105,7 @@ public class LoadingServiceImpl implements LoadingService {
     public Collection<SocialNetworkInfo> loadAccounts(int userId) {
         Collection<SocialNetworkInfo> collection = new HashSet<>();
         try (Connection conn = dataBaseConnection.getConnection();
-             PreparedStatement statement = conn.prepareStatement(SELECT_ACCOUNTS_VIA_POSTS)) {
+             PreparedStatement statement = conn.prepareStatement(SELECT_ACCOUNTS_VIA_PORTS)) {
             statement.setInt(1, userId);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {

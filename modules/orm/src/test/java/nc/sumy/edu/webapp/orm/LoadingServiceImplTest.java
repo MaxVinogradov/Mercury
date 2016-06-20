@@ -1,7 +1,16 @@
 package nc.sumy.edu.webapp.orm;
 
-import static org.junit.Assert.*;
+import org.dbunit.DBTestCase;
+import org.dbunit.dataset.IDataSet;
 
-public class LoadingServiceImplTest {
+public class LoadingServiceImplTest extends DBTestCase {
 
+    public LoadingServiceImplTest() {
+
+    }
+
+    @Override
+    protected IDataSet getDataSet() throws Exception {
+        return null;
+    }
 }

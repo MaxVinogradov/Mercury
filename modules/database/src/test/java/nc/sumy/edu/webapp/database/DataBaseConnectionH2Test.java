@@ -32,6 +32,7 @@ public class DataBaseConnectionH2Test {
              PreparedStatement statement = connection
                      .prepareStatement("SELECT * FROM PUBLIC.ACCOUNTS;");
              ResultSet result = statement.executeQuery()) {
+
             assertTrue(result.next());
             assertEquals(1, result.getInt(1));
             assertEquals("vk.com", result.getString(2));
