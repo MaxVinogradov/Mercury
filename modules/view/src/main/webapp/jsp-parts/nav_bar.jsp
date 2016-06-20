@@ -27,7 +27,7 @@
                 <li><a href="${pageContext.request.contextPath}" target="_blank">About<span class="pull-right hidden-xs showopacity glyphicon glyphicon-home menu-icon-size"></span></a></li>
                     <li>
                         <form action="Controller?action=log_out" method="POST" style="margin-bottom: 0;">
-                            <a href="#"><button type="submit" class="btn btn-default log-out-btn">Log out<span class="pull-right hidden-xs showopacity glyphicon glyphicon-log-out menu-icon-size"></span></button></a>
+                            <a href="#"><button type="submit" class="btn btn-default log-out-btn"><span class="text-primary">Log out</span><span class="text-primary pull-right hidden-xs showopacity glyphicon glyphicon-log-out menu-icon-size"></span></button></a>
                         </form>
                     </li>
             </ul>

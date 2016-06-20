@@ -24,8 +24,6 @@
                 <div class="panel-title text-center">Create post</div>
             </div>
             <div class="panel-body">
-                <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1
-                            col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
                     <%=(new ApplicationPostProcessor()).process(request, response)%>
                 </div>
             </div>

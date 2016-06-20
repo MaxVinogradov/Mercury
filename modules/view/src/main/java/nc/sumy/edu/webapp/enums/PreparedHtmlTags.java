@@ -24,9 +24,16 @@ public enum PreparedHtmlTags {
 
     P_CL("</p>"),
 
-    H3_OP("<h3 class=\"text-center\">"),
+    P_POST_OP("<p class=\"post-text\">"),
 
-    H3_CL("</h3>");
+    P_HEADER_OP("<p class=\"text-center text-primary post-header\">"),
+
+    P_DATE_OP("<p class=\"text-right \" style=\"font-size:1.1em;\"><em>"),
+
+    P_DATE_CL("</em></p>"),
+
+    POST_CONTAINER_OP(" <div class=\"col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 " +
+                        "col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 post-container shadow-affect\">");
 
 
     private final String preparedTag;

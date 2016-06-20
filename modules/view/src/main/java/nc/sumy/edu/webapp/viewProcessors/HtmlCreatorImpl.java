@@ -2,6 +2,7 @@ package nc.sumy.edu.webapp.viewProcessors;
 
 import nc.sumy.edu.webapp.orm.domain.Post;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 import static nc.sumy.edu.webapp.enums.PreparedHtmlTags.*;
@@ -27,7 +28,7 @@ public class HtmlCreatorImpl {
     public String createPostList(Collection<Post> posts) {
         StringBuilder builder = new StringBuilder();
         for (Post post: posts) {
-            builder.append(DIV_OP)
+            builder.append(POST_CONTAINER_OP)
                     .append(createPost(post))
                     .append(DIV_CL);
         }
@@ -39,9 +40,10 @@ public class HtmlCreatorImpl {
     }
 
     private String createPost(Post post) {
-        return H3_OP + "Mercury" + H3_CL +
-                P_OP + post.getBody() + P_CL +
-                P_OP + post.getPublishDate() + P_CL;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return P_HEADER_OP + "Mercury" + P_CL +
+                P_POST_OP + post.getBody() + P_CL +
+                P_DATE_OP  + formatter.format(post.getPublishDate().getTime()) + P_DATE_CL;
     }
 
 }
