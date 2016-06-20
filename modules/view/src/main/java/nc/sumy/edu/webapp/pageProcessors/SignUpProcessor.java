@@ -22,10 +22,7 @@ public class SignUpProcessor extends AbstractProcessor {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());
-        System.err.println(login);
         if (nonNull((new LoadingServiceImpl()).loadUser(login))) {
-            System.err.println("User has already exist");
-            System.err.println((new LoadingServiceImpl()).loadUser(login).getMail());
             doForward(request, response,
                     SIGN_UP_PAGE,
                     SIGN_UP_ERROR,
@@ -42,7 +39,7 @@ public class SignUpProcessor extends AbstractProcessor {
 
                 request.getSession().setAttribute(USER_ID.toString(),
                         (new StoringServiceImpl()).addUser(user).getUserId());
-                response.sendRedirect(CREATE_POST_PAGE.toString());
+                response.sendRedirect("/view/" + CREATE_POST_PAGE.toString());
             } catch (ParseException e) {
                 doForward(request, response,
                         SIGN_UP_PAGE,
