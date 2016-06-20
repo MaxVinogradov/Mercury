@@ -42,6 +42,13 @@ public class MainController extends HttpServlet {
                     (new PublishingProcessor()).process(request, response);
                 }
                 break;
+                case ("isSessionExist") : {
+                    if (nonNull(request.getSession(false))) {
+                        response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
+                        response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
+                        response.getWriter().write("exist");
+                    }
+                }
             }
         }
     }
