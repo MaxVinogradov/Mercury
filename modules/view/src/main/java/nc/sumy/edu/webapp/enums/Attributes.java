@@ -12,7 +12,7 @@ public enum Attributes {
     APPLICATION_POSTS("application_posts"),
     MESSAGE("message"),
     POSTING_RESULTS("posting_results"),
-    LOGIN_ERROR("login_error"),
+    LOGIN_ERROR("log_in_error"),
     SIGN_UP_ERROR("sign_up_error");
 
 

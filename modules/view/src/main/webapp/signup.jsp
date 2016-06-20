@@ -49,11 +49,12 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12 controls">
-                                    <button type="submit" class="btn btn-primary pull-right" id='submitBtn'><i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;&nbsp;Log in</button>
+                                    <button type="submit" class="btn btn-primary pull-right" id='submitBtn'><i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;&nbsp;Sign up</button>
                                     <button type="cancel" class="btn btn-danger pull-right" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
                                 </div>
                             </div>
                             <p id="massage" class="text-center text-danger"></p>
+                            <div class="row text-center" id="servlet_error" style="color: rgba(0,0,0,0);"><%=request.getAttribute("sign_up_error")%></div>
                         </form>
                     </div>
                 </div>

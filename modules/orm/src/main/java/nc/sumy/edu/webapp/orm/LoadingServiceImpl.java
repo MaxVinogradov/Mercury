@@ -27,30 +27,40 @@ public class LoadingServiceImpl implements LoadingService {
             "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
     private static final String SELECT_POSTS =
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
+    /*
     private static final String SELECT_ACCOUNTS_VIA_POSTS =
             "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
                     "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
                     "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
+    */
+    private static final String SELECT_ACCOUNTS_VIA_POSTS =
+            "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
+                    "FROM   PUBLIC.ACCOUNTS ACC " +
+                    "       INNER JOIN " +
+                    "       PUBLIC.PORTALS PORT " +
+                    "       ON ACC.USER_ID = PORT.USER_ID" +
+                    "WHERE  ACC.USER_ID = ?;";
+
 
     @Override
     public User loadUser(String login) {
-        User user;
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(SELECT_USER)) {
             statement.setString(1, login);
             try (ResultSet resultSet = statement.executeQuery()) {
-                user = new User();
+                User user = new User();
                 resultSet.next();
                 user.setUserId(resultSet.getInt("USER_ID"))
                         .setLogin(resultSet.getString("LOGIN"))
                         .setPassword(resultSet.getString("PASSWORD"))
                         .setMail(resultSet.getString("MAIL"))
                         .setBirthDate(resultSet.getDate("BIRTHDAY"));
+                return user;
             }
         } catch (SQLException e) {
-            throw new LoadingServiceException("Unable to load a new user: " + login, e);
+            //throw new LoadingServiceException("Unable to load a new user: " + login, e);
+            return null;
         }
-        return user;
     }
 
     @Override
