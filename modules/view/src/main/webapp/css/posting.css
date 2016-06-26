@@ -1,0 +1,38 @@
+textarea {
+    display: block !important;
+    width: 90% !important;
+    margin-left: auto;
+    margin-right: auto;
+    resize: vertical; 
+    border: 2px solid rgba(33, 150, 243, 1) !important;
+    font-size: 1.2em !important;
+}
+
+.controls>button {
+    margin-top: 8px;
+    min-width: 15%;
+}
+
+.shadow-affect {
+     box-shadow: 0 5px 3px -3px rgba(33, 150, 243, .7) ;
+}
+
+.posting-result {
+    margin-top: 18px;
+}
+
+.post-header {
+    font-weight: bold;
+    font-size:   1.4em;
+}
+
+.post-text {
+    font-size:   1.2em;
+    text-indent: 15px;
+}
+
+.post-container {
+    border: 1px solid #2196F3;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

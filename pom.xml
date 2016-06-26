@@ -10,12 +10,13 @@
     <version>0.1</version>
 
     <modules>
-        <module>modules/liqubase</module>
+        <module>modules/liquibase</module>
         <module>modules/action</module>
         <module>modules/common</module>
         <module>modules/database</module>
         <module>modules/integration</module>
         <module>modules/view</module>
+        <module>modules/orm</module>
     </modules>
 
     <properties>
@@ -40,11 +41,24 @@
         <h2.version>1.4.191</h2.version>
         <liquibase-maven-plugin.version>3.5.0</liquibase-maven-plugin.version>
         <ojdbc6.version>11.2.0.3</ojdbc6.version>
+        <!-- Integration -->
+        <scribejava.version>2.5.2</scribejava.version>
+        <org.twitter4j.version>4.0.2</org.twitter4j.version>
         <!-- Other -->
         <surefire.plugin.version>2.14.1</surefire.plugin.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.twitter4j</groupId>
+            <artifactId>twitter4j-core</artifactId>
+            <version>${org.twitter4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-apis</artifactId>
+            <version>${scribejava.version}</version>
+        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
@@ -121,6 +135,16 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
     </dependencies>
 
@@ -203,6 +227,10 @@
                     <configuration>
                         <excludes>
                             <exclude>**/database/**/*.class</exclude>
+
+                            <exclude>**/nc/sumy/edu/webcontainer/common/integration/*.*</exclude>
+                            <exclude>**/nc/sumy/edu/webcontainer/action/*.*</exclude>
+                            <exclude>**/nc/sumy/edu/webapp/integration/*.*</exclude>
                         </excludes>
                         <rules>
                             <rule implementation="org.jacoco.maven.RuleConfiguration">
@@ -231,10 +259,10 @@
                     <version>${pitest-maven.version}</version>
                     <configuration>
                         <targetClasses>
-                            <param>nc.sumy.edu.webapp.database.*</param>
+                            <param>nc.sumy.edu.webapp.orm.*</param>
                         </targetClasses>
                         <targetTests>
-                            <param>nc.sumy.edu.webapp.database.*</param>
+                            <param>nc.sumy.edu.webapp.orm.*</param>
                         </targetTests>
                     </configuration>
                 </plugin>

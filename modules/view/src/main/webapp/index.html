@@ -48,12 +48,10 @@
                 <div class="row-fluid">
                     <img src="images/logo-large.svg" alt="logo" class="logo">
                 </div>
-                <div class="row-fluid">
-                    <a href="login.html" style="margin-right: 20px;"><button class="btn nav-item">Log in</button></a>
-                    <a href="signup.html" style="margin-left: 20px;"><button class="btn nav-item">Sign up</button></a>
+                <div class="row-fluid button-container">
                 </div>
                 <div class="row-fluid btn-intro-container">
-                    <a href="#description"><button class="btn btn-lg learn-more-btn">Go to description</button></a>
+                    <a href="#description"><button id="goDescr" class="btn btn-lg learn-more-btn">Go to description</button></a>
                 </div>
             </div>
         </div>
@@ -222,6 +220,25 @@
     <script type="text/javascript" src="lib/parallax.js/parallax.js"></script>
     <script type="text/javascript" src="lib/spincrement.js/jquery.spincrement.min.js"></script>
     <script type="text/javascript" src="js/index_custom.js"></script>
+    <script type="text/javascript">
+            $.post("/view/Controller?action=isSessionExist", function (responseText) {
+                if (responseText == "exist") {
+                    $(".button-container").html(
+                     "<a href=\"#\" style=\"margin-right: 20px;\">" +
+                     "<form action=\"/view/Controller?action=log_out\" method=\"POST\" style=\"margin-bottom: 0;\">" +
+                     "<button type=\"success\" class=\"btn nav-item\">Log out</button>" +
+                     "</a></form>");
+                } else {
+                    $(".button-container").html(
+                            "<a href=\"login.jsp\" style=\"margin-right: 20px;\">" +
+                            "<button class=\"btn nav-item\">Log in</button></a>" +
+                            "<a href=\"signup.jsp\" style=\"margin-left: 20px;\">" +
+                            "<button class=\"btn nav-item\">Sign up</button></a>"
+                    );
+                }
+            });
+
+    </script>
 </body>
 
 </html>
