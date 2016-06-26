@@ -4,6 +4,8 @@ import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.User;
 import nc.sumy.edu.webapp.html_builders.HtmlCreatorImpl;
+import nc.sumy.edu.webcontainer.action.Act;
+import nc.sumy.edu.webcontainer.action.Actions;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +20,8 @@ import static java.util.Objects.*;
 import static nc.sumy.edu.webapp.constants.Attributes.*;
 import static nc.sumy.edu.webapp.constants.PageURLs.*;
 
-public class SignUpProcessor extends AbstractProcessor {
+@Act(id = "sign_up")
+public class SignUpProcessor extends AbstractProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());

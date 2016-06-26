@@ -6,6 +6,8 @@ import nc.sumy.edu.webapp.orm.StoringService;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.Post;
 import nc.sumy.edu.webapp.html_builders.HtmlCreatorImpl;
+import nc.sumy.edu.webcontainer.action.Act;
+import nc.sumy.edu.webcontainer.action.Actions;
 import nc.sumy.edu.webcontainer.common.integration.ResultOfPostSubmit;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 
@@ -19,7 +21,8 @@ import java.util.Set;
 import static nc.sumy.edu.webapp.constants.PageURLs.*;
 import static nc.sumy.edu.webapp.constants.Attributes.*;
 
-public class PublishingProcessor extends AbstractProcessor {
+@Act(id = "publish")
+public class PublishingProcessor extends AbstractProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<SocialNetworkInfo> networkInfos =

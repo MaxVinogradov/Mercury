@@ -3,6 +3,8 @@ package nc.sumy.edu.webapp.logic_processors;
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.User;
 import nc.sumy.edu.webapp.html_builders.HtmlCreatorImpl;
+import nc.sumy.edu.webcontainer.action.Act;
+import nc.sumy.edu.webcontainer.action.Actions;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -14,7 +16,8 @@ import static java.util.Objects.isNull;
 import static nc.sumy.edu.webapp.constants.PageURLs.*;
 import static nc.sumy.edu.webapp.constants.Attributes.*;
 
-public class LogInProcessor extends AbstractProcessor {
+@Act(id = "log_in")
+public class LogInProcessor extends AbstractProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());
