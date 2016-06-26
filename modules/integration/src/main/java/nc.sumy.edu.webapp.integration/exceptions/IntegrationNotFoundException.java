@@ -7,4 +7,7 @@ public class IntegrationNotFoundException extends IntegrationException {
         super("Integration for social network with name " + type + "was not found");
     }
 
+    public IntegrationNotFoundException(SocialNetworks type, Throwable throwable) {
+        super("Integration for social network with name " + type + "was not found", throwable);
+    }
 }
