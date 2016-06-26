@@ -229,6 +229,7 @@
                             <exclude>**/database/**/*.class</exclude>
 
                             <exclude>**/nc/sumy/edu/webcontainer/common/integration/*.*</exclude>
+                            <exclude>**/nc/sumy/edu/webcontainer/action/*.*</exclude>
                         </excludes>
                         <rules>
                             <rule implementation="org.jacoco.maven.RuleConfiguration">
