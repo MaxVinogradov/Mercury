@@ -11,7 +11,7 @@ import java.util.Map;
 public class Test implements Actions {
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response) {
-
+        //why is it empty?
     }
 
     public String run(Map<String, String> parameters) {

@@ -19,7 +19,7 @@ public class TestWithPrivateConstructor implements Actions {
 
     @Override
     public void process(HttpServletRequest request, HttpServletResponse response) {
-
+        //why is it empty?
     }
 
     @Override
