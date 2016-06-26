@@ -3,6 +3,8 @@ package nc.sumy.edu.webcontainer.action;
 import nc.sumy.edu.webcontainer.common.ClassUtil;
 import org.atteo.classindex.ClassIndex;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 public class ActionHandlerImpl implements ActionHandler {
@@ -11,8 +13,9 @@ public class ActionHandlerImpl implements ActionHandler {
      * create instance and invoke run method to process response body.
      */
     @Override
-    public String process(String className, Map<String, String> parameters) {
-        return run(find(className), parameters);
+    public void process(String className, HttpServletRequest request, HttpServletResponse response) {
+        run(find(className), request, response);
+        //return run(find(className), parameters);
     }
 
     /**
@@ -25,10 +28,10 @@ public class ActionHandlerImpl implements ActionHandler {
         throw new ActionClassNotFoundException(id);
     }
 
-    protected String run(Class<Actions> klass, Map<String, String> args) {
+    protected void run(Class<Actions> klass, HttpServletRequest request, HttpServletResponse response) {
         if (!Actions.class.isAssignableFrom(klass))
             throw new ActionInvalidClassException(klass.getSimpleName());
         Actions instance = ClassUtil.newInstance(klass);
-        return instance.run(args);
+        instance.process(request, response);
     }
 }
