@@ -3,10 +3,17 @@ package nc.sumy.edu.webcontainer.action.stub;
 import nc.sumy.edu.webcontainer.action.Act;
 import nc.sumy.edu.webcontainer.action.Actions;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Act(id = "Test")
 public class Test implements Actions {
+    @Override
+    public void process(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
     public String run(Map<String, String> parameters) {
         String result;
 

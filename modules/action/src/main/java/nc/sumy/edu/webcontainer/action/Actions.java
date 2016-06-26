@@ -14,4 +14,8 @@ public interface Actions {
      * This method generate response body.
      */
     void process(HttpServletRequest request, HttpServletResponse response);
+
+    default String run(Map<String, String> args){
+        return null;
+    };
 }
