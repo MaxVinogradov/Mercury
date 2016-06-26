@@ -23,52 +23,53 @@ public class CodeProcessor {
         String code = request.getParameter("oauth_verifier");
         String requestToken = request.getParameter("oauth_token");
         String redirectUrl = REDIRECT_URL;
-        Object user_idObj = request.getSession().getAttribute("user_id");
+        Object userIdObj = request.getSession().getAttribute("user_id");
 
-        if (code != null && requestToken != null && user_idObj != null) {
+        if (code == null || requestToken == null || userIdObj == null) {
+            redirectUrl += FAIL_PARAMETER;
+        } else {
             try{
-                int user_id = (int) user_idObj;
+                int userId = (int) userIdObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(type,
                         requestToken, code);
                 fixNullFields(info);
-                setLogin(info, user_id);
+                setLogin(info, userId);
                 StoringService store = new StoringServiceImpl();
-                store.addAccount(user_id, info);
+                store.addAccount(userId, info);
                 redirectUrl += SUCCESS_PARAMETER;
             } catch(IntegrationException e) {
                 //log
                 redirectUrl += FAIL_PARAMETER;
             }
-        } else
-            redirectUrl += FAIL_PARAMETER;
+        }
         response.sendRedirect(redirectUrl);
     }
 
-    private void setLogin(SocialNetworkInfo info, int user_id) {
-        int size = new LoadingServiceImpl().loadAccountsWithTwoMethods(user_id).size();
-        info.setLogin("" + user_id + (size + 1));
+    private void setLogin(SocialNetworkInfo info, int userId) {
+        int size = new LoadingServiceImpl().loadAccountsWithTwoMethods(userId).size();
+        info.setLogin(String.valueOf(userId) + (size + 1));
     }
 
     public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) throws IOException, ServletException {
         String code = request.getParameter("code");
         String redirectUrl = REDIRECT_URL;
-        Object user_idObj = request.getSession().getAttribute("user_id");
+        Object userIdObj = request.getSession().getAttribute("user_id");
 
-        if (code != null && user_idObj != null) {
+        if (code == null || userIdObj == null) {
+            redirectUrl += FAIL_PARAMETER;
+        } else {
             try{
-                int user_id = (int) user_idObj;
+                int userId = (int) userIdObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(type, code);
                 fixNullFields(info);
-                setLogin(info,user_id);
+                setLogin(info,userId);
                 StoringService store = new StoringServiceImpl();
-                store.addAccount(user_id, info);
+                store.addAccount(userId, info);
                 redirectUrl += SUCCESS_PARAMETER;
             } catch(IntegrationException e) {
                 //log
                 redirectUrl += FAIL_PARAMETER;
             }
-        } else {
-            redirectUrl += FAIL_PARAMETER;
         }
         response.sendRedirect(redirectUrl);
     }
