@@ -26,10 +26,7 @@ public class CodeProcessor {
         String requestToken = request.getParameter("oauth_token");
         String redirectUrl = REDIRECT_URL;
         Object user_idObj = request.getSession().getAttribute("user_id");
-        System.out.println(user_idObj);
-        System.out.println(redirectUrl);
-        System.out.println(code);
-        System.out.println(requestToken);
+
         if (code != null && requestToken != null && user_idObj != null) {
             try{
                 int user_id = (int) user_idObj;
@@ -58,9 +55,7 @@ public class CodeProcessor {
         String code = request.getParameter("code");
         String redirectUrl = REDIRECT_URL;
         Object user_idObj = request.getSession().getAttribute("user_id");
-        System.out.println(user_idObj);
-        System.out.println(redirectUrl);
-        System.out.println(code);
+
         if (code != null && user_idObj != null) {
             try{
                 int user_id = (int) user_idObj;
@@ -77,7 +72,6 @@ public class CodeProcessor {
         } else {
             redirectUrl += FAIL_PARAMETER;
         }
-        //response.getWriter().append(redirectUrl);
         response.sendRedirect(redirectUrl);
     }
 
