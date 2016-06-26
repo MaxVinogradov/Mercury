@@ -28,10 +28,6 @@
             </column>
         </createIndex>
 
-        <addUniqueConstraint tableName="accounts"
-                             columnNames="service_name, login"
-                             constraintName="service_login_uk"
-        />
     </changeSet>
 
 </databaseChangeLog>
