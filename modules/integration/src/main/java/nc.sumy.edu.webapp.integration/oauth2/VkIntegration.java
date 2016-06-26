@@ -39,8 +39,9 @@ public class VkIntegration implements OAuth2Integration {
     @Override
     public boolean post(SocialNetworkInfo info, String message) {
         OAuth2AccessToken accessToken = new OAuth2AccessToken(info.getLastToken(), info.getAdditionalTokenField());
-        OAuthRequest request = new OAuthRequest(Verb.GET, WALL_POST_URL, service);
+        OAuthRequest request = new OAuthRequest(Verb.POST, WALL_POST_URL, service);
         service.signRequest(accessToken, request);
+        request.addParameter("message", message);
         Response response = request.send();
         return !response.getBody().contains("error");
     }

@@ -26,7 +26,7 @@
 
                 <div class="form-group">
                     <form name="form" method="POST" action="Controller?action=publish" id="form" class="form-horizontal" >
-                        <textarea class="shadow-affect" rows="7" name="message" id="post"></textarea>
+                        <textarea class="shadow-affect" rows="7" name="message" id="message"></textarea>
                         <div class="col-sm-12 controls text-center">
                             <button type="cancel" class="btn btn-danger" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
                             <button class="btn btn-primary" style="margin-right: 15px;"><i class="glyphicon glyphicon-share-alt"></i>&nbsp;&nbsp;&nbsp;Go to the wall</button>
