@@ -3,6 +3,7 @@ package nc.sumy.edu.webapp.codeProcessors;
 import com.github.scribejava.core.exceptions.OAuthException;
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.integration.exceptions.IntegrationException;
+import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.StoringService;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
@@ -35,6 +36,7 @@ public class CodeProcessor {
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth1(type,
                         requestToken, code);
                 fixNullFields(info);
+                setLogin(info, user_id);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(user_id, info);
                 redirectUrl += SUCCESS_PARAMETER;
@@ -45,6 +47,11 @@ public class CodeProcessor {
         } else
             redirectUrl += FAIL_PARAMETER;
         response.sendRedirect(redirectUrl);
+    }
+
+    private void setLogin(SocialNetworkInfo info, int user_id) {
+        int size = new LoadingServiceImpl().loadAccountsWithTwoMethods(user_id).size();
+        info.setLogin("" + user_id + (size + 1));
     }
 
     public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) throws IOException, ServletException {
@@ -59,6 +66,7 @@ public class CodeProcessor {
                 int user_id = (int) user_idObj;
                 SocialNetworkInfo info = new IntegrationImpl().processCodeForOAuth2(type, code);
                 fixNullFields(info);
+                setLogin(info,user_id);
                 StoringService store = new StoringServiceImpl();
                 store.addAccount(user_id, info);
                 redirectUrl += SUCCESS_PARAMETER;
@@ -81,7 +89,7 @@ public class CodeProcessor {
             info.setLastToken("");
         }
         if (info.getLogin() == null) {
-            info.setLogin("second");
+            info.setLogin("");
         }
         if (info.getPassword() == null) {
             info.setPassword("");
