@@ -1,9 +1,9 @@
-package nc.sumy.edu.webapp.pageProcessors;
+package nc.sumy.edu.webapp.logic_processor;
 
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.User;
-import nc.sumy.edu.webapp.viewProcessors.HtmlCreatorImpl;
+import nc.sumy.edu.webapp.html_processors.HtmlCreatorImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

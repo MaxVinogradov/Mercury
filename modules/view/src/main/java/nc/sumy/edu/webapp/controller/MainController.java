@@ -1,8 +1,8 @@
-package nc.sumy.edu.webapp.servlets;
+package nc.sumy.edu.webapp.controller;
 
-import nc.sumy.edu.webapp.pageProcessors.LogInProcessor;
-import nc.sumy.edu.webapp.pageProcessors.PublishingProcessor;
-import nc.sumy.edu.webapp.pageProcessors.SignUpProcessor;
+import nc.sumy.edu.webapp.logic_processor.LogInProcessor;
+import nc.sumy.edu.webapp.logic_processor.PublishingProcessor;
+import nc.sumy.edu.webapp.logic_processor.SignUpProcessor;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

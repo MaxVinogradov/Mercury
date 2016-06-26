@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.codeProcessors;
+package nc.sumy.edu.webapp.access_code_processing;
 
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 
@@ -10,17 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet("/FacebookCodeProcessor")
-public class FacebookCodeProcessor extends HttpServlet {
+@WebServlet("/VkCodeProcessor")
+public class VkCodeProcessor extends HttpServlet {
     private static final CodeProcessor PROCESSOR = new CodeProcessor();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PROCESSOR.processOAuth2(request, response, SocialNetworks.FACEBOOK);
+        PROCESSOR.processOAuth2(request, response, SocialNetworks.VK);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PROCESSOR.processOAuth2(request, response, SocialNetworks.FACEBOOK);
+        PROCESSOR.processOAuth2(request, response, SocialNetworks.VK);
     }
-
-
 }

@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.pageProcessors;
+package nc.sumy.edu.webapp.logic_processor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

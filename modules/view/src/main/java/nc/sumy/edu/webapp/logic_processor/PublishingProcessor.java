@@ -1,11 +1,11 @@
-package nc.sumy.edu.webapp.pageProcessors;
+package nc.sumy.edu.webapp.logic_processor;
 
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.StoringService;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.Post;
-import nc.sumy.edu.webapp.viewProcessors.HtmlCreatorImpl;
+import nc.sumy.edu.webapp.html_processors.HtmlCreatorImpl;
 import nc.sumy.edu.webcontainer.common.integration.ResultOfPostSubmit;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 

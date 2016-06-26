@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.codeProcessors;
+package nc.sumy.edu.webapp.access_code_processing;
 
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 

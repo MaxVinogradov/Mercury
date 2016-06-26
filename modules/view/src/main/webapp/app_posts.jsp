@@ -1,4 +1,4 @@
-<%@ page import="nc.sumy.edu.webapp.pageProcessors.ApplicationPostProcessor" %>
+<%@ page import="nc.sumy.edu.webapp.logic_processor.ApplicationPostProcessor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>

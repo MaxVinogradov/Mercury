@@ -1,4 +1,4 @@
-package nc.sumy.edu.webapp.viewProcessors;
+package nc.sumy.edu.webapp.html_processors;
 
 import nc.sumy.edu.webapp.orm.domain.Post;
 

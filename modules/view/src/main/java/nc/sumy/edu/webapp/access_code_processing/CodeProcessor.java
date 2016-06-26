@@ -1,6 +1,5 @@
-package nc.sumy.edu.webapp.codeProcessors;
+package nc.sumy.edu.webapp.access_code_processing;
 
-import com.github.scribejava.core.exceptions.OAuthException;
 import nc.sumy.edu.webapp.integration.IntegrationImpl;
 import nc.sumy.edu.webapp.integration.exceptions.IntegrationException;
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
@@ -9,7 +8,6 @@ import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworks;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
