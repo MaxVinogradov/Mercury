@@ -230,6 +230,7 @@
 
                             <exclude>**/nc/sumy/edu/webcontainer/common/integration/*.*</exclude>
                             <exclude>**/nc/sumy/edu/webcontainer/action/*.*</exclude>
+                            <exclude>**/nc/sumy/edu/webapp/integration/*.*</exclude>
                         </excludes>
                         <rules>
                             <rule implementation="org.jacoco.maven.RuleConfiguration">
