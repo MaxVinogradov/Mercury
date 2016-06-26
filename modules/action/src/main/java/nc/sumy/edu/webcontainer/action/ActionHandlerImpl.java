@@ -12,10 +12,8 @@ public class ActionHandlerImpl implements ActionHandler {
      * Find class marked with Act annotation and implemented Actions interface,
      * create instance and invoke run method to process response body.
      */
-    @Override
-    public void process(String className, HttpServletRequest request, HttpServletResponse response) {
-        run(find(className), request, response);
-        //return run(find(className), parameters);
+    public String process(String className, Map<String, String> parameters) {
+        return run(find(className), parameters);
     }
 
     /**
@@ -26,6 +24,19 @@ public class ActionHandlerImpl implements ActionHandler {
             if (klass.getAnnotation(Act.class).id().equals(id))
                 return (Class<Actions>) klass;
         throw new ActionClassNotFoundException(id);
+    }
+
+    protected String run(Class<Actions> klass, Map<String, String> args) {
+        if (!Actions.class.isAssignableFrom(klass))
+            throw new ActionInvalidClassException(klass.getSimpleName());
+        Actions instance = ClassUtil.newInstance(klass);
+        return instance.run(args);
+    }
+
+    @Override
+    public void process(String className, HttpServletRequest request, HttpServletResponse response) {
+        run(find(className), request, response);
+        //return run(find(className), parameters);
     }
 
     protected void run(Class<Actions> klass, HttpServletRequest request, HttpServletResponse response) {
