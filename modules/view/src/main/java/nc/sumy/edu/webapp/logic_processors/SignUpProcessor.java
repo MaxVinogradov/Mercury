@@ -1,9 +1,9 @@
-package nc.sumy.edu.webapp.logic_processor;
+package nc.sumy.edu.webapp.logic_processors;
 
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.StoringServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.User;
-import nc.sumy.edu.webapp.html_processors.HtmlCreatorImpl;
+import nc.sumy.edu.webapp.html_builders.HtmlCreatorImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +15,8 @@ import java.text.SimpleDateFormat;
 
 import static java.util.Locale.*;
 import static java.util.Objects.*;
-import static nc.sumy.edu.webapp.enums.Attributes.*;
-import static nc.sumy.edu.webapp.enums.PageURLs.*;
+import static nc.sumy.edu.webapp.constants.Attributes.*;
+import static nc.sumy.edu.webapp.constants.PageURLs.*;
 
 public class SignUpProcessor extends AbstractProcessor {
 

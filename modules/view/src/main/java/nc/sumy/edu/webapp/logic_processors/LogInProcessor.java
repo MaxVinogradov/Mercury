@@ -1,8 +1,8 @@
-package nc.sumy.edu.webapp.logic_processor;
+package nc.sumy.edu.webapp.logic_processors;
 
 import nc.sumy.edu.webapp.orm.LoadingServiceImpl;
 import nc.sumy.edu.webapp.orm.domain.User;
-import nc.sumy.edu.webapp.html_processors.HtmlCreatorImpl;
+import nc.sumy.edu.webapp.html_builders.HtmlCreatorImpl;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static java.util.Objects.isNull;
-import static nc.sumy.edu.webapp.enums.PageURLs.*;
-import static nc.sumy.edu.webapp.enums.Attributes.*;
+import static nc.sumy.edu.webapp.constants.PageURLs.*;
+import static nc.sumy.edu.webapp.constants.Attributes.*;
 
 public class LogInProcessor extends AbstractProcessor {
 

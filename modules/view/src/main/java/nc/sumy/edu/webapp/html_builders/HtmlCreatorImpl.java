@@ -1,11 +1,11 @@
-package nc.sumy.edu.webapp.html_processors;
+package nc.sumy.edu.webapp.html_builders;
 
 import nc.sumy.edu.webapp.orm.domain.Post;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 
-import static nc.sumy.edu.webapp.enums.PreparedHtmlTags.*;
+import static nc.sumy.edu.webapp.constants.PreparedHtmlTags.*;
 
 public class HtmlCreatorImpl {
 
