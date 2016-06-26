@@ -47,7 +47,7 @@ public class CodeProcessor {
 
     private void setLogin(SocialNetworkInfo info, int userId) {
         int size = new LoadingServiceImpl().loadAccountsWithTwoMethods(userId).size();
-        info.setLogin(String.valueOf(userId) + (size + 1));
+        info.setLogin(userId + "_" + (size + 1));
     }
 
     public void processOAuth2(HttpServletRequest request, HttpServletResponse response, SocialNetworks type) throws IOException, ServletException {
