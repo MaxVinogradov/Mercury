@@ -21,12 +21,12 @@ import static nc.sumy.edu.webapp.constants.Attributes.*;
 import static nc.sumy.edu.webapp.constants.PageURLs.*;
 
 @Act(id = "sign_up")
-public class SignUpProcessor extends AbstractProcessor implements Actions {
+public class SignUpProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());
         if (nonNull((new LoadingServiceImpl()).loadUser(login))) {
-            doForward(request, response,
+            (new AbstractProcessor()).doForward(request, response,
                     SIGN_UP_PAGE,
                     SIGN_UP_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("This login has already exist. Try again!")
@@ -44,7 +44,7 @@ public class SignUpProcessor extends AbstractProcessor implements Actions {
                         (new StoringServiceImpl()).addUser(user).getUserId());
                 response.sendRedirect("/view" + CREATE_POST_PAGE.toString());
             } catch (ParseException e) {
-                doForward(request, response,
+                (new AbstractProcessor()).doForward(request, response,
                         SIGN_UP_PAGE,
                         SIGN_UP_ERROR,
                         (new HtmlCreatorImpl()).createErrorMassage("Incorrect birthday date. Try again!")

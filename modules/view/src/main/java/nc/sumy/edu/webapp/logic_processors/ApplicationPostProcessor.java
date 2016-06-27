@@ -8,10 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ApplicationPostProcessor extends AbstractProcessor {
+public class ApplicationPostProcessor {
 
     public String process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return (new HtmlCreatorImpl()).createPostList(new LoadingServiceImpl().loadPosts(getUserIdFromSession(request)));
+        return (new HtmlCreatorImpl()).createPostList(
+                new LoadingServiceImpl().loadPosts(
+                        (new AbstractProcessor()).getUserIdFromSession(request)
+                )
+        );
     }
 
 }

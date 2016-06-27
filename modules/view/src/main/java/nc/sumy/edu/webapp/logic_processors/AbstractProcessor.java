@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static java.lang.String.valueOf;
 
-public abstract class AbstractProcessor {
+public class AbstractProcessor {
 
     public int getUserIdFromSession(HttpServletRequest request) {
         return  (int)(request.getSession().getAttribute("user_id"));

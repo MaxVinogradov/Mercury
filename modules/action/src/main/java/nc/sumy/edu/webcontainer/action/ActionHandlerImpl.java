@@ -47,7 +47,7 @@ public class ActionHandlerImpl implements ActionHandler {
         try {
             instance.process(request, response);
         } catch (ServletException | IOException e) {
-            throw new ActionException("Exception was caused by server logic: " + e.getStackTrace());
+            throw new ActionException("Exception was caused by server logic in: ", e);
         }
     }
 }

@@ -5,6 +5,7 @@ import nc.sumy.edu.webapp.orm.domain.Post;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 
+import static java.util.Locale.*;
 import static nc.sumy.edu.webapp.constants.PreparedHtmlTags.*;
 
 public class HtmlCreatorImpl {
@@ -40,7 +41,7 @@ public class HtmlCreatorImpl {
     }
 
     private String createPost(Post post) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", ENGLISH);
         return P_HEADER_OP + "Mercury" + P_CL +
                 P_POST_OP + post.getBody() + P_CL +
                 P_DATE_OP  + formatter.format(post.getPublishDate().getTime()) + P_DATE_CL;

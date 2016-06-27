@@ -1,6 +1,5 @@
 package nc.sumy.edu.webapp.controller;
 
-import nc.sumy.edu.webcontainer.action.ActionHandler;
 import nc.sumy.edu.webcontainer.action.ActionHandlerImpl;
 
 import javax.servlet.ServletException;

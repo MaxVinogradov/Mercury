@@ -22,20 +22,22 @@ import static nc.sumy.edu.webapp.constants.PageURLs.*;
 import static nc.sumy.edu.webapp.constants.Attributes.*;
 
 @Act(id = "publish")
-public class PublishingProcessor extends AbstractProcessor implements Actions {
+public class PublishingProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<SocialNetworkInfo> networkInfos =
-                (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccountsWithTwoMethods(getUserIdFromSession(request));
+                (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccountsWithTwoMethods(
+                        (new AbstractProcessor()).getUserIdFromSession(request)
+                );
         String message = request.getParameter(MESSAGE.toString());
         Post post = new Post();
-        post.setUserId(getUserIdFromSession(request))
+        post.setUserId((new AbstractProcessor()).getUserIdFromSession(request))
                 .setTitle("")
                 .setBody(message)
                 .setPublishDate(new Date());
         StoringService storingService = new StoringServiceImpl();
         storingService.addPost(post);
-        doForward(request, response,
+        (new AbstractProcessor()).doForward(request, response,
                 CREATE_POST_PAGE,
                 POSTING_RESULTS,
                 getTableData(new IntegrationImpl().submitPost(networkInfos, message))

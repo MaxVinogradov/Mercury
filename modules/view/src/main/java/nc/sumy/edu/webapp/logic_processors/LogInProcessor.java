@@ -17,27 +17,27 @@ import static nc.sumy.edu.webapp.constants.PageURLs.*;
 import static nc.sumy.edu.webapp.constants.Attributes.*;
 
 @Act(id = "log_in")
-public class LogInProcessor extends AbstractProcessor implements Actions {
+public class LogInProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());
         String password = request.getParameter(PASSWORD.toString());
         User user = (new LoadingServiceImpl()).loadUser(login);
         if (isNull(user)) {
-            doForward(request, response,
+            (new AbstractProcessor()).doForward(request, response,
                     LOG_IN_PAGE,
                     LOGIN_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("Invalid login. Try again!")
             );
-        } else if (!StringUtils.equals(user.getPassword(), password)){
-            doForward(request, response,
+        } else if (StringUtils.equals(user.getPassword(), password)){
+            request.getSession().setAttribute(USER_ID.toString(), user.getUserId());
+            response.sendRedirect("/view" + CREATE_POST_PAGE);
+        } else {
+            (new AbstractProcessor()).doForward(request, response,
                     LOG_IN_PAGE,
                     LOGIN_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("Uncorrected password. Try again!")
             );
-        } else {
-            request.getSession().setAttribute(USER_ID.toString(), user.getUserId());
-            response.sendRedirect("/view" + CREATE_POST_PAGE);
         }
     }
 
