@@ -4,6 +4,8 @@ import nc.sumy.edu.webapp.orm.domain.Post;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 import static java.util.Locale.*;
 import static nc.sumy.edu.webapp.constants.PreparedHtmlTags.*;
@@ -27,11 +29,13 @@ public class HtmlCreatorImpl implements HtmlCreator {
     }
 
     public String createPostList(Collection<Post> posts) {
+        ListIterator iterator = ((LinkedList)posts).listIterator(posts.size());
         StringBuilder builder = new StringBuilder();
-        for (Post post: posts) {
+        while(iterator.hasPrevious()) {
             builder.append(POST_CONTAINER_OP)
-                    .append(createPost(post))
+                    .append(createPost((Post) iterator.previous()))
                     .append(DIV_CL);
+
         }
         return builder.toString();
     }

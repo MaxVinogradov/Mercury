@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RemovingServiceImpl  implements RemovingService{
+public class RemovingServiceImpl  implements RemovingService {
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
     private static final String REMOVE_USER =

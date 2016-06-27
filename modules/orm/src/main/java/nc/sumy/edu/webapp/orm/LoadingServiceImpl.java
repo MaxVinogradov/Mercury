@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 public class LoadingServiceImpl implements LoadingService {
     private final DataBaseConnection dataBaseConnection =
@@ -27,12 +28,6 @@ public class LoadingServiceImpl implements LoadingService {
             "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
     private static final String SELECT_POSTS =
             "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
-    /*
-    private static final String SELECT_ACCOUNTS_VIA_PORTS =
-            "SELECT ACC.ACCOUNT_ID, ACC.SERVICE_NAME, ACC.LOGIN, ACC.PASSWORD, ACC.LAST_TOKEN, ACC.RAW_RESPONSE " +
-                    "FROM   PUBLIC.ACCOUNTS ACC, PUBLIC.PORTALS PORT " +
-                    "WHERE  ACC.USER_ID = PORT.USER_ID AND ACC.USER_ID = ?;";
-    */
     private static final String SELECT_ACCOUNTS_VIA_PORTS =
             "SELECT ACC.* \n" +
                     "FROM   \n" +
@@ -58,7 +53,6 @@ public class LoadingServiceImpl implements LoadingService {
                 return user;
             }
         } catch (SQLException e) {
-            //throw new LoadingServiceException("Unable to load a new user: " + login, e);
             return null;
         }
     }
@@ -87,13 +81,10 @@ public class LoadingServiceImpl implements LoadingService {
              PreparedStatement statement = conn.prepareStatement(SELECT_ACCOUNT)) {
             statement.setInt(1, accountId);
             try (ResultSet resultSet = statement.executeQuery()) {
-                //socialNetworkInfo.setAccountId(resultSet.getInt("ACCOUNT_ID"));
                 if(resultSet.next()) {
                     String type = resultSet.getString("SERVICE_NAME");
                     SocialNetworks typeN = SocialNetworks.getNetworkType(type);
                     socialNetworkInfo.setServiceName(typeN);
-                    //socialNetworkInfo.setLogin(resultSet.getString("LOGIN"));
-                    //socialNetworkInfo.setPassword(resultSet.getString("PASSWORD"));
                     socialNetworkInfo.setLastToken(resultSet.getString("LAST_TOKEN"));
                     socialNetworkInfo.setAdditionalTokenField(resultSet.getString("RAW_RESPONSE"));
                 }
@@ -141,7 +132,7 @@ public class LoadingServiceImpl implements LoadingService {
 
     @Override
     public Collection<Post> loadPosts(int userId) {
-        Collection<Post> collection = new ArrayList<>();
+        Collection<Post> collection = new LinkedList<>();
         try (Connection conn = dataBaseConnection.getConnection();
              PreparedStatement statement = conn.prepareStatement(SELECT_POSTS)) {
             statement.setInt(1, userId);
