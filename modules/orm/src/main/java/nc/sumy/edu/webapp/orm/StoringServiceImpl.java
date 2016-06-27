@@ -2,6 +2,7 @@ package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
+import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webapp.orm.domain.Portal;
 import nc.sumy.edu.webapp.orm.domain.Post;
@@ -12,34 +13,16 @@ import java.sql.*;
 public class StoringServiceImpl implements StoringService {
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
-    private static final String INSERT_USER =
-            "INSERT INTO PUBLIC.USERS  (LOGIN, PASSWORD, MAIL, BIRTHDAY) VALUES (?, ?, ?, ?);";
-    private static final String INSERT_POST =
-            "INSERT INTO PUBLIC.POSTS (USER_ID, PUBLISH_DATE, TITLE, BODY) VALUES (?, ?, ?, ?);";
-    private static final String INSERT_ACCOUNT =
-            "INSERT INTO PUBLIC.ACCOUNTS (SERVICE_NAME, LOGIN, PASSWORD, LAST_TOKEN, RAW_RESPONSE) VALUES (?, ?, ?, ?, ?);";
-    private static final String INSERT_PORTAL =
-            "INSERT INTO PUBLIC.PORTALS VALUES (?, ?);";
-    private static final String UPDATE_USER =
-            "UPDATE PUBLIC.USERS " +
-                    "SET LOGIN=?, PASSWORD=?, " +
-                    "MAIL=?, BIRTHDAY=? " +
-                    "WHERE USER_ID=?;";
-    private static final String UPDATE_POST =
-            "UPDATE PUBLIC.POSTS " +
-                    "SET USER_ID=?, PUBLISH_DATE=?, " +
-                    "TITLE=?, BODY=? " +
-                    "WHERE POST_ID=?;";
-    private static final String UPDATE_ACCOUNT =
-            "UPDATE PUBLIC.ACCOUNTS " +
-                    "SET USER_ID=?, PUBLISH_DATE=?, " +
-                    "TITLE=?, BODY=? " +
-                    "WHERE POST_ID=?;";
+    private static final String INSERT_USER     = new QueryLoader().get("insert_user.sql");
+    private static final String INSERT_POST     = new QueryLoader().get("insert_post.sql");
+    private static final String INSERT_ACCOUNT  = new QueryLoader().get("insert_account.sql");
+    private static final String INSERT_PORTAL   = new QueryLoader().get("insert_portal.sql");
+
+    private static final String UPDATE_USER     = new QueryLoader().get("update_user.sql");
+    private static final String UPDATE_POST     = new QueryLoader().get("update_post.sql");
+    private static final String UPDATE_ACCOUNT  = new QueryLoader().get("update_account.sql");
     //TODO: add column PORTAL_ID to PORTALS table and fix query
-    private static final String UPDATE_PORTAL =
-            "UPDATE PUBLIC.PORTALS " +
-                    "SET ACCOUNT_ID=? " +
-                    "WHERE USER_ID=?;";
+    private static final String UPDATE_PORTAL   = new QueryLoader().get("update_portal.sql");
 
     @Override
     public User addUser(User user) {
