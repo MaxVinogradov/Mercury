@@ -2,6 +2,7 @@ package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
+import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
 import nc.sumy.edu.webapp.orm.domain.Portal;
 import nc.sumy.edu.webapp.orm.domain.Post;
@@ -20,22 +21,12 @@ import java.util.LinkedList;
 public class LoadingServiceImpl implements LoadingService {
     private final DataBaseConnection dataBaseConnection =
             new DataBaseConnectionH2();
-    private static final String SELECT_USER =
-            "SELECT * FROM PUBLIC.USERS WHERE LOGIN = ?;";
-    private static final String SELECT_PORTAL =
-            "SELECT * FROM PUBLIC.PORTALS WHERE USER_ID = ?;";
-    private static final String SELECT_ACCOUNT =
-            "SELECT * FROM PUBLIC.ACCOUNTS WHERE ACCOUNT_ID = ?;";
-    private static final String SELECT_POSTS =
-            "SELECT * FROM PUBLIC.POSTS WHERE USER_ID = ?;";
-    private static final String SELECT_ACCOUNTS_VIA_PORTS =
-            "SELECT ACC.* \n" +
-                    "FROM   \n" +
-                    "  PUBLIC.ACCOUNTS acc\n" +
-                    "  ,PUBLIC.PORTALS port \n" +
-                    "WHERE  port.USER_ID = ?\n" +
-                    "AND acc.ACCOUNT_ID = port.ACCOUNT_ID;";
-
+    private static final String SELECT_USER     = new QueryLoader().get("select_user.sql");
+    private static final String SELECT_PORTAL   = new QueryLoader().get("select_portal.sql");
+    private static final String SELECT_ACCOUNT  = new QueryLoader().get("select_account.sql");
+    private static final String SELECT_POSTS    = new QueryLoader().get("select_posts.sql");
+    private static final String SELECT_ACCOUNTS_VIA_PORTS
+                                                = new QueryLoader().get("select_accounts_via_posts.sql");
 
     @Override
     public User loadUser(String login) {
