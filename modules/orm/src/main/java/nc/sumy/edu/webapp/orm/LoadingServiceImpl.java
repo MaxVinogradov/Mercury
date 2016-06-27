@@ -1,6 +1,7 @@
 package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
+import nc.sumy.edu.webapp.database.DataBaseConnectionCreator;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
 import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
@@ -20,7 +21,7 @@ import java.util.LinkedList;
 
 public class LoadingServiceImpl implements LoadingService {
     private final DataBaseConnection dataBaseConnection =
-            new DataBaseConnectionH2();
+            new DataBaseConnectionCreator().getConection();
     private static final String SELECT_USER     = new QueryLoader().get("select_user.sql");
     private static final String SELECT_PORTAL   = new QueryLoader().get("select_portal.sql");
     private static final String SELECT_ACCOUNT  = new QueryLoader().get("select_account.sql");

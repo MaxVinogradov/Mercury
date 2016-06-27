@@ -65,6 +65,10 @@ public class QueryLoader {
         return homeDirectory;
     }
 
+    public String getDbProfile() {
+        return dbProfile;
+    }
+
     private enum TypeDB {
         OracleXE("OracleXE"),
         H2("H2");

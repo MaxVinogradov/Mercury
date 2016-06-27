@@ -1,6 +1,7 @@
 package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
+import nc.sumy.edu.webapp.database.DataBaseConnectionCreator;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
 import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 
 public class RemovingServiceImpl  implements RemovingService {
     private final DataBaseConnection dataBaseConnection =
-            new DataBaseConnectionH2();
+            new DataBaseConnectionCreator().getConection();
     private static final String REMOVE_USER     = new QueryLoader().get("remove_user.sql");
     private static final String REMOVE_POST     = new QueryLoader().get("remove_post.sql");
     private static final String REMOVE_ACCOUNT  = new QueryLoader().get("remove_account.sql");

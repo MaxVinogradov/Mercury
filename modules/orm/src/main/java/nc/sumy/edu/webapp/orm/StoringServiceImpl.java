@@ -1,6 +1,7 @@
 package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
+import nc.sumy.edu.webapp.database.DataBaseConnectionCreator;
 import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
 import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 import nc.sumy.edu.webcontainer.common.integration.SocialNetworkInfo;
@@ -12,7 +13,7 @@ import java.sql.*;
 
 public class StoringServiceImpl implements StoringService {
     private final DataBaseConnection dataBaseConnection =
-            new DataBaseConnectionH2();
+            new DataBaseConnectionCreator().getConection();
     private static final String INSERT_USER     = new QueryLoader().get("insert_user.sql");
     private static final String INSERT_POST     = new QueryLoader().get("insert_post.sql");
     private static final String INSERT_ACCOUNT  = new QueryLoader().get("insert_account.sql");
