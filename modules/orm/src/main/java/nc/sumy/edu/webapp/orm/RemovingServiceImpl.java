@@ -2,7 +2,6 @@ package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
 import nc.sumy.edu.webapp.database.DataBaseConnectionCreator;
-import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
 import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 
 import java.sql.Connection;
