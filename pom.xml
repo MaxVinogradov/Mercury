@@ -28,14 +28,19 @@
         <!-- Libraries versions -->
         <classindex.version>3.4</classindex.version>
         <commons-lang3.version>3.0</commons-lang3.version>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <junit.version>4.12</junit.version>
-        <pitest-maven.version>1.1.10</pitest-maven.version>
         <logback.version>1.1.7</logback.version>
+        <pitest-maven.version>1.1.10</pitest-maven.version>
+        <properties.version>2.0.RC5</properties.version>
         <slf4j.version>1.7.16</slf4j.version>
+        <spring-context.version>3.0.2.RELEASE</spring-context.version>
         <testng.version>6.9.10</testng.version>
         <!-- Java code/tests analysis-->
         <coveralls.version>4.1.0</coveralls.version>
+        <dbunit.version>2.5.2</dbunit.version>
         <jacoco.version>0.7.6.201602180812</jacoco.version>
+        <pitest-maven.version>1.1.10</pitest-maven.version>
         <pmd.version>3.6</pmd.version>
         <!-- Database -->
         <h2.version>1.4.191</h2.version>
@@ -134,27 +139,27 @@
         <dependency>
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
-            <version>1.1.10</version>
+            <version>${pitest-maven.version}</version>
         </dependency>
         <dependency>
             <groupId>org.dbunit</groupId>
             <artifactId>dbunit</artifactId>
-            <version>2.5.2</version>
+            <version>${dbunit.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <version>${javax.servlet-api.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.qatools.commons</groupId>
             <artifactId>properties</artifactId>
-            <version>2.0.RC5</version>
+            <version>${properties.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.0.2.RELEASE</version>
+            <version>${spring-context.version}</version>
         </dependency>
     </dependencies>
 
