@@ -8,7 +8,7 @@ import java.util.Collection;
 import static java.util.Locale.*;
 import static nc.sumy.edu.webapp.constants.PreparedHtmlTags.*;
 
-public class HtmlCreatorImpl {
+public class HtmlCreatorImpl implements HtmlCreator {
 
     public String createTableRow(String... data) {
         StringBuilder builder = new StringBuilder();

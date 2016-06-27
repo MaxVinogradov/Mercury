@@ -24,7 +24,7 @@ public class LogInProcessor implements Actions {
         String password = request.getParameter(PASSWORD.toString());
         User user = (new LoadingServiceImpl()).loadUser(login);
         if (isNull(user)) {
-            (new AbstractProcessor()).doForward(request, response,
+            (new BasicProcessor()).doForward(request, response,
                     LOG_IN_PAGE,
                     LOGIN_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("Invalid login. Try again!")
@@ -33,7 +33,7 @@ public class LogInProcessor implements Actions {
             request.getSession().setAttribute(USER_ID.toString(), user.getUserId());
             response.sendRedirect("/view" + CREATE_POST_PAGE);
         } else {
-            (new AbstractProcessor()).doForward(request, response,
+            (new BasicProcessor()).doForward(request, response,
                     LOG_IN_PAGE,
                     LOGIN_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("Uncorrected password. Try again!")

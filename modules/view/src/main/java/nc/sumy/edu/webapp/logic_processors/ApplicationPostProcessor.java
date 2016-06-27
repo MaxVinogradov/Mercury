@@ -13,7 +13,7 @@ public class ApplicationPostProcessor {
     public String process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         return (new HtmlCreatorImpl()).createPostList(
                 new LoadingServiceImpl().loadPosts(
-                        (new AbstractProcessor()).getUserIdFromSession(request)
+                        (new BasicProcessor()).getUserIdFromSession(request)
                 )
         );
     }

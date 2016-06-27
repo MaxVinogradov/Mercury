@@ -27,17 +27,17 @@ public class PublishingProcessor implements Actions {
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<SocialNetworkInfo> networkInfos =
                 (Set<SocialNetworkInfo>) new LoadingServiceImpl().loadAccountsWithTwoMethods(
-                        (new AbstractProcessor()).getUserIdFromSession(request)
+                        (new BasicProcessor()).getUserIdFromSession(request)
                 );
         String message = request.getParameter(MESSAGE.toString());
         Post post = new Post();
-        post.setUserId((new AbstractProcessor()).getUserIdFromSession(request))
+        post.setUserId((new BasicProcessor()).getUserIdFromSession(request))
                 .setTitle("")
                 .setBody(message)
                 .setPublishDate(new Date());
         StoringService storingService = new StoringServiceImpl();
         storingService.addPost(post);
-        (new AbstractProcessor()).doForward(request, response,
+        (new BasicProcessor()).doForward(request, response,
                 CREATE_POST_PAGE,
                 POSTING_RESULTS,
                 getTableData(new IntegrationImpl().submitPost(networkInfos, message))

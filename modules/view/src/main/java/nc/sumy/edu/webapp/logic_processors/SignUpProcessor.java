@@ -26,7 +26,7 @@ public class SignUpProcessor implements Actions {
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());
         if (nonNull((new LoadingServiceImpl()).loadUser(login))) {
-            (new AbstractProcessor()).doForward(request, response,
+            (new BasicProcessor()).doForward(request, response,
                     SIGN_UP_PAGE,
                     SIGN_UP_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("This login has already exist. Try again!")
@@ -44,7 +44,7 @@ public class SignUpProcessor implements Actions {
                         (new StoringServiceImpl()).addUser(user).getUserId());
                 response.sendRedirect("/view" + CREATE_POST_PAGE.toString());
             } catch (ParseException e) {
-                (new AbstractProcessor()).doForward(request, response,
+                (new BasicProcessor()).doForward(request, response,
                         SIGN_UP_PAGE,
                         SIGN_UP_ERROR,
                         (new HtmlCreatorImpl()).createErrorMassage("Incorrect birthday date. Try again!")
