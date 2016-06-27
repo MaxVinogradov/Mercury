@@ -42,7 +42,7 @@
                                             <input type="text" name="code" placeholder="Enter access code" style="width: 80%;"/>
                                         </div>
                                         <button type="cancel" class="btn btn-danger" style="margin-right:15px;"><i class="glyphicon glyphicon-remove"></i>&nbsp;&nbsp;&nbsp;Cancel</button>
-                                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-oks"></i>&nbsp;&nbsp;&nbsp;Submit</button>
+                                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp;&nbsp;Submit</button>
                                     </form>
                                 </div>
                             </div>

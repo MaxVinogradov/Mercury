@@ -42,7 +42,7 @@ public class SignUpProcessor implements Actions {
 
                 request.getSession().setAttribute(USER_ID.toString(),
                         (new StoringServiceImpl()).addUser(user).getUserId());
-                response.sendRedirect("/view" + CREATE_POST_PAGE.toString());
+                response.sendRedirect("/view" + CONNECT_PAGE.toString());
             } catch (ParseException e) {
                 (new BasicProcessor()).doForward(request, response,
                         SIGN_UP_PAGE,

@@ -224,10 +224,17 @@
             $.post("/view/Controller?action=isSessionExist", function (responseText) {
                 if (responseText == "exist") {
                     $(".button-container").html(
-                     "<a href=\"#\" style=\"margin-right: 20px;\">" +
-                     "<form action=\"/view/Controller?action=log_out\" method=\"POST\" style=\"margin-bottom: 0;\">" +
+                     "<a href=\"#\" \">" +
+                     "<form action=\"/view/Controller?action=log_out\" method=\"POST\" style=\"display: inline-block; margin-bottom: 15px;\">" +
                      "<button type=\"success\" class=\"btn nav-item\">Log out</button>" +
-                     "</a></form>");
+                     "</form></a>" +
+                     "<div class=\"row\">" +
+                     "<a href=\"/view/app_posts.jsp\" style=\"margin-right: 20px;\">" +
+                     "<button class=\"btn nav-item\">Go to posts</button></a>" +
+                     "<a href=\"/view/create_post.jsp\" style=\"margin-left: 20px;\">" +
+                     "<button class=\"btn nav-item\">Create post</button></a>" +
+                     "</div>"
+                    );
                 } else {
                     $(".button-container").html(
                             "<a href=\"login.jsp\" style=\"margin-right: 20px;\">" +
