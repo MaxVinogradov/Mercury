@@ -66,7 +66,7 @@ public class QueryLoader {
     }
 
     private enum TypeDB {
-        OracleXE("PostgreSQL"),
+        OracleXE("OracleXE"),
         H2("H2");
 
         private String profile;
