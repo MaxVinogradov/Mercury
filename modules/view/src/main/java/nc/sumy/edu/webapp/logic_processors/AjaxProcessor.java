@@ -14,7 +14,7 @@ import static java.util.Objects.nonNull;
 public class AjaxProcessor implements Actions {
 
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (nonNull(request.getSession(false))) {
+        if (nonNull(request.getSession().getAttribute("user_id"))) {
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write("exist");
