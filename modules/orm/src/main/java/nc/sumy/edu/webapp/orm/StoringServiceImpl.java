@@ -109,10 +109,6 @@ public class StoringServiceImpl implements StoringService {
              PreparedStatement statement = conn.prepareStatement(INSERT_ACCOUNT)) {
             setParamAccount(statement, socialNetworkInfo).executeUpdate();
             addPortal(new Portal(userId, getInsertedId(statement)));
-            System.out.println("------indert account with id = ");
-            System.out.println(userId);
-            System.out.println("------");
-            System.out.println(getInsertedId(statement));
             return socialNetworkInfo.setAccountId(getInsertedId(statement));
         } catch (SQLException e) {
             throw new StoringServiceException("Unable to add a new socialNetworkInfo: " + socialNetworkInfo.getLogin(), e);

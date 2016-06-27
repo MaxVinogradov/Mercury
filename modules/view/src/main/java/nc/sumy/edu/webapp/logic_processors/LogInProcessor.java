@@ -22,22 +22,17 @@ public class LogInProcessor implements Actions {
     public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter(LOGIN.toString());
         String password = request.getParameter(PASSWORD.toString());
-        System.err.println(login + " " + password);
         User user = (new LoadingServiceImpl()).loadUser(login);
-        System.err.println(isNull(user));
         if (isNull(user)) {
-            System.err.println("Invalid login");
             (new BasicProcessor()).doForward(request, response,
                     LOG_IN_PAGE,
                     LOGIN_ERROR,
                     (new HtmlCreatorImpl()).createErrorMassage("Invalid login. Try again!")
             );
         } else if (StringUtils.equals(user.getPassword(), password)){
-            System.err.println("OK");
             request.getSession().setAttribute(USER_ID.toString(), user.getUserId());
             response.sendRedirect("/view" + CREATE_POST_PAGE);
         } else {
-            System.err.println("Uncorrected password");
             (new BasicProcessor()).doForward(request, response,
                     LOG_IN_PAGE,
                     LOGIN_ERROR,
