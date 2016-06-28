@@ -21,7 +21,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="panel-title text-center">Create post</div>
+                <div class="panel-title text-center">Your posts</div>
             </div>
             <div class="panel-body">
                     <%=(new ApplicationPostProcessor()).process(request, response)%>
