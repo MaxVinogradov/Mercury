@@ -1,23 +1,20 @@
 package nc.sumy.edu.webapp.orm;
 
 import nc.sumy.edu.webapp.database.DataBaseConnection;
-import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
+import nc.sumy.edu.webapp.database.DataBaseConnectionCreator;
+import nc.sumy.edu.webapp.database.queryloader.QueryLoader;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RemovingServiceImpl  implements RemovingService{
+public class RemovingServiceImpl  implements RemovingService {
     private final DataBaseConnection dataBaseConnection =
-            new DataBaseConnectionH2();
-    private static final String REMOVE_USER =
-            "DELETE PUBLIC.USER WHERE USER_ID = ?;";
-    private static final String REMOVE_POST =
-            "DELETE PUBLIC.POST WHERE POST_ID = ?;";
-    private static final String REMOVE_ACCOUNT =
-            "DELETE PUBLIC.ACCOUNT WHERE ACCOUNT_ID = ?;";
-    private static final String REMOVE_PORTAL =
-            "DELETE PUBLIC.PORTAL WHERE USER_ID = ? AND ACCOUNT_ID = ?;";
+            new DataBaseConnectionCreator().getConection();
+    private static final String REMOVE_USER     = new QueryLoader().get("remove_user.sql");
+    private static final String REMOVE_POST     = new QueryLoader().get("remove_post.sql");
+    private static final String REMOVE_ACCOUNT  = new QueryLoader().get("remove_account.sql");
+    private static final String REMOVE_PORTAL   = new QueryLoader().get("remove_portal.sql");
 
     @Override
     public void removeUser(int userId) {

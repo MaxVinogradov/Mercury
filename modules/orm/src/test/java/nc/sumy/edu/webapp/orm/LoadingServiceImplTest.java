@@ -1,8 +1,8 @@
 package nc.sumy.edu.webapp.orm;
 
 
-import nc.sumy.edu.webapp.database.DataBaseConnection;
-import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
+//import nc.sumy.edu.webapp.database.DataBaseConnection;
+//import nc.sumy.edu.webapp.database.DataBaseConnectionH2;
 import org.dbunit.Assertion;
 import org.dbunit.DBTestCase;
 import org.dbunit.DatabaseUnitException;
@@ -16,12 +16,13 @@ import java.io.*;
 import static org.dbunit.PropertiesBasedJdbcDatabaseTester.*;
 
 public class LoadingServiceImplTest extends DBTestCase {
+    public static final String DATASET_XML = "dataset.xml";
 
-    private final DataBaseConnection dbCon = new DataBaseConnectionH2();
+    //private final DataBaseConnection dbCon = new DataBaseConnectionH2();
 
     @Override
     protected IDataSet getDataSet() throws DatabaseUnitException, IOException {
-        return new FlatXmlDataSetBuilder().build(new FileInputStream("dataset.xml"));
+        return new FlatXmlDataSetBuilder().build(new FileInputStream(DATASET_XML));
     }
 
     public LoadingServiceImplTest(String name) {
@@ -38,7 +39,7 @@ public class LoadingServiceImplTest extends DBTestCase {
         IDataSet databaseDataSet = getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("USERS");
 
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("dataset.xml"));
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File(DATASET_XML));
         ITable expectedTable = expectedDataSet.getTable("USERS");
 
         Assertion.assertEquals(expectedTable, actualTable);
@@ -49,7 +50,7 @@ public class LoadingServiceImplTest extends DBTestCase {
         IDataSet databaseDataSet = getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("ACCOUNTS");
 
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("dataset.xml"));
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File(DATASET_XML));
         ITable expectedTable = expectedDataSet.getTable("ACCOUNTS");
 
         Assertion.assertEquals(expectedTable, actualTable);
@@ -60,7 +61,7 @@ public class LoadingServiceImplTest extends DBTestCase {
         IDataSet databaseDataSet = getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("PORTALS");
 
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("dataset.xml"));
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File(DATASET_XML));
         ITable expectedTable = expectedDataSet.getTable("PORTALS");
 
         Assertion.assertEquals(expectedTable, actualTable);
@@ -71,7 +72,7 @@ public class LoadingServiceImplTest extends DBTestCase {
         IDataSet databaseDataSet = getConnection().createDataSet();
         ITable actualTable = databaseDataSet.getTable("POSTS");
 
-        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File("dataset.xml"));
+        IDataSet expectedDataSet = new FlatXmlDataSetBuilder().build(new File(DATASET_XML));
         ITable expectedTable = expectedDataSet.getTable("POSTS");
 
         Assertion.assertEquals(expectedTable, actualTable);

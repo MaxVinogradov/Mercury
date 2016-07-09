@@ -1,4 +1,4 @@
-<%@ page import="nc.sumy.edu.webapp.pageProcessors.ApplicationPostProcessor" %>
+<%@ page import="nc.sumy.edu.webapp.logic_processors.ApplicationPostProcessor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -21,11 +21,10 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="panel-title text-center">Create post</div>
+                <div class="panel-title text-center">Your posts</div>
             </div>
             <div class="panel-body">
                     <%=(new ApplicationPostProcessor()).process(request, response)%>
-                </div>
             </div>
         </div>
     </div>

@@ -3,8 +3,10 @@ package nc.sumy.edu.webcontainer.action;
 import nc.sumy.edu.webcontainer.common.ClassUtil;
 import org.atteo.classindex.ClassIndex;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Map;
 
 public class ActionHandlerImpl implements ActionHandler {
@@ -36,13 +38,16 @@ public class ActionHandlerImpl implements ActionHandler {
     @Override
     public void process(String className, HttpServletRequest request, HttpServletResponse response) {
         run(find(className), request, response);
-        //return run(find(className), parameters);
     }
 
     protected void run(Class<Actions> klass, HttpServletRequest request, HttpServletResponse response) {
         if (!Actions.class.isAssignableFrom(klass))
             throw new ActionInvalidClassException(klass.getSimpleName());
         Actions instance = ClassUtil.newInstance(klass);
-        instance.process(request, response);
+        try {
+            instance.process(request, response);
+        } catch (ServletException | IOException e) {
+            throw new ActionException("Exception was caused by server logic in: ", e);
+        }
     }
 }
