@@ -1,0 +1,4 @@
+cd $OPENSHIFT_DATA_DIR
+PATH=$OPENSHIFT_DATA_DIR/maven/apache-maven-3.3.9/bin:$PATH
+M2_HOME=$OPENSHIFT_DATA_DIR/maven/apache-maven-3.3.9
+JAVA_HOME=$OPENSHIFT_DATA_DIR/jdk/jdk/jdk1.8.0_51
