@@ -297,7 +297,7 @@
 					<configuration>
 						<war>${project.basedir}/modules/view/target/view.war</war>
 					</configuration>
-				</plugin>				
+				</plugin>
             </plugins>
         </pluginManagement>
     </build>

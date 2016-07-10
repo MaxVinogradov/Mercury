@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DataBaseConnectionH2 implements DataBaseConnection {
 
-    private static final String URL = "jdbc:h2:~/test";
+    private static final String URL = "jdbc:h2:./../../test";
     private static final String USER = "sa";
     private static final String PASS = "";
 

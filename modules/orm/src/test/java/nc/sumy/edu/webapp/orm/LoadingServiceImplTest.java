@@ -28,7 +28,7 @@ public class LoadingServiceImplTest extends DBTestCase {
     public LoadingServiceImplTest(String name) {
         super(name);
         System.setProperty(DBUNIT_DRIVER_CLASS, "org.h2.Driver");
-        System.setProperty(DBUNIT_CONNECTION_URL, "jdbc:h2:~/test");
+        System.setProperty(DBUNIT_CONNECTION_URL, "jdbc:h2:./../../test");
         System.setProperty(DBUNIT_USERNAME, "sa");
         System.setProperty(DBUNIT_PASSWORD, "");
         System.setProperty(DBUNIT_SCHEMA, "PUBLIC");
